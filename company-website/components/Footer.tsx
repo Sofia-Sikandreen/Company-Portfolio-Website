@@ -24,6 +24,8 @@ export default function Footer() {
       style={{
         background: '#0a0a0f',
         borderTop: '1px solid rgba(145,164,215,0.12)',
+        userSelect: "none",
+    cursor: "default",
       }}
     >
 

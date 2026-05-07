@@ -65,7 +65,8 @@ export default function Hero() {
   }, [])
 
   return (
-    <section id="home" ref={heroRef} className="hero">
+    <section id="home" ref={heroRef} className="hero"style={{userSelect: "none",
+    cursor: "default",}}>
 
       <div className="bg-glow" />
 
@@ -78,6 +79,7 @@ export default function Hero() {
           textAlign: 'center',
           gap: 22,
           maxWidth: 700
+          
         }}>
 
           {/* TAG */}

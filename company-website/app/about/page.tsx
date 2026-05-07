@@ -10,6 +10,8 @@ export default function AboutPage() {
         background: "#110b0f",
         color: "white",
         padding: "120px 24px 80px",
+        userSelect: "none",
+    cursor: "default",
       }}
     >
       <div style={{ maxWidth: 1100, margin: "0 auto" }}>

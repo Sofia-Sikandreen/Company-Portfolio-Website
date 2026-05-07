@@ -84,7 +84,8 @@ function CountUp({ target, suffix }: { target: number; suffix: string }) {
 
 export default function Stats() {
   return (
-    <section id="about" style={{ padding: '50px 0' }}>
+    <section id="about" style={{ padding: '50px 0',userSelect: "none",
+    cursor: "default", }}>
 
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 20px' }}>
 

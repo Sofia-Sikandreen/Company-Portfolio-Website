@@ -34,6 +34,8 @@ export default function Navbar() {
         background: scrolled ? 'rgba(10,10,15,0.92)' : 'transparent',
         borderBottom: scrolled ? '1px solid rgba(108, 99, 255, 0.15)' : 'none',
         backdropFilter: scrolled ? 'blur(12px)' : 'none',
+        userSelect: "none",
+    cursor: "default",
       }}
     >
       <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 48px' }}>

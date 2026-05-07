@@ -29,9 +29,21 @@ export default function ContactPage() {
     setLoading(true);
 
     try {
-      console.log(form);
-      setSuccess(true);
-      setForm({ name: "", email: "", message: "" });
+   await fetch("http://localhost:3001/api/contact", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  credentials: "include",   // VERY IMPORTANT
+  body: JSON.stringify({
+    name: form.name,
+    email: form.email,
+    message: form.message,
+  }),
+});
+
+setSuccess(true);
+setForm({ name: "", email: "", message: "" });
     } finally {
       setLoading(false);
     }
@@ -58,6 +70,8 @@ export default function ContactPage() {
         background: "#110b0f",
         color: "#fff",
         padding: "120px 24px 80px",
+        userSelect: "none",
+    cursor: "default",
       }}
     >
       <div style={{ maxWidth: 900, margin: "0 auto" }}>

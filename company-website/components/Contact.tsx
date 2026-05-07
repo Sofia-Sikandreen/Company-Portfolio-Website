@@ -1,24 +1,53 @@
 'use client'
 
-import { useState } from 'react'
+import { useState } from 'react';
+
+type FormState = {
+  name: string;
+  email: string;
+  message: string;
+};
 
 export default function Contact() {
-  const [form, setForm] = useState({
-    name: '',
-    email: '',
-    message: '',
-  })
-
-  const handleChange = (e: any) => {
-    setForm({ ...form, [e.target.name]: e.target.value })
-  }
-
-  const handleSubmit = (e: any) => {
-    e.preventDefault()
-
-    // later connect to backend API
-    console.log(form)
-  }
+  const [form, setForm] = useState<FormState>({
+      name: "",
+      email: "",
+      message: "",
+    });
+  
+    const [loading, setLoading] = useState(false);
+    const [success, setSuccess] = useState(false);
+  
+    const handleChange = (
+      e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
+      setForm({ ...form, [e.target.name]: e.target.value });
+    };
+  
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      setLoading(true);
+  
+      try {
+     await fetch("http://localhost:3001/api/contact", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",   // VERY IMPORTANT
+    body: JSON.stringify({
+      name: form.name,
+      email: form.email,
+      message: form.message,
+    }),
+  });
+  
+  setSuccess(true);
+  setForm({ name: "", email: "", message: "" });
+      } finally {
+        setLoading(false);
+      }
+    };
 
   return (
     <section
@@ -26,6 +55,8 @@ export default function Contact() {
       style={{
         padding: '50px 0',
         background: '#110b0f',
+        userSelect: "none",
+    cursor: "default",
       }}
     >
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 20px' }}>
@@ -132,8 +163,14 @@ export default function Contact() {
                 cursor: 'pointer',
               }}
             >
-              Send Message
+               {loading ? "Sending..." : "Send Message"}
             </button>
+
+             {success && (
+              <p style={{ color: "#0f727a", marginTop: 12, textAlign: "center" }}>
+                Message sent successfully!
+              </p>
+            )}
 
           </form>
 

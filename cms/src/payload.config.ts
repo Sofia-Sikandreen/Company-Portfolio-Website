@@ -7,6 +7,10 @@ import sharp from 'sharp'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
+import { Services } from './collections/Services'
+import { Contact } from './collections/Contact'
+import { Careers } from './collections/Careers'
+import { Applications } from './collections/Applications'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -18,12 +22,21 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media],
+  collections: [Users, Media, Services, Contact, Careers, Applications,],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
+    cors: [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+  ],
+
+  csrf: [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+  ],
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URL || '',

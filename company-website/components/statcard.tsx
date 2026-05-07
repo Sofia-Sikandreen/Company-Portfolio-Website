@@ -26,6 +26,7 @@ export default function StatCard({
       viewport={{ once: true }}
       whileHover={{ y: -6 }}
       className="relative rounded-xl"
+      
     >
       {/* Card */}
       <div
@@ -36,6 +37,8 @@ export default function StatCard({
           padding: 24,
           textAlign: "center",
           transition: "0.3s",
+          userSelect: "none",
+    cursor: "default",
         }}
       >
         {/* Icon */}

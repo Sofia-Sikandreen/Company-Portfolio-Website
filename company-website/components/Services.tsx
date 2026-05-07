@@ -5,10 +5,10 @@ import { motion } from 'framer-motion'
 
 const services = [
   { title: 'Web Development', color: '#91a4d7', icon: '💻' },
-  { title: 'Laravel Dev', color: '#68477c', icon: '⚙️' },
-  { title: 'WordPress', color: '#0f727a', icon: '🌐' },
-  { title: 'Shopify', color: '#9d2c0b', icon: '🛒' },
-  { title: 'YouTube Automation', color: '#e11d48', icon: '▶️' },
+  { title: 'Laravel Dev', color: '#91a4d7', icon: '⚙️' },
+  { title: 'WordPress', color: '#91a4d7', icon: '🌐' },
+  { title: 'Shopify', color: '#91a4d7', icon: '🛒' },
+  { title: 'YouTube Automation', color: '#91a4d7', icon: '▶️' },
   { title: 'Next.js Apps', color: '#91a4d7', icon: '⚡' },
 ]
 
@@ -20,6 +20,8 @@ export default function Services() {
         background: 'linear-gradient(135deg, #0f727a, #68477c)',
         padding: '18px 0 22px', // 🔥 tighter vertical space
         overflow: 'hidden',
+        userSelect: "none",
+    cursor: "default",
       }}
     >
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 24px' }}>
@@ -99,7 +101,7 @@ export default function Services() {
                   <div
                     style={{
                       fontSize: 16,
-                      color: s.color,
+                      
                     }}
                   >
                     {s.icon}

@@ -53,6 +53,8 @@ export default function FeaturedProjects() {
       style={{
         background: '#110b0f',
         padding: '50px 0',
+        userSelect: "none",
+    cursor: "default",
       }}
     >
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 24px' }}>
