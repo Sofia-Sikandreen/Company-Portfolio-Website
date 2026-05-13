@@ -26,7 +26,7 @@ export default function CareersPage() {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const res = await fetch("http://localhost:3001/api/careers", {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_CMS_URL}/api/careers`,  {
           cache: "no-store",
         });
 
@@ -67,7 +67,7 @@ export default function CareersPage() {
     formData.append("jobTitle", applyJob?.title || "");
     formData.append("cv", form.cv);
 
-    const res = await fetch("http://localhost:3001/api/applications", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_CMS_URL}/api/applications`, {
       method: "POST",
       body: formData,
     });
@@ -224,7 +224,7 @@ export default function CareersPage() {
         const mediaForm = new FormData();
         mediaForm.append("file", form.cv);
 
-        const mediaRes = await fetch("http://localhost:3001/api/media", {
+        const mediaRes = await fetch(`${process.env.NEXT_PUBLIC_CMS_URL}/api/media`, {
           method: "POST",
           body: mediaForm,
         });
@@ -245,7 +245,7 @@ export default function CareersPage() {
         }
 
         // STEP 2: Create the application with the media ID as the cv field
-        const appRes = await fetch("http://localhost:3001/api/applications", {
+        const appRes = await fetch(`${process.env.NEXT_PUBLIC_CMS_URL}/api/applications`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

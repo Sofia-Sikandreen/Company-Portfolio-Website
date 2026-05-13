@@ -29,7 +29,7 @@ export default function Contact() {
       setLoading(true);
   
       try {
-     await fetch("http://localhost:3001/api/contact", {
+     await fetch(`${process.env.NEXT_PUBLIC_CMS_URL}/api/contact`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

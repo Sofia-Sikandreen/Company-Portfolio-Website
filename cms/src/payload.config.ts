@@ -28,14 +28,18 @@ export default buildConfig({
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
-    cors: [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
+      serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3000',
+
+  cors: [
+    'http://localhost:3001',
+    'http://127.0.0.1:3001',
+    ...(process.env.FRONTEND_URL ? [process.env.FRONTEND_URL] : []),
   ],
 
   csrf: [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
+    'http://localhost:3001',
+    'http://127.0.0.1:3001',
+    ...(process.env.FRONTEND_URL ? [process.env.FRONTEND_URL] : []),
   ],
   db: postgresAdapter({
     pool: {

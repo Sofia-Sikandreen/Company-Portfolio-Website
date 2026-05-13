@@ -107,7 +107,7 @@ export default function ServicesPage() {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const res = await fetch("http://localhost:3001/api/services");
+        const res = await fetch(`${process.env.NEXT_PUBLIC_CMS_URL}/api/services`);
         const data = await res.json();
 
         setApiServices(data.docs || []);
