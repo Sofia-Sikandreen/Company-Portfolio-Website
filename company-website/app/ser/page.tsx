@@ -150,21 +150,24 @@ export default function ServicesPage() {
             </p>
           </div>
 
-          <div style={{
-            display: "grid", gridTemplateColumns: "repeat(4, 1fr)",
-            border: "1px solid #1E1E2E", borderRadius: 20,
-            overflow: "hidden", background: "#111118",
-          }}>
-            {platforms.map((p, i) => {
-              const Icon = p.icon;
-              return (
-                <div key={i} style={{ padding: 20, textAlign: "center", marginTop: 7 }}>
-                  <Icon size={22} style={{ color: "#68477c" }} />
-                  <p style={{ fontSize: 12, marginTop: 6, color: "#9ca3af" }}>{p.name}</p>
-                </div>
-              );
-            })}
-          </div>
+         <div style={{
+  display: "grid", gridTemplateColumns: "repeat(4, 1fr)",
+  border: "1px solid #1E1E2E", borderRadius: 20,
+  overflow: "hidden", background: "#111118",
+}}>
+  {platforms.map((p, i) => {
+    const Icon = p.icon;
+    return (
+      <div key={i} style={{
+        padding: 20, textAlign: "center", marginTop: 7,
+        display: "flex", flexDirection: "column", alignItems: "center", gap: 6,
+      }}>
+        <Icon size={22} style={{ color: "#68477c" }} />
+        <p style={{ fontSize: 12, margin: 0, color: "#9ca3af" }}>{p.name}</p>
+      </div>
+    );
+  })}
+</div>
         </div>
 
         {/* MOVING STRIP */}
