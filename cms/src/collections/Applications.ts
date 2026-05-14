@@ -11,7 +11,7 @@ export const Applications: CollectionConfig = {
 },
   admin: {
     useAsTitle: "fullName", // ✅ shows applicant name in the list
-    defaultColumns: ["fullName", "email", "jobTitle", "cv", "createdAt"],
+    defaultColumns: ["fullName", "email", "jobTitle", "cvUrl", "createdAt"],
   },
 
   fields: [
@@ -29,10 +29,13 @@ export const Applications: CollectionConfig = {
       name: "jobTitle",
       type: "text",
     },
-    {
-      name: "cv",
-     type: "relationship",
-     relationTo: "media",
-    },
+{
+  name: "cvUrl",
+  type: "text",
+  required: true,
+     admin: {
+    readOnly: true,
+  },
+}
   ],
 };

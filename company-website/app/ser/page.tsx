@@ -125,6 +125,7 @@ export default function ServicesPage() {
               <div key={index} className="card-hover" style={{
                 padding: 22, borderRadius: 16, textAlign: "center",
                 background: "#111118", border: "1px solid #1E1E2E",
+                display: "flex", flexDirection: "column", alignItems: "center", gap: 6,
               }}>
                 <Icon size={32} style={{ color: "#91a4d7", marginBottom: 10 }} />
                 <h3 style={{ color: "#91a4d7", fontSize: 14, fontWeight: 600 }}>

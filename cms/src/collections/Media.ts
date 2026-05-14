@@ -9,14 +9,13 @@ export const Media: CollectionConfig = {
   },
 
   upload: {
-    staticDir: "media",
-    mimeTypes: [
-      "image/png",
-      "image/jpeg",
-      "image/jpg",
-      "application/pdf",
-    ],
+    disableLocalStorage: true, // IMPORTANT for cloud setup
   },
 
-  fields: [],
+  fields: [
+    {
+      name: "url",
+      type: "text",
+    },
+  ],
 };

@@ -33,13 +33,13 @@ export default buildConfig({
   cors: [
     'http://localhost:3001',
     'http://127.0.0.1:3001',
-    ...(process.env.FRONTEND_URL ? [process.env.FRONTEND_URL] : []),
+    "https://company-portfolio-website.vercel.app",
   ],
 
   csrf: [
     'http://localhost:3001',
     'http://127.0.0.1:3001',
-    ...(process.env.FRONTEND_URL ? [process.env.FRONTEND_URL] : []),
+    "https://company-portfolio-website.vercel.app",
   ],
   db: postgresAdapter({
     pool: {

@@ -51,44 +51,7 @@ export default function CareersPage() {
 
     fetchJobs();
   }, []);
-
-  // 🔹 SUBMIT APPLICATION (FIXED)
-  const submitApplication = async () => {
-  if (!form.fullName || !form.email || !form.cv) {
-    alert("Please fill all fields + upload CV");
-    return;
-  }
-
-  try {
-    const formData = new FormData();
-
-    formData.append("fullName", form.fullName);
-    formData.append("email", form.email);
-    formData.append("jobTitle", applyJob?.title || "");
-    formData.append("cv", form.cv);
-
-    const res = await fetch(`${process.env.NEXT_PUBLIC_CMS_URL}/api/applications`, {
-      method: "POST",
-      body: formData,
-    });
-
-    //  check response
-    if (!res.ok) {
-      const error = await res.text();
-      console.log("Payload error:", error);
-      alert("Submission failed");
-      return;
-    }
-
-    alert("Application submitted");
-
-    setForm({ fullName: "", email: "", cv: null });
-    setApplyJob(null);
-  } catch (err) {
-    console.log(err);
-    alert("Submission failed");
-  }
-};
+// 🔹 SUBMIT APPLICATION (FIXED)
 
   return (
     <main
@@ -213,67 +176,66 @@ export default function CareersPage() {
   <ApplyCard
     job={applyJob}
     onClose={() => setApplyJob(null)}
-    onSubmit={async (form) => {
-      if (!form.fullName || !form.email || !form.cv) {
-        alert("Please fill all fields and upload a CV");
-        return;
+    
+     onSubmit={async (form) => {
+  if (!form.fullName || !form.email || !form.cv) {
+    alert("Please fill all fields and upload CV");
+    return;
+  }
+
+  try {
+    const uploadForm = new FormData();
+    uploadForm.append("cv", form.cv);
+
+    const uploadRes = await fetch(
+      `${process.env.NEXT_PUBLIC_CMS_URL}/upload-cv`,
+      {
+        method: "POST",
+        body: uploadForm,
       }
+    );
 
-      try {
-        // STEP 1: Upload the CV file to Payload's media collection
-        const mediaForm = new FormData();
-        mediaForm.append("file", form.cv);
+    const uploadData = await uploadRes.json();
+    const cvUrl = uploadData?.url;
 
-        const mediaRes = await fetch(`${process.env.NEXT_PUBLIC_CMS_URL}/api/media`, {
-          method: "POST",
-          body: mediaForm,
-        });
+    if (!cvUrl) {
+      alert("CV upload failed");
+      return;
+    }
 
-        if (!mediaRes.ok) {
-          const err = await mediaRes.text();
-          console.error("Media upload failed:", err);
-          alert("CV upload failed");
-          return;
-        }
-
-        const mediaData = await mediaRes.json();
-        const cvId = mediaData.doc?.id;
-
-        if (!cvId) {
-          alert("Could not get CV ID after upload");
-          return;
-        }
-
-        // STEP 2: Create the application with the media ID as the cv field
-        const appRes = await fetch(`${process.env.NEXT_PUBLIC_CMS_URL}/api/applications`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            fullName: form.fullName,
-            email: form.email,
-            jobTitle: applyJob.title,
-            cv: cvId, // ✅ media document ID, not the raw file
-          }),
-        });
-
-        if (!appRes.ok) {
-          const err = await appRes.text();
-          console.error("Application submission failed:", err);
-          alert("Submission failed");
-          return;
-        }
-
-        alert("Application submitted successfully!");
-        setApplyJob(null);
-
-      } catch (err) {
-        console.error(err);
-        alert("Something went wrong");
+    const appRes = await fetch(
+      `${process.env.NEXT_PUBLIC_CMS_URL}/api/applications`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fullName: form.fullName,
+          email: form.email,
+          jobTitle: applyJob?.title,
+          cvUrl,
+        }),
       }
-    }}
-  />
+    );
+
+    if (!appRes.ok) {
+      const err = await appRes.text();
+      console.log(err);
+      alert("Application failed");
+      return;
+    }
+
+    alert("Application submitted successfully!");
+    setApplyJob(null);
+
+  } catch (err) {
+    console.log(err);
+    alert("Something went wrong");
+  }
+}}
+
+/>
 )}
       </div>
     </main>
