@@ -4,11 +4,7 @@ import { useState } from "react";
 
 type Job = { title: string; type?: string; location?: string };
 
-export default function ApplyCard({
-  job,
-  onClose,
-  onSubmit,
-}: {
+export default function ApplyCard({ job, onClose, onSubmit }: {
   job: Job;
   onClose: () => void;
   onSubmit: (data: { fullName: string; email: string; cv: File | null }) => void;
@@ -23,26 +19,13 @@ export default function ApplyCard({
   };
 
   return (
-    <div
-      onClick={onClose}
-      style={{
-        position: "fixed", inset: 0,
-        background: "rgba(0,0,0,0.55)",
-        display: "flex", alignItems: "center", justifyContent: "center",
-        zIndex: 9999, padding: "1rem",
-        userSelect: "none",
-    cursor: "default",
-      }}
-    >
-      <div
-        onClick={(e) => e.stopPropagation()}
-        style={{
-          width: "100%", maxWidth: 420,
-          background: "#111118",
-          border: "0.5px solid #1E1E2E",
-          borderRadius: 20, padding: "1.75rem",
-        }}
-      >
+    <div onClick={onClose} style={{
+      position: "fixed", inset: 0, background: "rgba(0,0,0,0.55)",
+      display: "flex", alignItems: "center", justifyContent: "center",
+      zIndex: 9999, padding: "1rem", userSelect: "none", cursor: "default",
+    }}>
+      <div onClick={(e) => e.stopPropagation()} className="apply-card">
+
         {/* Badge */}
         <div style={{
           display: "inline-flex", alignItems: "center", gap: 6,
@@ -53,7 +36,6 @@ export default function ApplyCard({
           💼 {job.type || "Full-time"} · {job.location || "On-site"}
         </div>
 
-        {/* Title */}
         <h2 style={{ fontSize: 18, fontWeight: 500, margin: 0, color: "#fff" }}>
           Apply for {job.title}
         </h2>
@@ -65,30 +47,22 @@ export default function ApplyCard({
 
         {/* Full Name */}
         <p style={{ fontSize: 12, color: "#9ca3af", margin: "1rem 0 4px" }}>Full name</p>
-        <input
-          type="text"
-          placeholder="e.g. Ahmed Khan"
-          value={form.fullName}
+        <input type="text" placeholder="e.g. Ahmed Khan" value={form.fullName}
           onChange={(e) => setForm({ ...form, fullName: e.target.value })}
           style={{
-            width: "100%", boxSizing: "border-box",
-            padding: "9px 12px", borderRadius: 8,
-            border: "0.5px solid #2a2a3a", background: "#1a1a24",
+            width: "100%", boxSizing: "border-box", padding: "9px 12px",
+            borderRadius: 8, border: "0.5px solid #2a2a3a", background: "#1a1a24",
             color: "#fff", fontSize: 14, outline: "none",
           }}
         />
 
         {/* Email */}
         <p style={{ fontSize: 12, color: "#9ca3af", margin: "1rem 0 4px" }}>Email address</p>
-        <input
-          type="email"
-          placeholder="you@example.com"
-          value={form.email}
+        <input type="email" placeholder="you@example.com" value={form.email}
           onChange={(e) => setForm({ ...form, email: e.target.value })}
           style={{
-            width: "100%", boxSizing: "border-box",
-            padding: "9px 12px", borderRadius: 8,
-            border: "0.5px solid #2a2a3a", background: "#1a1a24",
+            width: "100%", boxSizing: "border-box", padding: "9px 12px",
+            borderRadius: 8, border: "0.5px solid #2a2a3a", background: "#1a1a24",
             color: "#fff", fontSize: 14, outline: "none",
           }}
         />
@@ -98,46 +72,52 @@ export default function ApplyCard({
           display: "flex", flexDirection: "column", alignItems: "center",
           justifyContent: "center", gap: 6, marginTop: "1rem",
           border: `0.5px dashed ${fileName ? "#1D9E75" : "#2a2a3a"}`,
-          borderRadius: 8, background: "#1a1a24",
-          padding: "1.25rem", cursor: "pointer",
-          transition: "border-color 0.15s",
+          borderRadius: 8, background: "#1a1a24", padding: "1rem",
+          cursor: "pointer", transition: "border-color 0.15s",
         }}>
-          <span style={{ fontSize: 28 }}>☁️</span>
-          {fileName ? (
-            <span style={{ fontSize: 13, color: "#1D9E75", fontWeight: 500 }}>{fileName}</span>
-          ) : (
-            <span style={{ fontSize: 13, color: "#9ca3af" }}>Click to upload your CV</span>
-          )}
+          <span style={{ fontSize: 24 }}>☁️</span>
+          {fileName
+            ? <span style={{ fontSize: 13, color: "#1D9E75", fontWeight: 500 }}>{fileName}</span>
+            : <span style={{ fontSize: 13, color: "#9ca3af" }}>Click to upload your CV</span>
+          }
           <span style={{ fontSize: 11, color: "#6b7280" }}>PDF or Word · max 5MB</span>
           <input type="file" accept=".pdf,.doc,.docx" onChange={handleFile} style={{ display: "none" }} />
         </label>
 
         {/* Buttons */}
-        <div style={{ display: "flex", gap: 10, marginTop: "1.5rem" }}>
-          <button
-            onClick={onClose}
-            style={{
-              flex: 1, padding: 10, borderRadius: 8,
-              border: "0.5px solid #2a2a3a", background: "#1a1a24",
-              color: "#9ca3af", fontSize: 14, cursor: "pointer",
-            }}
-          >
-            Cancel
-          </button>
-          <button
-            onClick={() => onSubmit(form)}
-            style={{
-              flex: 2, padding: 10, borderRadius: 8,
-              border: "none", background: "#0F6E56",
-              color: "#fff", fontSize: 14, fontWeight: 500,
-              cursor: "pointer", display: "flex",
-              alignItems: "center", justifyContent: "center", gap: 6,
-            }}
-          >
-            ✉ Submit application
-          </button>
+        <div style={{ display: "flex", gap: 10, marginTop: "1.25rem" }}>
+          <button onClick={onClose} style={{
+            flex: 1, padding: 10, borderRadius: 8,
+            border: "0.5px solid #2a2a3a", background: "#1a1a24",
+            color: "#9ca3af", fontSize: 14, cursor: "pointer",
+          }}>Cancel</button>
+          <button onClick={() => onSubmit(form)} style={{
+            flex: 2, padding: 10, borderRadius: 8, border: "none",
+            background: "#0F6E56", color: "#fff", fontSize: 14,
+            fontWeight: 500, cursor: "pointer",
+            display: "flex", alignItems: "center", justifyContent: "center", gap: 6,
+          }}>✉ Submit application</button>
         </div>
       </div>
+
+      <style>{`
+        .apply-card {
+          width: 100%;
+          max-width: 420px;
+          background: #111118;
+          border: 0.5px solid #1E1E2E;
+          border-radius: 20px;
+          padding: 1.75rem;
+          max-height: 90vh;
+          overflow-y: auto;
+        }
+        @media (max-width: 480px) {
+          .apply-card {
+            padding: 1.25rem;
+            border-radius: 16px;
+          }
+        }
+      `}</style>
     </div>
   );
 }
