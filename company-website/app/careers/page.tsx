@@ -105,30 +105,53 @@ export default function CareersPage() {
                 return;
               }
               try {
+                // STEP 1: Upload CV
                 const mediaForm = new FormData();
-                mediaForm.append("file", form.cv);
-                const mediaRes = await fetch(`${process.env.NEXT_PUBLIC_CMS_URL}/api/media`, {
-                  method: "POST", body: mediaForm,
-                });
-                if (!mediaRes.ok) { alert("CV upload failed"); return; }
-                const mediaData = await mediaRes.json();
-                const cvId = mediaData.doc?.id;
-                if (!cvId) { alert("Could not get CV ID after upload"); return; }
+                mediaForm.append("file", form.cv, form.cv.name); // ← filename added
+                mediaForm.append("alt", form.cv.name);           // ← alt added
 
+                const mediaRes = await fetch(`${process.env.NEXT_PUBLIC_CMS_URL}/api/media`, {
+                  method: "POST",
+                  body: mediaForm,
+                  // ❌ NO Content-Type header
+                });
+
+                const mediaData = await mediaRes.json();
+                console.log("Media response:", mediaData);
+
+                const cvId = mediaData?.doc?.id || mediaData?.id;
+
+                if (!mediaRes.ok || !cvId) {
+                  alert("CV upload failed: " + JSON.stringify(mediaData));
+                  return;
+                }
+
+                // STEP 2: Submit application
                 const appRes = await fetch(`${process.env.NEXT_PUBLIC_CMS_URL}/api/applications`, {
                   method: "POST",
                   headers: { "Content-Type": "application/json" },
                   body: JSON.stringify({
-                    fullName: form.fullName, email: form.email,
-                    jobTitle: applyJob.title, cv: cvId,
+                    fullName: form.fullName,
+                    email: form.email,
+                    jobTitle: applyJob.title,
+                    cv: cvId,
                   }),
                 });
-                if (!appRes.ok) { alert("Submission failed"); return; }
+
+                const appData = await appRes.json();
+                console.log("Application response:", appData);
+
+                if (!appRes.ok) {
+                  alert("Submission failed: " + JSON.stringify(appData));
+                  return;
+                }
+
                 alert("Application submitted successfully!");
                 setApplyJob(null);
+
               } catch (err) {
                 console.error(err);
-                alert("Something went wrong");
+                alert("Something went wrong: " + err);
               }
             }}
           />
