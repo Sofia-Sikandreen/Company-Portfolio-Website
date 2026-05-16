@@ -218,6 +218,8 @@ export default function CareersPage() {
         }),
       }
     );
+    const responseText = await appRes.text();
+    console.log("Payload response:", responseText);
 
     if (!appRes.ok) {
       const err = await appRes.text();
