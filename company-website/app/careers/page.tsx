@@ -188,7 +188,7 @@ export default function CareersPage() {
     uploadForm.append("cv", form.cv);
 
     const uploadRes = await fetch(
-      `${process.env.NEXT_PUBLIC_CMS_URL}/upload-cv`,
+       `${process.env.NEXT_PUBLIC_CMS_URL}/api/upload-cv`,
       {
         method: "POST",
         body: uploadForm,
