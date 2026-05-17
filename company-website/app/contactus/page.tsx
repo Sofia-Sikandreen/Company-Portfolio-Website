@@ -29,12 +29,11 @@ export default function ContactPage() {
     setLoading(true);
 
     try {
-   await fetch(`${process.env.NEXT_PUBLIC_CMS_URL}/api/contact`, {
+   await fetch(`/api/contact`, {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
   },
-  credentials: "include",   // VERY IMPORTANT
   body: JSON.stringify({
     name: form.name,
     email: form.email,
