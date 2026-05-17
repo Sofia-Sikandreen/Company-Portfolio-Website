@@ -35,7 +35,11 @@ export const Applications: CollectionConfig = {
   required: true,
      admin: {
     readOnly: true,
-  },
+    description: "Click to open CV",
+    components: {
+      Field: undefined,
+    },
+}
 }
   ],
 };
