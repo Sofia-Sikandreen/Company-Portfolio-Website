@@ -22,7 +22,7 @@ export const Applications: CollectionConfig = {
     },
     {
       name: "email",
-      type: "email",
+      type: "text",
       required: true,
     },
     {
