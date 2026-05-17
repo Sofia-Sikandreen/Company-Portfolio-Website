@@ -10,7 +10,7 @@ export const Applications: CollectionConfig = {
   delete: () => true,
 },
   admin: {
-    useAsTitle: "fullName", // ✅ shows applicant name in the list
+    useAsTitle: "fullName", // shows applicant name in the list
     defaultColumns: ["fullName", "email", "jobTitle", "cvUrl", "createdAt"],
   },
 
@@ -36,9 +36,6 @@ export const Applications: CollectionConfig = {
      admin: {
     readOnly: true,
     description: "Click to open CV",
-    components: {
-      Field: undefined,
-    },
 }
 }
   ],

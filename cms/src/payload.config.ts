@@ -21,6 +21,11 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    meta: {
+      titleSuffix: "— Company Portfolio CMS",
+    },
+    theme: "dark",
+    dateFormat: "dd/MM/yyyy",
   },
   collections: [Users, Media, Services, Contact, Careers, Applications,],
   editor: lexicalEditor(),
