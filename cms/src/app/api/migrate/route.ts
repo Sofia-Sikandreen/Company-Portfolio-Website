@@ -7,11 +7,21 @@ export async function GET() {
     const payload = await getPayload({ config: configPromise });
     const db = (payload.db as any).drizzle;
 
+    // applications column
     await db.execute(`ALTER TABLE applications ADD COLUMN IF NOT EXISTS cv_url varchar`);
-    await db.execute(`ALTER TABLE projects ADD COLUMN IF NOT EXISTS title varchar`);
-    await db.execute(`ALTER TABLE projects ADD COLUMN IF NOT EXISTS tag varchar`);
-    await db.execute(`ALTER TABLE projects ADD COLUMN IF NOT EXISTS description text`);
-    await db.execute(`ALTER TABLE projects ADD COLUMN IF NOT EXISTS image_id integer`);
+
+    // create projects table if not exists
+    await db.execute(`
+      CREATE TABLE IF NOT EXISTS projects (
+        id serial PRIMARY KEY,
+        title varchar,
+        tag varchar,
+        description text,
+        image_id integer,
+        updated_at timestamp with time zone,
+        created_at timestamp with time zone
+      )
+    `);
 
     return NextResponse.json({ success: true });
   } catch (err: any) {
