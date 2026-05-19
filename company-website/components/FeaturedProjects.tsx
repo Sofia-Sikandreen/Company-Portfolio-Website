@@ -46,6 +46,8 @@ export default function FeaturedProjects() {
 
   const project = projects[index]
   const imageUrl = project.image?.url
+  ? `${process.env.NEXT_PUBLIC_CMS_URL}${project.image.url}`
+  : ''
 
   return (
     <section

@@ -20,8 +20,13 @@ export async function GET() {
         image_id integer,
         updated_at timestamp with time zone,
         created_at timestamp with time zone
+         _status varchar DEFAULT 'published'
       )
     `);
+
+
+    // Drop manually created projects table
+    await db.execute(`DROP TABLE IF EXISTS projects CASCADE`);
 
     return NextResponse.json({ success: true });
   } catch (err: any) {
