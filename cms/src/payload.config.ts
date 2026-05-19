@@ -11,6 +11,7 @@ import { Services } from './collections/Services'
 import { Contact } from './collections/Contact'
 import { Careers } from './collections/Careers'
 import { Applications } from './collections/Applications'
+import { Projects } from './collections/Projects'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -27,7 +28,7 @@ export default buildConfig({
     theme: "dark",
     dateFormat: "dd/MM/yyyy",
   },
-  collections: [Users, Media, Services, Contact, Careers, Applications,],
+  collections: [Users, Media, Services, Contact, Careers, Applications,Projects],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
