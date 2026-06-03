@@ -28,25 +28,28 @@ export default buildConfig({
     theme: "dark",
     dateFormat: "dd/MM/yyyy",
   },
-  collections: [Users, Media, Services, Contact, Careers, Applications,Projects],
+  collections: [Users, Media, Services, Contact, Careers, Applications, Projects],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
-      serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3000',
+  serverURL: 'https://cms-production-efe7.up.railway.app',
 
   cors: [
     'http://localhost:3001',
     'http://127.0.0.1:3001',
-    "https://company-portfolio-website-silk.vercel.app",
+    'https://company-portfolio-website-silk.vercel.app',
+    'https://cms-production-efe7.up.railway.app',
   ],
 
   csrf: [
     'http://localhost:3001',
     'http://127.0.0.1:3001',
-    "https://company-portfolio-website-silk.vercel.app",
+    'https://company-portfolio-website-silk.vercel.app',
+    'https://cms-production-efe7.up.railway.app',
   ],
+
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URL || '',
