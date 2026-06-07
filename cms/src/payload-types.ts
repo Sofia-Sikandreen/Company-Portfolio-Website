@@ -73,6 +73,7 @@ export interface Config {
     contact: Contact;
     careers: Career;
     applications: Application;
+    pages: Page;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -86,6 +87,7 @@ export interface Config {
     contact: ContactSelect<false> | ContactSelect<true>;
     careers: CareersSelect<false> | CareersSelect<true>;
     applications: ApplicationsSelect<false> | ApplicationsSelect<true>;
+    pages: PagesSelect<false> | PagesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -230,7 +232,82 @@ export interface Application {
   fullName: string;
   email: string;
   jobTitle?: string | null;
-  cv?: (number | null) | Media;
+  /**
+   * Click to open CV
+   */
+  cvUrl: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages".
+ */
+export interface Page {
+  id: number;
+  title: string;
+  /**
+   * Konsa page hai yeh?
+   */
+  slug: 'home' | 'about' | 'team';
+  blocks?:
+    | (
+        | {
+            heading: string;
+            subheading?: string | null;
+            buttonText?: string | null;
+            buttonLink?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'heroBlock';
+          }
+        | {
+            stats?:
+              | {
+                  value: string;
+                  label: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'statsBlock';
+          }
+        | {
+            heading?: string | null;
+            description?: string | null;
+            image?: (number | null) | Media;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'aboutBlock';
+          }
+        | {
+            heading?: string | null;
+            subtext?: string | null;
+            buttonText?: string | null;
+            buttonLink?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'ctaBlock';
+          }
+        | {
+            heading?: string | null;
+            subheading?: string | null;
+            projects?:
+              | {
+                  title: string;
+                  tag?: ('Web App' | 'Automation' | 'eCommerce' | 'Business' | 'Mobile App') | null;
+                  description?: string | null;
+                  image?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'featuredProjectsBlock';
+          }
+      )[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -281,6 +358,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'applications';
         value: number | Application;
+      } | null)
+    | ({
+        relationTo: 'pages';
+        value: number | Page;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -404,7 +485,80 @@ export interface ApplicationsSelect<T extends boolean = true> {
   fullName?: T;
   email?: T;
   jobTitle?: T;
-  cv?: T;
+  cvUrl?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages_select".
+ */
+export interface PagesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  blocks?:
+    | T
+    | {
+        heroBlock?:
+          | T
+          | {
+              heading?: T;
+              subheading?: T;
+              buttonText?: T;
+              buttonLink?: T;
+              id?: T;
+              blockName?: T;
+            };
+        statsBlock?:
+          | T
+          | {
+              stats?:
+                | T
+                | {
+                    value?: T;
+                    label?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        aboutBlock?:
+          | T
+          | {
+              heading?: T;
+              description?: T;
+              image?: T;
+              id?: T;
+              blockName?: T;
+            };
+        ctaBlock?:
+          | T
+          | {
+              heading?: T;
+              subtext?: T;
+              buttonText?: T;
+              buttonLink?: T;
+              id?: T;
+              blockName?: T;
+            };
+        featuredProjectsBlock?:
+          | T
+          | {
+              heading?: T;
+              subheading?: T;
+              projects?:
+                | T
+                | {
+                    title?: T;
+                    tag?: T;
+                    description?: T;
+                    image?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+      };
   updatedAt?: T;
   createdAt?: T;
 }
