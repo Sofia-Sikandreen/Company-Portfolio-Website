@@ -71,13 +71,13 @@ export default function ApplyCard({ job, onClose, onSubmit }: {
         <label style={{
           display: "flex", flexDirection: "column", alignItems: "center",
           justifyContent: "center", gap: 6, marginTop: "1rem",
-          border: `0.5px dashed ${fileName ? "#1D9E75" : "#2a2a3a"}`,
-          borderRadius: 8, background: "#1a1a24", padding: "1rem",
+          border: `0.5px dashed ${fileName ? "" : "#2a2a3a"}`,
+          borderRadius: 8, background: "var(--bg-main)", padding: "1rem",
           cursor: "pointer", transition: "border-color 0.15s",
         }}>
           <span style={{ fontSize: 24 }}>☁️</span>
           {fileName
-            ? <span style={{ fontSize: 13, color: "#1D9E75", fontWeight: 500 }}>{fileName}</span>
+            ? <span style={{ fontSize: 13, color: "var(--text-primary)", fontWeight: 500 }}>{fileName}</span>
             : <span style={{ fontSize: 13, color: "var(--text-secondary)" }}>Click to upload your CV</span>
           }
           <span style={{ fontSize: 11, color: "var(--text-secondary)" }}>PDF or Word · max 5MB</span>
