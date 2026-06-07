@@ -24,7 +24,9 @@ export default function ApplyCard({ job, onClose, onSubmit }: {
       display: "flex", alignItems: "center", justifyContent: "center",
       zIndex: 9999, padding: "1rem", userSelect: "none", cursor: "default",
     }}>
-      <div onClick={(e) => e.stopPropagation()} className="apply-card">
+      <div onClick={(e) => e.stopPropagation()} className="apply-card" style={{
+  isolation: 'isolate',
+}}>
 
         {/* Badge */}
         <div style={{
@@ -110,6 +112,8 @@ export default function ApplyCard({ job, onClose, onSubmit }: {
           padding: 1.75rem;
           max-height: 90vh;
           overflow-y: auto;
+          overflow-x: hidden;
+          contain: paint; 
         }
         @media (max-width: 480px) {
           .apply-card {
