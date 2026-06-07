@@ -12,7 +12,10 @@ export const Pages: CollectionConfig = {
     defaultColumns: ['title', 'slug', 'updatedAt'],
   },
   access: {
+    create: () => true,   
     read: () => true,
+    update: () => true,
+    delete: () => true,
   },
   fields: [
     {
