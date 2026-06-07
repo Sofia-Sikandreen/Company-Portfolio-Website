@@ -156,7 +156,7 @@ export default function CareersPage() {
                       padding: "10px 16px",
                       borderRadius: 10,
                       background:'linear-gradient(135deg, var(--green-bright), var(--green-lime))',
-                      color: "var(--text-primary)",
+                      color: "#ffff",
                       border: "none",
                       cursor: "pointer",
                       

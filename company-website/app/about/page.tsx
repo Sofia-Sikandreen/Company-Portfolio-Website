@@ -89,8 +89,8 @@ export default function AboutPage() {
           background: "linear-gradient(135deg, var(--green-bright), var(--green-lime),var(--green-dark))",
           borderRadius: 20, padding: 30, textAlign: "center",
         }}>
-          <h2 style={{ fontSize: 22, marginBottom: 10 }}>Let's Build Something Great Together</h2>
-          <p style={{ fontSize: 14 }}>
+          <h2 style={{ fontSize: 22, marginBottom: 10, color: '#ffff' }}>Let's Build Something Great Together</h2>
+          <p style={{ fontSize: 14,  color:'#ffff'}}>
             We collaborate with startups and enterprises to turn ideas into scalable digital products.
           </p>
         </div>

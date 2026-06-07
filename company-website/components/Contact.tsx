@@ -76,7 +76,7 @@ export default function Contact() {
             <button type="submit" style={{
               background: 'linear-gradient(135deg, var(--green-bright), var(--green-lime), var(--green-dark))',
               padding: '10px 14px', borderRadius: 10, border: 'none',
-              color: '#fff', fontWeight: 600, cursor: 'pointer',
+              color: '#ffff', fontWeight: 600, cursor: 'pointer',
             }}>
               {loading ? "Sending..." : "Send Message"}
             </button>

@@ -24,9 +24,7 @@ export default function ApplyCard({ job, onClose, onSubmit }: {
       display: "flex", alignItems: "center", justifyContent: "center",
       zIndex: 9999, padding: "1rem", userSelect: "none", cursor: "default",
     }}>
-      <div onClick={(e) => e.stopPropagation()} className="apply-card" style={{
-  isolation: 'isolate',
-}}>
+      <div onClick={(e) => e.stopPropagation()} className="apply-card" >
 
         {/* Badge */}
         <div style={{
@@ -45,7 +43,7 @@ export default function ApplyCard({ job, onClose, onSubmit }: {
           Fill in your details and attach your CV to apply.
         </p>
 
-        <div style={{ height: "0.5px", background: "var(bg-main)", margin: "1.25rem 0 0" }} />
+        <div style={{ height: "0.5px", background: "var(--bg-main)", margin: "1.25rem 0 0" }} />
 
         {/* Full Name */}
         <p style={{ fontSize: 12, color: "var(--text-secondary)", margin: "1rem 0 4px" }}>Full name</p>
@@ -103,18 +101,35 @@ export default function ApplyCard({ job, onClose, onSubmit }: {
       </div>
 
       <style>{`
-        .apply-card {
-          width: 100%;
-          max-width: 420px;
-          background: var(--card-bg);
-          border: 0.5px solid var(--border-green);
-          border-radius: 20px;
-          padding: 1.75rem;
-          max-height: 90vh;
-          overflow-y: auto;
-          overflow-x: hidden;
-          contain: paint; 
-        }
+          .apply-card {
+    width: 100%;
+    max-width: 420px;
+    background: var(--card-bg);
+    border: 0.5px solid var(--border-green);
+    border-radius: 20px;
+    padding: 1.75rem;
+    max-height: 90vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;          /* ← add */
+    isolation: isolate;          /* ← add */
+
+    /* scrollbar styling */
+    scrollbar-width: thin;
+    scrollbar-color: var(--green-bright) transparent;
+  }
+
+  .apply-card::-webkit-scrollbar {
+    width: 4px;
+  }
+  .apply-card::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .apply-card::-webkit-scrollbar-thumb {
+    background: var(--green-bright);
+    border-radius: 20px;
+  }
+
         @media (max-width: 480px) {
           .apply-card {
             padding: 1.25rem;
