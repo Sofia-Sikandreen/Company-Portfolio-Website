@@ -4,6 +4,7 @@ import { StatsBlock } from '../blocks/StatsBlock'
 import { AboutBlock } from '../blocks/AboutBlock'
 import { CTABlock } from '../blocks/CTABlock'
 import { FeaturedProjectsBlock } from '../blocks/FeaturedProjectsBlock'
+import { ServicesStripBlock } from '../blocks/ServicesStripBlock'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -42,7 +43,7 @@ export const Pages: CollectionConfig = {
       name: 'blocks',
       type: 'blocks',
       label: 'Page Blocks',
-      blocks: [HeroBlock, StatsBlock, AboutBlock, CTABlock, FeaturedProjectsBlock,],
+      blocks: [HeroBlock, StatsBlock, AboutBlock, CTABlock, FeaturedProjectsBlock,ServicesStripBlock],
     },
   ],
 }
