@@ -43,7 +43,7 @@ export default function ApplyCard({ job, onClose, onSubmit }: {
           Fill in your details and attach your CV to apply.
         </p>
 
-        <div style={{ height: "0.5px", background: "#1E1E2E", margin: "1.25rem 0 0" }} />
+        <div style={{ height: "0.5px", background: "var(bg-main)", margin: "1.25rem 0 0" }} />
 
         {/* Full Name */}
         <p style={{ fontSize: 12, color: "var(--text-secondary)", margin: "1rem 0 4px" }}>Full name</p>
@@ -51,7 +51,7 @@ export default function ApplyCard({ job, onClose, onSubmit }: {
           onChange={(e) => setForm({ ...form, fullName: e.target.value })}
           style={{
             width: "100%", boxSizing: "border-box", padding: "9px 12px",
-            borderRadius: 8, border: "0.5px solid #2a2a3a", background: "#1a1a24",
+            borderRadius: 8, border: "0.5px solid var(--border-green)", background: "var(--bg-main)",
             color: "var(--text-primary)", fontSize: 14, outline: "none",
           }}
         />
@@ -62,7 +62,7 @@ export default function ApplyCard({ job, onClose, onSubmit }: {
           onChange={(e) => setForm({ ...form, email: e.target.value })}
           style={{
             width: "100%", boxSizing: "border-box", padding: "9px 12px",
-            borderRadius: 8, border: "0.5px solid #2a2a3a", background: "#1a1a24",
+            borderRadius: 8, border: "0.5px solid var(--border-green)", background: "var(--bg-main)",
             color: "var(--text-primary)", fontSize: 14, outline: "none",
           }}
         />
@@ -88,7 +88,7 @@ export default function ApplyCard({ job, onClose, onSubmit }: {
         <div style={{ display: "flex", gap: 10, marginTop: "1.25rem" }}>
           <button onClick={onClose} style={{
             flex: 1, padding: 10, borderRadius: 8,
-            border: "0.5px solid var(--border-green)", background: "#1a1a24",
+            border: "0.5px solid var(--border-green)", background: "var(--bg-main)",
             color: "var(--text-secondary)", fontSize: 14, cursor: "pointer",
           }}>Cancel</button>
           <button onClick={() => onSubmit(form)} style={{
