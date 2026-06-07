@@ -5,6 +5,73 @@
 
 @custom-variant dark (&:is(.dark *));
 
+:root {
+  --green-dark: #364225;
+  --green-mid: #3BCB5A;
+  --green-bright: #6DB33F;
+  --green-lime: #A5D64A;
+
+  --bg-main: #08090C;
+  --bg-secondary: #11151A;
+  --bg-white: #151A20;
+  --bg-soft: #1A2129;
+
+  --card-bg: #151A20;
+  --card-hover: #1A2129;
+  --card-bg-tint: #202833;
+
+  --badge-bg: #151A20;
+
+  --text-primary: #FFFFFF;
+  --text-secondary: #A8B0BB;
+  --text-light: #FFFFFF;
+
+  --border-green: rgba(255, 255, 255, 0.08);
+  --border-green-hover: rgba(59, 203, 90, 0.35);
+
+  --footer-bg: #11151A;
+  --navbar-bg: rgba(8, 9, 12, 0.85);
+
+  --tag-bg: #1E1E2E;
+
+  --heading-color: #FFFFFF;
+
+  --glow-color: rgba(59, 203, 90, 0.18);
+
+  --image-overlay: rgba(8, 9, 12, 0.55);
+}
+.light {
+  --bg-main: #f9fdf8;
+  --bg-secondary: #EAEDE8;
+  --bg-white: #FFFFFF;
+  --bg-soft: #E4E8E0;
+
+  --card-bg: #f3feed;
+  --card-hover: #F0F3EE;
+  --card-bg-tint: #E8EDE5;
+
+  --badge-bg: #EAEDE8;
+
+  --text-primary: #1A2129;
+  --text-secondary: #4A5568;
+  --text-light: #FFFFFF;          /* keep white — used on green buttons */
+
+  --border-green: rgba(0, 0, 0, 0.10);
+  --border-green-hover: rgba(59, 203, 90, 0.35);
+
+  --footer-bg: #d5e3c8;
+  --navbar-bg: #d5e3c8;
+
+  --tag-bg: #dbf7cc;
+
+  --heading-color: #1A2129;
+
+  --glow-color: rgba(59, 203, 90, 0.14);
+
+  --image-overlay: rgba(244, 246, 243, 0.45);
+}
+
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -16,46 +83,50 @@ html {
 }
 
 body {
-  background: #110b0f; /* Black Sheep */
-  color: #eaeaf0;
+  background: var(--bg-main);
+  color: var(--text-primary);
   font-family: 'Sora', sans-serif;
   overflow-x: hidden;
 }
 
 /* Scrollbar */
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #110b0f; }
+::-webkit-scrollbar-track { background: var(--bg-main); }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(#0f727a, #68477c);
+  background: linear-gradient(var(--green-bright), var(--green-dark));
   border-radius: 3px;
 }
 
 /* Grid Background */
 .grid-bg {
   background-image:
-    linear-gradient(rgba(145, 164, 215, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(145, 164, 215, 0.04) 1px, transparent 1px);
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
   background-size: 60px 60px;
 }
 
 /* Gradient Text */
 .gradient-text {
-  background: linear-gradient(135deg, #0f727a, #68477c);
+ background: linear-gradient(
+  135deg,
+  var(--green-bright),
+  var(--green-lime),
+  var(--green-dark)
+ );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 /* Cards */
 .card-hover {
-  background: rgba(48, 34, 61, 0.6); /* Telopea */
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(145, 164, 215, 0.15);
-  transition: all 0.3s ease;
+  background: rgba(21,26,32,0.85);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.06);
 }
 
 .card-hover:hover {
-  border-color: #0f727a;
-  box-shadow: 0 10px 40px rgba(15, 114, 122, 0.25);
+  border-color: var(--green-bright);
+  box-shadow: 0 10px 40px var(--border-green-hover);
   transform: translateY(-6px);
 }
 
@@ -63,44 +134,44 @@ body {
 .stats-bg {
   background: linear-gradient(
     135deg,
-    rgba(15, 114, 122, 0.15),
-    rgba(104, 71, 124, 0.15)
+    rgba(126, 227, 58, 0.1),
+    rgba(130, 213, 88, 0.08)
   );
-  border: 1px solid rgba(145, 164, 215, 0.2);
+  border: 1px solid var(--border-green);
 }
 
 /* Buttons */
 .btn-primary {
-  background: linear-gradient(135deg, #0f727a, #68477c);
+  background: #3BCB5A;
   color: white;
-  transition: all 0.3s ease;
+  border: 1px solid rgba(255,255,255,.08);
 }
 
 .btn-primary:hover {
-  box-shadow: 0 8px 30px rgba(15, 114, 122, 0.4);
+  box-shadow: 0 8px 30px var(--border-green-hover);
   transform: translateY(-2px);
 }
 
 .btn-outline {
-  border: 1px solid #91a4d7;
-  color: #91a4d7;
+  border: 1px solid var(--green-bright);
+  color: var(--green-bright);
   transition: all 0.3s ease;
 }
 
 .btn-outline:hover {
-  background: rgba(145, 164, 215, 0.1);
+  background: rgba(109, 179, 63, 0.1);
 }
 
 /* Tech Badge */
 .tech-badge {
-  background: #1a1422;
-  border: 1px solid rgba(145, 164, 215, 0.15);
+  background: var(--badge-bg);
+  border: 1px solid var(--border-green);
   animation: float 6s ease-in-out infinite;
 }
 
 /* Glow */
 .laptop-glow {
-  filter: drop-shadow(0 0 40px rgba(145, 164, 215, 0.25));
+  filter: drop-shadow(0 0 40px rgba(109, 179, 63, 0.3));
 }
 
 /* Animations */
@@ -120,7 +191,7 @@ body {
   margin-left: 4px;
   width: 2px;
   height: 1em;
-  background: #0f727a;
+  background: var(--green-bright);
   animation: pulse 1s ease-in-out infinite;
 }
 
@@ -139,26 +210,26 @@ body {
   --font-heading: var(--font-sans);
   --font-sans: var(--font-sans);
 
-  --color-background: #110b0f;
-  --color-foreground: #eaeaf0;
+  --color-background: var(--bg-main);
+  --color-foreground: var(--text-primary);
 
-  --color-card: #30223d;
-  --color-card-foreground: #ffffff;
+  --color-card: var(--card-bg);
+  --color-card-foreground: var(--text-primary);
 
-  --color-primary: #91a4d7;
-  --color-primary-foreground: #110b0f;
+  --color-primary: var(--green-bright);
+  --color-primary-foreground: var(--text-light);
 
-  --color-secondary: #68477c;
-  --color-secondary-foreground: #ffffff;
+  --color-secondary: var(--green-mid);
+  --color-secondary-foreground: var(--text-light);
 
-  --color-accent: #0f727a;
-  --color-accent-foreground: #ffffff;
+  --color-accent: var(--green-dark);
+  --color-accent-foreground: var(--text-light);
 
   --color-destructive: #9d2c0b;
 
-  --color-border: rgba(145, 164, 215, 0.15);
-  --color-input: rgba(145, 164, 215, 0.15);
-  --color-ring: #91a4d7;
+  --color-border: var(--border-green);
+  --color-input: var(--border-green);
+  --color-ring: var(--green-bright);
 
   --radius: 0.625rem;
 }

@@ -35,15 +35,15 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" style={{ padding: '50px 0', background: '#110b0f', userSelect: "none", cursor: "default" }}>
+    <section id="contact" style={{ padding: '50px 0', background: 'var(--bg-main)', userSelect: "none", cursor: "default" }}>
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 20px' }}>
 
         {/* HEADER */}
         <div style={{ textAlign: 'center', marginBottom: 40 }}>
-          <p style={{ color: '#91a4d7', fontSize: 11, letterSpacing: '0.3em', textTransform: 'uppercase', marginBottom: 6 }}>
+          <p style={{ color: 'var(--green-bright)', fontSize: 11, letterSpacing: '0.3em', textTransform: 'uppercase', marginBottom: 6 }}>
             Contact Us
           </p>
-          <h2 style={{ color: '#fff', fontSize: 28, fontWeight: 700, margin: 0 }}>
+          <h2 style={{ color: 'var(--heading-color)', fontSize: 28, fontWeight: 700, margin: 0 }}>
             Let's Build Something
           </h2>
         </div>
@@ -52,35 +52,35 @@ export default function Contact() {
         <div className="contact-grid">
 
           {/* LEFT INFO */}
-          <div style={{ color: '#aaa' }}>
-            <h3 style={{ color: '#fff', fontSize: 18, marginBottom: 12 }}>Get in Touch</h3>
+          <div style={{ color: 'var(--text-secondary)' }}>
+            <h3 style={{ color: 'var(--heading-color)', fontSize: 18, marginBottom: 12 }}>Get in Touch</h3>
             <p style={{ fontSize: 13, lineHeight: 1.7, marginBottom: 20 }}>
               Have a project idea or need a digital solution? We help businesses grow with web apps, automation and modern tech systems.
             </p>
             <div style={{ fontSize: 13, lineHeight: 2 }}>
-              <p><span style={{ color: '#91a4d7' }}>Email:</span> hello@yourcompany.com</p>
-              <p><span style={{ color: '#68477c' }}>Response:</span> within 24 hours</p>
-              <p><span style={{ color: '#0f727a' }}>Support:</span> 24/7 available</p>
+              <p><span style={{ color: 'var(--green-lime)' }}>Email:</span> hello@yourcompany.com</p>
+              <p><span style={{ color: 'var(--green-lime)' }}>Response:</span> within 24 hours</p>
+              <p><span style={{ color: 'var(--green-lime)' }}>Support:</span> 24/7 available</p>
             </div>
           </div>
 
           {/* FORM */}
           <form onSubmit={handleSubmit} style={{
             display: 'flex', flexDirection: 'column', gap: 14,
-            background: '#111118', padding: 20, borderRadius: 14,
-            border: '1px solid rgba(145,164,215,0.15)',
+            background: 'var(--card-bg)', padding: 20, borderRadius: 14,
+            border: '1px solid var(--border-green)',
           }}>
             <input name="name" placeholder="Your Name" onChange={handleChange} style={inputStyle} />
             <input name="email" placeholder="Your Email" onChange={handleChange} style={inputStyle} />
             <textarea name="message" placeholder="Your Message" rows={4} onChange={handleChange} style={{ ...inputStyle, resize: 'none' }} />
             <button type="submit" style={{
-              background: 'linear-gradient(135deg, #0f727a, #68477c)',
+              background: 'linear-gradient(135deg, var(--green-bright), var(--green-lime), var(--green-dark))',
               padding: '10px 14px', borderRadius: 10, border: 'none',
               color: '#fff', fontWeight: 600, cursor: 'pointer',
             }}>
               {loading ? "Sending..." : "Send Message"}
             </button>
-            {success && <p style={{ color: "#0f727a", marginTop: 12, textAlign: "center" }}>Message sent successfully!</p>}
+            {success && <p style={{ color: "var(--green-bright)", marginTop: 12, textAlign: "center" }}>Message sent successfully!</p>}
           </form>
 
         </div>
@@ -106,6 +106,7 @@ export default function Contact() {
 
 const inputStyle = {
   padding: '10px 12px', borderRadius: 10,
-  background: '#0a0a0f', border: '1px solid rgba(145,164,215,0.15)',
-  color: '#fff', fontSize: 13, outline: 'none',
+  background: 'var(--bg-main)',
+  border: '1px solid var(--border-green)',
+  color: 'var(--heading-color)', fontSize: 13, outline: 'none',
 }

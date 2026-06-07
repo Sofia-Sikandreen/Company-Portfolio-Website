@@ -4,11 +4,13 @@ import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import { ThemeProvider } from '@/components/ThemeProvider'
+
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 export const metadata: Metadata = {
-  title: 'LOGO — IT Solutions That Empower Businesses',
-  description: 'Full-service IT company delivering modern web solutions.',
+  title: 'Hibit',
+  description: 'Full-service IT company delivering modern web solutions.',                                                   
 }
 
 export default function RootLayout({
@@ -18,7 +20,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={cn("font-sans", geist.variable)}>
-      <body><div className="flex flex-col min-h-screen">
+      <body>
+        <ThemeProvider>
+        <div className="flex flex-col min-h-screen">
   <Navbar />
 
   <main className="flex-1">
@@ -26,7 +30,9 @@ export default function RootLayout({
   </main>
 
   <Footer />
-</div></body>
+</div>
+</ThemeProvider>
+</body>
     </html>
   )
 }

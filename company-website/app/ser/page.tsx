@@ -94,7 +94,7 @@ export default function ServicesPage() {
 
   return (
     <main style={{
-      minHeight: "100vh", background: "#110b0f", color: "white",
+      minHeight: "100vh", background: "var(--bg-dark)", color: "var(--text-primary)",
       padding: "120px 24px 80px", userSelect: "none", cursor: "default",
     }}>
       <div style={{ maxWidth: 1100, margin: "0 auto" }}>
@@ -104,7 +104,7 @@ export default function ServicesPage() {
           <h1 style={{ fontSize: 38, fontWeight: 800 }}>
             Our <span className="gradient-text">Services</span>
           </h1>
-          <p style={{ color: "#9ca3af", maxWidth: 700, margin: "16px auto 0" }}>
+          <p style={{ color: "var(--text-secondary)", maxWidth: 700, margin: "16px auto 0" }}>
             Technologies and tools we use to build modern digital solutions.
           </p>
         </div>
@@ -124,11 +124,11 @@ export default function ServicesPage() {
             return (
               <div key={index} className="card-hover" style={{
                 padding: 22, borderRadius: 16, textAlign: "center",
-                background: "#111118", border: "1px solid #1E1E2E",
+                background: "var(--card-bg)", border: "1px solid var(--border-green)",
                 display: "flex", flexDirection: "column", alignItems: "center", gap: 6,
               }}>
-                <Icon size={32} style={{ color: "#91a4d7", marginBottom: 10 }} />
-                <h3 style={{ color: "#91a4d7", fontSize: 14, fontWeight: 600 }}>
+                <Icon size={32} style={{ color: "var(--green-lime)", marginBottom: 10 }} />
+                <h3 style={{ color: "var(--green-lime)", fontSize: 14, fontWeight: 600 }}>
                   {item.title.toUpperCase()}
                 </h3>
               </div>
@@ -139,22 +139,22 @@ export default function ServicesPage() {
         {/* PLATFORM */}
         <div className="platform-grid" style={{ marginTop: 70 }}>
           <div style={{
-            background: "#111118", border: "1px solid #1E1E2E",
+            background: "var(--card-bg)", border: "1px solid var(--border-green)",
             borderRadius: 20, padding: 28,
           }}>
             <h2 style={{ fontSize: 30, fontWeight: 800 }}>
               Platform flexibility.<br />
               <span className="gradient-text">Design consistency.</span>
             </h2>
-            <p style={{ marginTop: 14, color: "#9ca3af" }}>
+            <p style={{ marginTop: 14, color: "var(--text-secondary)" }}>
               Consistent design across all platforms with scalable architecture.
             </p>
           </div>
 
          <div style={{
   display: "grid", gridTemplateColumns: "repeat(4, 1fr)",
-  border: "1px solid #1E1E2E", borderRadius: 20,
-  overflow: "hidden", background: "#111118",
+  border: "1px solid var(--border-green)", borderRadius: 20,
+  overflow: "hidden", background: "var(--card-bg)",
 }}>
   {platforms.map((p, i) => {
     const Icon = p.icon;
@@ -163,8 +163,8 @@ export default function ServicesPage() {
         padding: 20, textAlign: "center", marginTop: 7,
         display: "flex", flexDirection: "column", alignItems: "center", gap: 6,
       }}>
-        <Icon size={22} style={{ color: "#68477c" }} />
-        <p style={{ fontSize: 12, margin: 0, color: "#9ca3af" }}>{p.name}</p>
+        <Icon size={22} style={{ color: "var(--green-lime)" }} />
+        <p style={{ fontSize: 12, margin: 0, color: "var(--text-secondary)" }}>{p.name}</p>
       </div>
     );
   })}
@@ -181,7 +181,7 @@ export default function ServicesPage() {
             {[...movingServices, ...movingServices].map((m, i) => {
               const Icon = m.icon;
               return (
-                <div key={i} style={{ display: "flex", gap: 6, color: "#0f727a" }}>
+                <div key={i} style={{ display: "flex", gap: 6, color: "var(--green-bright)" }}>
                   <Icon /><span>{m.name}</span>
                 </div>
               );
@@ -194,20 +194,20 @@ export default function ServicesPage() {
 
           {/* CMS */}
           <div style={{
-            background: "#111118", padding: 28,
-            borderRadius: 20, border: "1px solid #1E1E2E",
+            background: "var(--card-bg)", padding: 28,
+            borderRadius: 20, border: "1px solid var(--border-green)",
           }}>
             <h2 style={{ fontSize: 28, fontWeight: 800 }}>
               Seamless <span className="gradient-text">CMS</span> Launch
             </h2>
-            <p style={{ marginTop: 12, color: "#9ca3af" }}>Update content without code changes.</p>
-            <div style={{ marginTop: 20, padding: 16, border: "1px solid #1E1E2E", borderRadius: 12 }}>
+            <p style={{ marginTop: 12, color: "var(--text-secondary)" }}>Update content without code changes.</p>
+            <div style={{ marginTop: 20, padding: 16, border: "1px solid var(--border-green)", borderRadius: 12 }}>
               <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 10 }}>
-                <b style={{ color: "#91a4d7" }}>Title</b>
-                <b style={{ color: "#91a4d7" }}>Date</b>
+                <b style={{ color: "var(--green-lime)" }}>Title</b>
+                <b style={{ color: "var(--green-lime)" }}>Date</b>
               </div>
               {[["Mastering Motion", "5 Aug 2025"], ["Brand", "Jul"], ["UI", "Jun"]].map(([t, d]) => (
-                <div key={t} style={{ display: "flex", justifyContent: "space-between", color: "#9ca3af", fontSize: 13, marginTop: 8 }}>
+                <div key={t} style={{ display: "flex", justifyContent: "space-between", color: "var(--text-secondary)", fontSize: 13, marginTop: 8 }}>
                   <span>{t}</span><span>{d}</span>
                 </div>
               ))}
@@ -216,17 +216,17 @@ export default function ServicesPage() {
 
           {/* CLOCK */}
           <div style={{
-            background: "#111118", padding: 28, borderRadius: 20,
-            border: "1px solid #1E1E2E", textAlign: "center",
+            background: "var(--card-bg)", padding: 28, borderRadius: 20,
+            border: "1px solid var(--border-green)", textAlign: "center",
           }}>
             <h2 style={{ fontSize: 28, fontWeight: 800 }}>
               Future <span className="gradient-text">Ready</span>
             </h2>
-            <p style={{ color: "#9ca3af", marginTop: 10 }}>Systems that scale with growth</p>
+            <p style={{ color: "var(--text-secondary)", marginTop: 10 }}>Systems that scale with growth</p>
 
             <div style={{
               width: 180, height: 180, margin: "20px auto",
-              borderRadius: "50%", border: "1px solid #68477c", position: "relative",
+              borderRadius: "50%", border: "1px solid var(--green-mid)", position: "relative",
             }}>
               {[...Array(12)].map((_, i) => {
                 const angle = (i + 1) * 30;
@@ -235,46 +235,46 @@ export default function ServicesPage() {
                 return (
                   <span key={i} style={{
                     position: "absolute", left: `${x}%`, top: `${y}%`,
-                    transform: "translate(-50%, -50%)", fontSize: 9, color: "#9ca3af",
+                    transform: "translate(-50%, -50%)", fontSize: 9, color: "var(--text-secondary)",
                   }}>{i + 1}</span>
                 );
               })}
               <div style={{
-                position: "absolute", width: 10, height: 10, background: "#fff",
+                position: "absolute", width: 10, height: 10, background: "var(--text-primary)",
                 borderRadius: "50%", top: "50%", left: "50%",
                 transform: "translate(-50%, -50%)", zIndex: 10,
               }} />
               <div style={{
-                position: "absolute", width: 4, height: 55, background: "#fff",
+                position: "absolute", width: 4, height: 55, background: "var(--text-primary)",
                 top: "50%", left: "50%", transformOrigin: "bottom",
                 transform: `translate(-50%, -100%) rotate(${hourDeg}deg)`,
               }} />
               <div style={{
-                position: "absolute", width: 3, height: 68, background: "#9ca3af",
+                position: "absolute", width: 3, height: 68, background: "var(--text-secondary)",
                 top: "50%", left: "50%", transformOrigin: "bottom",
                 transform: `translate(-50%, -100%) rotate(${minuteDeg}deg)`,
               }} />
               <div style={{
-                position: "absolute", width: 2, height: 75, background: "#0f727a",
+                position: "absolute", width: 2, height: 75, background: "var(--green-bright)",
                 top: "50%", left: "50%", transformOrigin: "bottom",
                 transform: `translate(-50%, -100%) rotate(${secondDeg}deg)`,
               }} />
             </div>
-            <p style={{ color: "#0f727a" }}>Always on Time</p>
+            <p style={{ color: "var(--green-bright)" }}>Always on Time</p>
           </div>
         </div>
 
         {/* CTA */}
         <div style={{ marginTop: 80, textAlign: "center" }}>
           <div style={{
-            background: "linear-gradient(135deg,#111118,#0a0a0f)",
-            border: "1px solid #1E1E2E", borderRadius: 20, padding: 40,
+            background: "var(--card-bg)",
+            border: "1px solid var(--border-green)", borderRadius: 20, padding: 40,
           }}>
             <h2 style={{ fontSize: 28 }}>Still Have Questions?</h2>
-            <p style={{ color: "#9ca3af", marginTop: 10 }}>Contact us for custom solutions</p>
+            <p style={{ color: "var(--text-secondary)", marginTop: 10 }}>Contact us for custom solutions</p>
             <a href="/contactus" style={{
               display: "inline-block", marginTop: 20, padding: "12px 20px",
-              borderRadius: 10, background: "linear-gradient(135deg,#0f727a,#68477c)", color: "white",
+              borderRadius: 10, background: "linear-gradient(135deg,var(--green-bright),var(--green-lime))", color: "var(--text-primary)",
             }}>Contact Us</a>
           </div>
         </div>

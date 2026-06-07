@@ -57,8 +57,8 @@ export default function CareersPage() {
     <main
       style={{
         minHeight: "100vh",
-        background: "#110b0f",
-        color: "#fff",
+        background: "var(--bg-dark)",
+        color: "var(--text-primary)",
         padding: "120px 24px 80px",
         userSelect: "none",
     cursor: "default",
@@ -114,7 +114,7 @@ export default function CareersPage() {
                   {job.title}
                 </h3>
 
-                <p style={{ color: "#0f727a", marginTop: 6 }}>
+                <p style={{ color: "var(--green-bright)", marginTop: 6 }}>
                   {job.type} • {job.location}
                 </p>
 
@@ -137,7 +137,7 @@ export default function CareersPage() {
                       }
                       style={{
                         fontSize: 12,
-                        color: "#0f727a",
+                        color: "var(--green-bright)",
                         cursor: "pointer",
                       }}
                     >
@@ -156,8 +156,8 @@ export default function CareersPage() {
                       padding: "10px 16px",
                       borderRadius: 10,
                       background:
-                        "linear-gradient(135deg,#0f727a,#68477c)",
-                      color: "#fff",
+                        "linear-gradient(135deg,var(--green-bright),var(--green-mid))",
+                      color: "var(--text-primary)",
                       border: "none",
                       cursor: "pointer",
                       

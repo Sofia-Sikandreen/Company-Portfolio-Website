@@ -26,7 +26,7 @@ const teamMembers = [
 export default function TeamPage() {
   return (
     <main style={{
-      minHeight: "100vh", background: "#0d0d12", color: "#fff",
+      minHeight: "100vh", background: "var(--bg-main)", color: "var(--text-primary)",
       padding: "120px 24px 80px", userSelect: "none", cursor: "default",
     }}>
       <div style={{ maxWidth: 1100, margin: "0 auto" }}>
@@ -36,23 +36,23 @@ export default function TeamPage() {
           <h1 style={{ fontSize: 42, fontWeight: 800 }}>
             Meet Our <span className="gradient-text">Team</span>
           </h1>
-          <p style={{ color: "#9ca3af", maxWidth: 600, margin: "16px auto 0" }}>
+          <p style={{ color: "var(--text-secondary)", maxWidth: 600, margin: "16px auto 0" }}>
             People behind the product — designers, engineers & problem solvers.
           </p>
         </div>
 
         {/* CEO SECTION */}
         <div className="ceo-card" style={{ marginBottom: 80 }}>
-          <div style={{ width: 160, height: 160, borderRadius: 20, overflow: "hidden", flexShrink: 0 }}>
+          <div style={{ width: 160, height: 160, borderRadius: 20, overflow: "hidden", flexShrink: 0, border: "1px solid var(--border-green)" }}>
             <Image src={ceo.img} alt={ceo.name} width={160} height={160} style={{ objectFit: "cover" }} />
           </div>
           <div>
             <h2 style={{ fontSize: 26, fontWeight: 700 }}>{ceo.name}</h2>
-            <p style={{ color: "#0f727a", marginTop: 6 }}>{ceo.role}</p>
-            <p style={{ color: "#9ca3af", marginTop: 12, maxWidth: 500 }}>
+            <p style={{ color: "var(--green-bright)", marginTop: 6 }}>{ceo.role}</p>
+            <p style={{ color: "var(--text-secondary)", marginTop: 12, maxWidth: 500 }}>
               Leading the vision and strategy, ensuring we build impactful and scalable digital solutions.
             </p>
-            <p style={{ marginTop: 10, fontStyle: "italic", color: "#cbd5e1" }}>"{ceo.quote}"</p>
+            <p style={{ marginTop: 10, fontStyle: "italic", color: "var(--text-secondary)" }}>"{ceo.quote}"</p>
             <div style={{ marginTop: 14, display: "flex", gap: 14 }}>
               <a href={ceo.github} target="_blank"><FaGithub /></a>
               <a href={ceo.linkedin} target="_blank"><FaLinkedin /></a>
@@ -67,8 +67,8 @@ export default function TeamPage() {
               key={index}
               style={{
                 position: "relative",
-                background: "#111118",
-                border: "1px solid #1E1E2E",
+                background: "var(--card-bg)",
+                border: "1px solid var(--border-green)",
                 borderRadius: 20,
                 padding: "100px 20px 28px",
                 textAlign: "center",
@@ -87,20 +87,20 @@ export default function TeamPage() {
               <div style={{
                 position: "absolute", top: -45, left: "50%",
                 transform: "translateX(-50%)", width: 110, height: 110,
-                borderRadius: "50%", overflow: "hidden", border: "4px solid #0d0d12",
+                borderRadius: "50%", overflow: "hidden", border: "4px solid var(--border-green)",
               }}>
                 <Image src={member.img} alt={member.name} width={110} height={110} />
               </div>
 
               <h3 style={{ fontSize: 17, fontWeight: 700 }}>{member.name}</h3>
-              <p style={{ color: "#0f727a", fontSize: 14, marginTop: 6 }}>{member.role}</p>
-              <p style={{ fontSize: 13, color: "#9ca3af", marginTop: 10 }}>{member.bio}</p>
+              <p style={{ color: "var(--green-bright)", fontSize: 14, marginTop: 6 }}>{member.role}</p>
+              <p style={{ fontSize: 13, color: "var(--text-secondary)", marginTop: 10 }}>{member.bio}</p>
 
               <div style={{ marginTop: 10, display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 6 }}>
                 {member.skills.map((skill, i) => (
                   <span key={i} style={{
                     fontSize: 11, padding: "4px 8px", borderRadius: 6,
-                    background: "#1E1E2E", color: "#cbd5e1",
+                    background: "var(--tag-bg)", color: "var(--text-primary)",
                   }}>{skill}</span>
                 ))}
               </div>
@@ -116,15 +116,15 @@ export default function TeamPage() {
         {/* CTA */}
         <div style={{ marginTop: 90 }}>
           <div style={{
-            background: "#111118", border: "1px solid #1E1E2E",
+            background: "var(--card-bg)", border: "1px solid var(--border-green)",
             borderRadius: 20, padding: 40, textAlign: "center",
           }}>
             <h2 style={{ fontSize: 28, fontWeight: 700 }}>Want to work with us?</h2>
-            <p style={{ color: "#9ca3af", marginTop: 10 }}>Let's build something impactful together.</p>
+            <p style={{ color: "var(--text-secondary)", marginTop: 10 }}>Let's build something impactful together.</p>
             <a href="/contactus" style={{
               display: "inline-block", marginTop: 20, padding: "12px 22px",
-              borderRadius: 10, background: "linear-gradient(135deg,#0f727a,#68477c)",
-              color: "#fff", fontWeight: 600,
+              borderRadius: 10, background: "linear-gradient(135deg,var(--green-bright),var(--green-lime))",
+              color: "#ffff", fontWeight: 600,
             }}>Contact Us</a>
           </div>
         </div>
@@ -138,8 +138,8 @@ export default function TeamPage() {
           align-items: center;
           padding: 30px;
           borderRadius: 20px;
-          background: #111118;
-          border: 1px solid #1E1E2E;
+          background: var(--card-bg);
+          border: 1px solid var(--border-green);
           border-radius: 20px;
           flex-wrap: wrap;
         }

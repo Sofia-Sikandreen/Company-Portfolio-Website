@@ -53,21 +53,21 @@ setForm({ name: "", email: "", message: "" });
     padding: 14,
     marginBottom: 14,
     borderRadius: 10,
-    background: "#0b0b10",
-    border: "1px solid #1E1E2E",
-    color: "#fff",
+    background: "var(--bg-main)",
+    border: "1px solid var(--border-green)",
+    color: "var(--text-primary)",
     fontSize: 14,
     outline: "none",
     boxShadow: "none",
-    caretColor: "#0f727a",
+    caretColor: "var(--green-bright)",
   };
 
   return (
     <main
       style={{
         minHeight: "100vh",
-        background: "#110b0f",
-        color: "#fff",
+        background: "var(--bg-main)",
+        color: "var(--text-primary)",
         padding: "120px 24px 80px",
         userSelect: "none",
     cursor: "default",
@@ -80,7 +80,7 @@ setForm({ name: "", email: "", message: "" });
             Contact <span className="gradient-text">Us</span>
           </h1>
 
-          <p style={{ color: "#9ca3af", maxWidth: 600, margin: "16px auto 0" }}>
+          <p style={{ color: "var(--text-secondary)", maxWidth: 600, margin: "16px auto 0" }}>
             Let’s discuss your project, idea, or opportunity.
           </p>
         </div>
@@ -88,8 +88,8 @@ setForm({ name: "", email: "", message: "" });
         {/* FORM CARD */}
         <div
           style={{
-            background: "#111118",
-            border: "1px solid #1E1E2E",
+            background: "var(--card-bg)",
+            border: "1px solid var(--border-green)",
             borderRadius: 20,
             padding: 30,
             position: "relative",
@@ -132,8 +132,8 @@ userSelect: "none",
                 padding: 14,
                 borderRadius: 10,
                 border: "none",
-                background: "linear-gradient(135deg,#0f727a,#68477c)",
-                color: "#fff",
+                background: "linear-gradient(135deg,var(--green-bright),var(--green-lime))",
+                color: "var(--text-primary)",
                 fontWeight: 600,
                 cursor: "pointer",
               }}
@@ -142,7 +142,7 @@ userSelect: "none",
             </button>
 
             {success && (
-              <p style={{ color: "#0f727a", marginTop: 12, textAlign: "center" }}>
+              <p style={{ color: "var(--green-bright)", marginTop: 12, textAlign: "center" }}>
                 Message sent successfully!
               </p>
             )}
