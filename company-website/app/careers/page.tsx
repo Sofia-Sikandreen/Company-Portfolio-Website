@@ -57,7 +57,7 @@ export default function CareersPage() {
     <main
       style={{
         minHeight: "100vh",
-        background: "var(--bg-dark)",
+        background: "var(--bg-main)",
         color: "var(--text-primary)",
         padding: "120px 24px 80px",
         userSelect: "none",
@@ -72,21 +72,21 @@ export default function CareersPage() {
             Careers at <span className="gradient-text">Our Company</span>
           </h1>
 
-          <p style={{ color: "#9ca3af", marginTop: 10 }}>
+          <p style={{ color: "var(--text-secondary)", marginTop: 10 }}>
             Explore opportunities and grow with us.
           </p>
         </div>
 
         {/* LOADING */}
         {loading && (
-          <p style={{ textAlign: "center", color: "#9ca3af" }}>
+          <p style={{ textAlign: "center", color: "var(--text-secondary)" }}>
             Loading opportunities...
           </p>
         )}
 
         {/* EMPTY */}
         {!loading && jobs.length === 0 && (
-          <p style={{ textAlign: "center", color: "#9ca3af" }}>
+          <p style={{ textAlign: "center", color: "var(--text-secondary)" }}>
             No jobs available right now
           </p>
         )}
@@ -104,8 +104,8 @@ export default function CareersPage() {
               <div
                 key={index}
                 style={{
-                  background: "#111118",
-                  border: "1px solid #1E1E2E",
+                  background: "var(--card-bg)",
+                  border: "1px solid var(--border-green)",
                   borderRadius: 20,
                   padding: 22,
                 }}
@@ -119,7 +119,7 @@ export default function CareersPage() {
                 </p>
 
                 {/* DESCRIPTION */}
-                <p style={{ color: "#9ca3af", marginTop: 6 }}>
+                <p style={{ color: "var(--text-secondary)", marginTop: 6 }}>
                   {expandedIndex === index
                     ? job.description
                     : (job.description || "").length > 90
@@ -156,7 +156,7 @@ export default function CareersPage() {
                       padding: "10px 16px",
                       borderRadius: 10,
                       background:
-                        "linear-gradient(135deg,var(--green-bright),var(--green-mid))",
+                        "linear-gradient(135deg,var(--green-bright),var(--green-lime))",
                       color: "var(--text-primary)",
                       border: "none",
                       cursor: "pointer",
