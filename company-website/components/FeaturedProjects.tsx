@@ -10,9 +10,17 @@ type Project = {
   image: { url: string }
 }
 
-export default function FeaturedProjects() {
+type ProjectsData = {
+  heading?: string
+  subheading?: string
+}
+
+export default function FeaturedProjects({ data }: { data?: ProjectsData }) {
   const [projects, setProjects] = useState<Project[]>([])
   const [index, setIndex] = useState(0)
+
+  const heading = data?.heading || 'Featured Projects'
+  const subheading = data?.subheading || 'Our Work'
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -40,20 +48,16 @@ export default function FeaturedProjects() {
     <section id="works" style={{ background: 'var(--bg-main)', padding: '50px 0', userSelect: 'none', cursor: 'default' }}>
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 24px' }}>
 
-        {/* HEADER */}
         <div style={{ textAlign: 'center', marginBottom: 50 }}>
           <p style={{ color: 'var(--green-mid)', fontSize: 11, letterSpacing: '0.3em', textTransform: 'uppercase', marginBottom: 10 }}>
-            Our Work
+            {subheading}
           </p>
           <h2 style={{ color: 'var(--heading-color)', fontSize: 32, fontWeight: 700 }}>
-            Featured Projects
+            {heading}
           </h2>
         </div>
 
-        {/* MAIN LAYOUT */}
         <div style={{ display: 'flex', gap: 50, alignItems: 'center', flexWrap: 'wrap' }}>
-
-          {/* IMAGE */}
           <div style={{
             flex: 1, minWidth: 320, height: 360, borderRadius: 16,
             overflow: 'hidden', border: '1px solid var(--border-green)', position: 'relative',
@@ -71,7 +75,6 @@ export default function FeaturedProjects() {
             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, var(--image-overlay), transparent)' }} />
           </div>
 
-          {/* CONTENT */}
           <div style={{ flex: 1, minWidth: 320 }}>
             <p style={{ color: 'var(--green-bright)', fontSize: 12, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: 10 }}>
               {project.tag}
