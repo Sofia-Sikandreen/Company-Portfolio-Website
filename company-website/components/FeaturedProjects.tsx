@@ -1,48 +1,34 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 type Project = {
   title: string
   tag: string
   description: string
-  image: { url: string }
+  image?: { url: string }
 }
 
 type ProjectsData = {
   heading?: string
   subheading?: string
+  projects?: Project[]
 }
 
 export default function FeaturedProjects({ data }: { data?: ProjectsData }) {
-  const [projects, setProjects] = useState<Project[]>([])
   const [index, setIndex] = useState(0)
 
   const heading = data?.heading || 'Featured Projects'
   const subheading = data?.subheading || 'Our Work'
-
-  useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_CMS_URL}/api/projects?limit=10`, { cache: 'no-store' })
-        const data = await res.json()
-        if (Array.isArray(data.docs) && data.docs.length > 0) setProjects(data.docs)
-      } catch (err) { console.error('Error fetching projects:', err) }
-    }
-    fetchProjects()
-  }, [])
-
-  useEffect(() => {
-    if (projects.length === 0) return
-    const interval = setInterval(() => setIndex((prev) => (prev + 1) % projects.length), 4000)
-    return () => clearInterval(interval)
-  }, [projects])
+  const projects = data?.projects || []
 
   if (projects.length === 0) return null
 
   const project = projects[index]
-  const imageUrl = project.image?.url ? `${process.env.NEXT_PUBLIC_CMS_URL}${project.image.url}` : ''
+  const imageUrl = project.image?.url
+    ? `${process.env.NEXT_PUBLIC_CMS_URL}${project.image.url}`
+    : ''
 
   return (
     <section id="works" style={{ background: 'var(--bg-main)', padding: '50px 0', userSelect: 'none', cursor: 'default' }}>
@@ -58,23 +44,28 @@ export default function FeaturedProjects({ data }: { data?: ProjectsData }) {
         </div>
 
         <div style={{ display: 'flex', gap: 50, alignItems: 'center', flexWrap: 'wrap' }}>
-          <div style={{
-            flex: 1, minWidth: 320, height: 360, borderRadius: 16,
-            overflow: 'hidden', border: '1px solid var(--border-green)', position: 'relative',
-          }}>
-            <AnimatePresence mode="wait">
-              <motion.img
-                key={imageUrl} src={imageUrl}
-                initial={{ opacity: 0, scale: 1.05 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.6 }}
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-              />
-            </AnimatePresence>
-            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, var(--image-overlay), transparent)' }} />
-          </div>
 
+          {/* IMAGE */}
+          {imageUrl && (
+            <div style={{
+              flex: 1, minWidth: 320, height: 360, borderRadius: 16,
+              overflow: 'hidden', border: '1px solid var(--border-green)', position: 'relative',
+            }}>
+              <AnimatePresence mode="wait">
+                <motion.img
+                  key={imageUrl} src={imageUrl}
+                  initial={{ opacity: 0, scale: 1.05 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.6 }}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
+              </AnimatePresence>
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, var(--image-overlay), transparent)' }} />
+            </div>
+          )}
+
+          {/* CONTENT */}
           <div style={{ flex: 1, minWidth: 320 }}>
             <p style={{ color: 'var(--green-bright)', fontSize: 12, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: 10 }}>
               {project.tag}
