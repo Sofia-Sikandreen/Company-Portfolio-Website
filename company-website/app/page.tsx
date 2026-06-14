@@ -9,22 +9,24 @@ export default async function Home() {
   const page = await getPage('home')
   const blocks = page?.blocks || []
 
-  const getBlock = (type: string) => blocks.find((b: any) => b.blockType === type)
-
-  const heroData = getBlock('heroBlock')
-  const statsData = getBlock('statsBlock')
-  const servicesData = getBlock('servicesStripBlock')
-  const projectsData = getBlock('featuredProjectsBlock')
-  const ctaData = getBlock('ctaBlock')
-  const aboutData = getBlock('aboutBlock')
-
   return (
     <>
-      <Hero data={heroData} />
-      <Services data={servicesData} />
-      <Stats data={statsData} />
-      <FeaturedProjects data={projectsData} />
-      <Contact data={ctaData} />
+      {blocks.map((block: any) => {
+        switch (block.blockType) {
+          case 'heroBlock':
+            return <Hero key={block.id} data={block} />
+          case 'statsBlock':
+            return <Stats key={block.id} data={block} />
+          case 'servicesStripBlock':
+            return <Services key={block.id} data={block} />
+          case 'featuredProjectsBlock':
+            return <FeaturedProjects key={block.id} data={block} />
+          case 'ctaBlock':
+            return <Contact key={block.id} data={block} />
+          default:
+            return null
+        }
+      })}
     </>
   )
 }

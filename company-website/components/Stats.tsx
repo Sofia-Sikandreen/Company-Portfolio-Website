@@ -47,11 +47,13 @@ function CountUp({ target, suffix }: { target: number; suffix: string }) {
 type StatData = { number: number; suffix: string; label: string }
 
 export default function Stats({ data }: { data?: { stats?: StatData[] } }) {
-  const stats = (data?.stats && data.stats.length > 0 ? data.stats : defaultStats).map((s, i) => ({
-    ...s,
-    icon: icons[i] || icons[0],
-    color: colors[i] || colors[0],
-  }))
+const stats = (data?.stats || []).map((s, i) => ({
+  ...s,
+  icon: icons[i] || icons[0],
+  color: colors[i] || colors[0],
+}))
+
+if (stats.length === 0) return null 
 
   return (
     <section id="about" style={{ padding: '50px 0', userSelect: "none", cursor: "default" }}>

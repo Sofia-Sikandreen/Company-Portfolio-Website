@@ -11,6 +11,12 @@ type CTAData = {
   supportText?: string
 }
 
+const inputStyle = {
+  padding: '10px 12px', borderRadius: 10,
+  background: 'var(--bg-main)', border: '1px solid var(--border-green)',
+  color: 'var(--heading-color)', fontSize: 13, outline: 'none',
+}
+
 export default function Contact({ data }: { data?: CTAData }) {
   const [form, setForm] = useState<FormState>({ name: "", email: "", message: "" });
   const [loading, setLoading] = useState(false);
@@ -93,10 +99,4 @@ export default function Contact({ data }: { data?: CTAData }) {
       `}</style>
     </section>
   )
-}
-
-const inputStyle = {
-  padding: '10px 12px', borderRadius: 10,
-  background: 'var(--bg-main)', border: '1px solid var(--border-green)',
-  color: 'var(--heading-color)', fontSize: 13, outline: 'none',
 }

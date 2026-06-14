@@ -16,8 +16,8 @@ const defaultServices = [
 type ServiceItem = { title: string; icon?: string; link?: string }
 
 export default function Services({ data }: { data?: { services?: ServiceItem[] } }) {
-  const services = (data?.services && data.services.length > 0) ? data.services : defaultServices
-
+  const services = data?.services || []
+if (services.length === 0) return null
   return (
     <section id="services" style={{ background: "linear-gradient(135deg,var(--green-bright),var(--green-lime),var(--green-dark))", overflow: 'hidden', userSelect: "none", cursor: "default" }} className="services-section">
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 24px' }}>
