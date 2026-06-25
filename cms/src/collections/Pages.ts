@@ -5,6 +5,11 @@ import { AboutBlock } from '../blocks/AboutBlock'
 import { CTABlock } from '../blocks/CTABlock'
 import { FeaturedProjectsBlock } from '../blocks/FeaturedProjectsBlock'
 import { ServicesStripBlock } from '../blocks/ServicesStripBlock'
+import { AboutHeaderBlock } from '../blocks/AboutHeaderBlock'
+import { AboutStatsBlock } from '../blocks/AboutStatsBlock'
+import { AboutTextBlock } from '../blocks/AboutTextBlock'
+import { ValuesBlock } from '../blocks/ValuesBlock'
+import { CTABannerBlock } from '../blocks/CTABannerBlock'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -13,37 +18,40 @@ export const Pages: CollectionConfig = {
     defaultColumns: ['title', 'slug', 'updatedAt'],
   },
   access: {
-    create: () => true,   
+    create: () => true,
     read: () => true,
     update: () => true,
     delete: () => true,
   },
   fields: [
-    {
-      name: 'title',
-      type: 'text',
-      required: true,
-      label: 'Page Title',
-    },
+    { name: 'title', type: 'text', required: true, label: 'Page Title' },
     {
       name: 'slug',
-      type: 'select',
+      type: 'text',
       required: true,
-      label: 'Page',
-      options: [
-        { label: 'Home', value: 'home' },
-        { label: 'About', value: 'about' },
-        { label: 'Team', value: 'team' },
-      ],
+      unique: true,
+      label: 'Page Slug',
       admin: {
-        description: 'Konsa page hai yeh?',
+        description: 'URL path for this page — lowercase, no spaces (e.g. "about", "pricing", "blog"). Use "home" for the homepage.',
       },
     },
     {
       name: 'blocks',
       type: 'blocks',
       label: 'Page Blocks',
-      blocks: [HeroBlock, StatsBlock, AboutBlock, CTABlock, FeaturedProjectsBlock,ServicesStripBlock],
+      blocks: [
+        HeroBlock,
+        StatsBlock,
+        AboutBlock,
+        CTABlock,
+        FeaturedProjectsBlock,
+        ServicesStripBlock,
+        AboutHeaderBlock,
+        AboutStatsBlock,
+        AboutTextBlock,
+        ValuesBlock,
+        CTABannerBlock,
+      ],
     },
   ],
 }

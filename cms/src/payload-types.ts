@@ -247,16 +247,21 @@ export interface Page {
   id: number;
   title: string;
   /**
-   * Konsa page hai yeh?
+   * URL path for this page — lowercase, no spaces (e.g. "about", "pricing", "blog"). Use "home" for the homepage.
    */
-  slug: 'home' | 'about' | 'team';
+  slug: string;
   blocks?:
     | (
         | {
-            heading: string;
-            subheading?: string | null;
-            buttonText?: string | null;
-            buttonLink?: string | null;
+            tagText?: string | null;
+            headingLine1?: string | null;
+            headingLine2?: string | null;
+            headingLine3?: string | null;
+            description?: string | null;
+            primaryButtonText?: string | null;
+            primaryButtonLink?: string | null;
+            secondaryButtonText?: string | null;
+            secondaryButtonLink?: string | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'heroBlock';
@@ -264,7 +269,8 @@ export interface Page {
         | {
             stats?:
               | {
-                  value: string;
+                  number: number;
+                  suffix?: string | null;
                   label: string;
                   id?: string | null;
                 }[]
@@ -274,18 +280,22 @@ export interface Page {
             blockType: 'statsBlock';
           }
         | {
-            heading?: string | null;
+            companyName?: string | null;
             description?: string | null;
-            image?: (number | null) | Media;
+            copyrightText?: string | null;
+            facebookUrl?: string | null;
+            twitterUrl?: string | null;
+            linkedinUrl?: string | null;
+            instagramUrl?: string | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'aboutBlock';
           }
         | {
             heading?: string | null;
-            subtext?: string | null;
-            buttonText?: string | null;
-            buttonLink?: string | null;
+            email?: string | null;
+            responseTime?: string | null;
+            supportText?: string | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'ctaBlock';
@@ -305,6 +315,72 @@ export interface Page {
             id?: string | null;
             blockName?: string | null;
             blockType: 'featuredProjectsBlock';
+          }
+        | {
+            services?:
+              | {
+                  title: string;
+                  icon?: string | null;
+                  link?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'servicesStripBlock';
+          }
+        | {
+            tagText?: string | null;
+            title?: string | null;
+            description?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'aboutHeaderBlock';
+          }
+        | {
+            stats?:
+              | {
+                  icon?: ('TrendingUp' | 'Users' | 'CheckCircle' | 'Award' | 'Clock' | 'Star') | null;
+                  value: string;
+                  label: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'aboutStatsBlock';
+          }
+        | {
+            paragraphs?:
+              | {
+                  text: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'aboutTextBlock';
+          }
+        | {
+            heading?: string | null;
+            highlightedWord?: string | null;
+            values?:
+              | {
+                  title: string;
+                  description?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'valuesBlock';
+          }
+        | {
+            heading?: string | null;
+            description?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'ctaBannerBlock';
           }
       )[]
     | null;
@@ -502,10 +578,15 @@ export interface PagesSelect<T extends boolean = true> {
         heroBlock?:
           | T
           | {
-              heading?: T;
-              subheading?: T;
-              buttonText?: T;
-              buttonLink?: T;
+              tagText?: T;
+              headingLine1?: T;
+              headingLine2?: T;
+              headingLine3?: T;
+              description?: T;
+              primaryButtonText?: T;
+              primaryButtonLink?: T;
+              secondaryButtonText?: T;
+              secondaryButtonLink?: T;
               id?: T;
               blockName?: T;
             };
@@ -515,7 +596,8 @@ export interface PagesSelect<T extends boolean = true> {
               stats?:
                 | T
                 | {
-                    value?: T;
+                    number?: T;
+                    suffix?: T;
                     label?: T;
                     id?: T;
                   };
@@ -525,9 +607,13 @@ export interface PagesSelect<T extends boolean = true> {
         aboutBlock?:
           | T
           | {
-              heading?: T;
+              companyName?: T;
               description?: T;
-              image?: T;
+              copyrightText?: T;
+              facebookUrl?: T;
+              twitterUrl?: T;
+              linkedinUrl?: T;
+              instagramUrl?: T;
               id?: T;
               blockName?: T;
             };
@@ -535,9 +621,9 @@ export interface PagesSelect<T extends boolean = true> {
           | T
           | {
               heading?: T;
-              subtext?: T;
-              buttonText?: T;
-              buttonLink?: T;
+              email?: T;
+              responseTime?: T;
+              supportText?: T;
               id?: T;
               blockName?: T;
             };
@@ -555,6 +641,78 @@ export interface PagesSelect<T extends boolean = true> {
                     image?: T;
                     id?: T;
                   };
+              id?: T;
+              blockName?: T;
+            };
+        servicesStripBlock?:
+          | T
+          | {
+              services?:
+                | T
+                | {
+                    title?: T;
+                    icon?: T;
+                    link?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        aboutHeaderBlock?:
+          | T
+          | {
+              tagText?: T;
+              title?: T;
+              description?: T;
+              id?: T;
+              blockName?: T;
+            };
+        aboutStatsBlock?:
+          | T
+          | {
+              stats?:
+                | T
+                | {
+                    icon?: T;
+                    value?: T;
+                    label?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        aboutTextBlock?:
+          | T
+          | {
+              paragraphs?:
+                | T
+                | {
+                    text?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        valuesBlock?:
+          | T
+          | {
+              heading?: T;
+              highlightedWord?: T;
+              values?:
+                | T
+                | {
+                    title?: T;
+                    description?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        ctaBannerBlock?:
+          | T
+          | {
+              heading?: T;
+              description?: T;
               id?: T;
               blockName?: T;
             };
