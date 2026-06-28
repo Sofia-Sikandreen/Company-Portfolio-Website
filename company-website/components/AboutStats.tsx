@@ -1,3 +1,5 @@
+'use client'
+
 import {
   TrendingUp, Users, CheckCircle, Award, Target, Zap, Shield,
   Heart, Star, Rocket, Briefcase, Globe, Clock, Lightbulb,
