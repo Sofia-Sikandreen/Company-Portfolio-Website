@@ -5,10 +5,8 @@ import {
 import StatCard from '@/components/statcard'
 
 const iconMap: Record<string, any> = {
-  trendingUp: TrendingUp, users: Users, checkCircle: CheckCircle,
-  award: Award, target: Target, zap: Zap, shield: Shield,
-  heart: Heart, star: Star, rocket: Rocket, briefcase: Briefcase,
-  globe: Globe, clock: Clock, lightbulb: Lightbulb,
+  TrendingUp, Users, CheckCircle, Award, Target, Zap, Shield,
+  Heart, Star, Rocket, Briefcase, Globe, Clock, Lightbulb,
 }
 
 type Stat = { icon: string; value: string; label: string }
