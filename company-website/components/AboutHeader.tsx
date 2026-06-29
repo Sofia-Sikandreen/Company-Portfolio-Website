@@ -1,35 +1,22 @@
-type PageHeaderData = {
-  eyebrow?: string
-  heading: string
-  highlightWord?: string
+type AboutHeaderData = {
+  tagText?: string
+  title: string
   description?: string
 }
 
-export default function PageHeader({ data }: { data: PageHeaderData }) {
-  const { eyebrow, heading, highlightWord, description } = data
-
-  const renderHeading = () => {
-    if (!highlightWord || !heading.includes(highlightWord)) return heading
-    const parts = heading.split(highlightWord)
-    return (
-      <>
-        {parts[0]}
-        <span className="gradient-text">{highlightWord}</span>
-        {parts.slice(1).join(highlightWord)}
-      </>
-    )
-  }
+export default function AboutHeader({ data }: { data: AboutHeaderData }) {
+  const { tagText, title, description } = data
 
   return (
     <div style={{ textAlign: 'center', marginBottom: 80 }}>
-      {eyebrow && (
+      {tagText && (
         <p style={{
           color: 'var(--green-lime)', letterSpacing: '0.3em', fontSize: 15,
           textTransform: 'uppercase', fontWeight: 500,
-        }}>{eyebrow}</p>
+        }}>{tagText}</p>
       )}
       <h1 className="page-header-title" style={{ fontWeight: 800, marginTop: 10 }}>
-        {renderHeading()}
+        {title}
       </h1>
       {description && (
         <p style={{ color: 'var(--text-secondary)', maxWidth: 700, margin: '18px auto 0', lineHeight: 1.7 }}>
