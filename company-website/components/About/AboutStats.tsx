@@ -4,7 +4,7 @@ import {
   TrendingUp, Users, CheckCircle, Award, Target, Zap, Shield,
   Heart, Star, Rocket, Briefcase, Globe, Clock, Lightbulb,
 } from 'lucide-react'
-import StatCard from '@/components/statcard'
+import StatCard from '@/components/Services/statcard'
 
 const iconMap: Record<string, any> = {
   TrendingUp, Users, CheckCircle, Award, Target, Zap, Shield,

@@ -10,6 +10,12 @@ import { AboutStatsBlock } from '../blocks/AboutStatsBlock'
 import { AboutTextBlock } from '../blocks/AboutTextBlock'
 import { ValuesBlock } from '../blocks/ValuesBlock'
 import { CTABannerBlock } from '../blocks/CTABannerBlock'
+import { TechGridBlock } from '../blocks/TechGridBlock'
+import { PlatformBlock } from '../blocks/PlatformBlock'
+import { MovingStripBlock } from '../blocks/MovingStripBlock'
+import { CmsFeatureBlock } from '../blocks/CmsFeatureBlock'
+import { ClockFeatureBlock } from '../blocks/ClockFeatureBlock'
+import { CTAButtonBlock } from '../blocks/CTAButtonBlock'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -40,18 +46,24 @@ export const Pages: CollectionConfig = {
       type: 'blocks',
       label: 'Page Blocks',
       blocks: [
-        HeroBlock,
-        StatsBlock,
-        AboutBlock,
-        CTABlock,
-        FeaturedProjectsBlock,
-        ServicesStripBlock,
-        AboutHeaderBlock,
-        AboutStatsBlock,
-        AboutTextBlock,
-        ValuesBlock,
-        CTABannerBlock,
-      ],
+  HeroBlock,
+  StatsBlock,
+  AboutBlock,
+  CTABlock,
+  FeaturedProjectsBlock,
+  ServicesStripBlock,
+  AboutHeaderBlock,
+  AboutStatsBlock,
+  AboutTextBlock,
+  ValuesBlock,
+  CTABannerBlock,
+  TechGridBlock,
+  PlatformBlock,
+  MovingStripBlock,
+  CmsFeatureBlock,
+  ClockFeatureBlock,
+  CTAButtonBlock,
+],
     },
   ],
 }

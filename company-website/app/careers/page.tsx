@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import ApplyCard from '@/components/careers/ApplyCard';
+import ApplyCard from '@/components/Careers/ApplyCard';
 
 type Job = {
   title: string;

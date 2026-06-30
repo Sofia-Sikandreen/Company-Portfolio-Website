@@ -8,113 +8,116 @@ export async function GET() {
     const db = (payload.db as any).drizzle;
 
     await db.execute(`
-      CREATE TYPE "public"."enum_pages_blocks_about_stats_block_stats_icon" AS ENUM('TrendingUp', 'Users', 'CheckCircle', 'Award', 'Clock', 'Star');
-
-      CREATE TABLE IF NOT EXISTS "pages_blocks_about_header_block" (
+      CREATE TABLE IF NOT EXISTS "pages_blocks_tech_grid_block" (
         "_order" integer NOT NULL,
         "_parent_id" integer NOT NULL,
         "_path" text NOT NULL,
         "id" varchar PRIMARY KEY NOT NULL,
-        "tag_text" varchar DEFAULT 'About Us',
-        "title" varchar DEFAULT 'We Build Modern Software Solutions',
-        "description" varchar DEFAULT 'We are a software development company focused on building scalable, high-performance digital products for businesses worldwide.',
         "block_name" varchar
       );
-
-      CREATE TABLE IF NOT EXISTS "pages_blocks_about_stats_block_stats" (
+      CREATE TABLE IF NOT EXISTS "pages_blocks_tech_grid_block_items" (
         "_order" integer NOT NULL,
         "_parent_id" varchar NOT NULL,
         "id" varchar PRIMARY KEY NOT NULL,
-        "icon" "enum_pages_blocks_about_stats_block_stats_icon" DEFAULT 'TrendingUp',
-        "value" varchar NOT NULL,
-        "label" varchar NOT NULL
+        "name" varchar NOT NULL,
+        "icon" varchar NOT NULL
       );
 
-      CREATE TABLE IF NOT EXISTS "pages_blocks_about_stats_block" (
+      CREATE TABLE IF NOT EXISTS "pages_blocks_platform_block" (
         "_order" integer NOT NULL,
         "_parent_id" integer NOT NULL,
         "_path" text NOT NULL,
         "id" varchar PRIMARY KEY NOT NULL,
+        "heading_line1" varchar DEFAULT 'Platform flexibility.',
+        "heading_line2" varchar DEFAULT 'Design consistency.',
+        "description" varchar DEFAULT 'Consistent design across all platforms with scalable architecture.',
         "block_name" varchar
       );
-
-      CREATE TABLE IF NOT EXISTS "pages_blocks_about_text_block_paragraphs" (
+      CREATE TABLE IF NOT EXISTS "pages_blocks_platform_block_platforms" (
         "_order" integer NOT NULL,
         "_parent_id" varchar NOT NULL,
         "id" varchar PRIMARY KEY NOT NULL,
-        "text" varchar NOT NULL
+        "name" varchar NOT NULL,
+        "icon" varchar NOT NULL
       );
 
-      CREATE TABLE IF NOT EXISTS "pages_blocks_about_text_block" (
+      CREATE TABLE IF NOT EXISTS "pages_blocks_moving_strip_block" (
         "_order" integer NOT NULL,
         "_parent_id" integer NOT NULL,
         "_path" text NOT NULL,
         "id" varchar PRIMARY KEY NOT NULL,
         "block_name" varchar
       );
+      CREATE TABLE IF NOT EXISTS "pages_blocks_moving_strip_block_items" (
+        "_order" integer NOT NULL,
+        "_parent_id" varchar NOT NULL,
+        "id" varchar PRIMARY KEY NOT NULL,
+        "name" varchar NOT NULL,
+        "icon" varchar NOT NULL
+      );
 
-      CREATE TABLE IF NOT EXISTS "pages_blocks_values_block_values" (
+      CREATE TABLE IF NOT EXISTS "pages_blocks_cms_feature_block" (
+        "_order" integer NOT NULL,
+        "_parent_id" integer NOT NULL,
+        "_path" text NOT NULL,
+        "id" varchar PRIMARY KEY NOT NULL,
+        "heading" varchar DEFAULT 'Seamless',
+        "highlighted_word" varchar DEFAULT 'CMS',
+        "heading_suffix" varchar DEFAULT 'Launch',
+        "description" varchar DEFAULT 'Update content without code changes.',
+        "block_name" varchar
+      );
+      CREATE TABLE IF NOT EXISTS "pages_blocks_cms_feature_block_list_items" (
         "_order" integer NOT NULL,
         "_parent_id" varchar NOT NULL,
         "id" varchar PRIMARY KEY NOT NULL,
         "title" varchar NOT NULL,
-        "description" varchar
+        "date" varchar NOT NULL
       );
 
-      CREATE TABLE IF NOT EXISTS "pages_blocks_values_block" (
+      CREATE TABLE IF NOT EXISTS "pages_blocks_clock_feature_block" (
         "_order" integer NOT NULL,
         "_parent_id" integer NOT NULL,
         "_path" text NOT NULL,
         "id" varchar PRIMARY KEY NOT NULL,
-        "heading" varchar DEFAULT 'Our',
-        "highlighted_word" varchar DEFAULT 'Values',
+        "heading" varchar DEFAULT 'Future',
+        "highlighted_word" varchar DEFAULT 'Ready',
+        "description" varchar DEFAULT 'Systems that scale with growth',
+        "footer_text" varchar DEFAULT 'Always on Time',
         "block_name" varchar
       );
 
-      CREATE TABLE IF NOT EXISTS "pages_blocks_cta_banner_block" (
+      CREATE TABLE IF NOT EXISTS "pages_blocks_cta_button_block" (
         "_order" integer NOT NULL,
         "_parent_id" integer NOT NULL,
         "_path" text NOT NULL,
         "id" varchar PRIMARY KEY NOT NULL,
-        "heading" varchar DEFAULT 'Let''s Build Something Great Together',
-        "description" varchar DEFAULT 'We collaborate with startups and enterprises to turn ideas into scalable digital products.',
+        "heading" varchar DEFAULT 'Still Have Questions?',
+        "description" varchar DEFAULT 'Contact us for custom solutions',
+        "button_text" varchar DEFAULT 'Contact Us',
+        "button_link" varchar DEFAULT '/contactus',
         "block_name" varchar
       );
 
-      ALTER TABLE "pages_blocks_about_header_block" ADD CONSTRAINT "pages_blocks_about_header_block_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages"("id") ON DELETE cascade ON UPDATE no action;
-      ALTER TABLE "pages_blocks_about_stats_block_stats" ADD CONSTRAINT "pages_blocks_about_stats_block_stats_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_about_stats_block"("id") ON DELETE cascade ON UPDATE no action;
-      ALTER TABLE "pages_blocks_about_stats_block" ADD CONSTRAINT "pages_blocks_about_stats_block_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages"("id") ON DELETE cascade ON UPDATE no action;
-      ALTER TABLE "pages_blocks_about_text_block_paragraphs" ADD CONSTRAINT "pages_blocks_about_text_block_paragraphs_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_about_text_block"("id") ON DELETE cascade ON UPDATE no action;
-      ALTER TABLE "pages_blocks_about_text_block" ADD CONSTRAINT "pages_blocks_about_text_block_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages"("id") ON DELETE cascade ON UPDATE no action;
-      ALTER TABLE "pages_blocks_values_block_values" ADD CONSTRAINT "pages_blocks_values_block_values_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_values_block"("id") ON DELETE cascade ON UPDATE no action;
-      ALTER TABLE "pages_blocks_values_block" ADD CONSTRAINT "pages_blocks_values_block_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages"("id") ON DELETE cascade ON UPDATE no action;
-      ALTER TABLE "pages_blocks_cta_banner_block" ADD CONSTRAINT "pages_blocks_cta_banner_block_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages"("id") ON DELETE cascade ON UPDATE no action;
+      ALTER TABLE "pages_blocks_tech_grid_block" ADD CONSTRAINT IF NOT EXISTS "tech_grid_block_parent_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages"("id") ON DELETE cascade;
+      ALTER TABLE "pages_blocks_tech_grid_block_items" ADD CONSTRAINT IF NOT EXISTS "tech_grid_items_parent_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_tech_grid_block"("id") ON DELETE cascade;
 
-      CREATE INDEX "pages_blocks_about_header_block_order_idx" ON "pages_blocks_about_header_block" USING btree ("_order");
-      CREATE INDEX "pages_blocks_about_header_block_parent_id_idx" ON "pages_blocks_about_header_block" USING btree ("_parent_id");
-      CREATE INDEX "pages_blocks_about_header_block_path_idx" ON "pages_blocks_about_header_block" USING btree ("_path");
-      CREATE INDEX "pages_blocks_about_stats_block_stats_order_idx" ON "pages_blocks_about_stats_block_stats" USING btree ("_order");
-      CREATE INDEX "pages_blocks_about_stats_block_stats_parent_id_idx" ON "pages_blocks_about_stats_block_stats" USING btree ("_parent_id");
-      CREATE INDEX "pages_blocks_about_stats_block_order_idx" ON "pages_blocks_about_stats_block" USING btree ("_order");
-      CREATE INDEX "pages_blocks_about_stats_block_parent_id_idx" ON "pages_blocks_about_stats_block" USING btree ("_parent_id");
-      CREATE INDEX "pages_blocks_about_stats_block_path_idx" ON "pages_blocks_about_stats_block" USING btree ("_path");
-      CREATE INDEX "pages_blocks_about_text_block_paragraphs_order_idx" ON "pages_blocks_about_text_block_paragraphs" USING btree ("_order");
-      CREATE INDEX "pages_blocks_about_text_block_paragraphs_parent_id_idx" ON "pages_blocks_about_text_block_paragraphs" USING btree ("_parent_id");
-      CREATE INDEX "pages_blocks_about_text_block_order_idx" ON "pages_blocks_about_text_block" USING btree ("_order");
-      CREATE INDEX "pages_blocks_about_text_block_parent_id_idx" ON "pages_blocks_about_text_block" USING btree ("_parent_id");
-      CREATE INDEX "pages_blocks_about_text_block_path_idx" ON "pages_blocks_about_text_block" USING btree ("_path");
-      CREATE INDEX "pages_blocks_values_block_values_order_idx" ON "pages_blocks_values_block_values" USING btree ("_order");
-      CREATE INDEX "pages_blocks_values_block_values_parent_id_idx" ON "pages_blocks_values_block_values" USING btree ("_parent_id");
-      CREATE INDEX "pages_blocks_values_block_order_idx" ON "pages_blocks_values_block" USING btree ("_order");
-      CREATE INDEX "pages_blocks_values_block_parent_id_idx" ON "pages_blocks_values_block" USING btree ("_parent_id");
-      CREATE INDEX "pages_blocks_values_block_path_idx" ON "pages_blocks_values_block" USING btree ("_path");
-      CREATE INDEX "pages_blocks_cta_banner_block_order_idx" ON "pages_blocks_cta_banner_block" USING btree ("_order");
-      CREATE INDEX "pages_blocks_cta_banner_block_parent_id_idx" ON "pages_blocks_cta_banner_block" USING btree ("_parent_id");
-      CREATE INDEX "pages_blocks_cta_banner_block_path_idx" ON "pages_blocks_cta_banner_block" USING btree ("_path");
+      ALTER TABLE "pages_blocks_platform_block" ADD CONSTRAINT IF NOT EXISTS "platform_block_parent_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages"("id") ON DELETE cascade;
+      ALTER TABLE "pages_blocks_platform_block_platforms" ADD CONSTRAINT IF NOT EXISTS "platform_platforms_parent_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_platform_block"("id") ON DELETE cascade;
+
+      ALTER TABLE "pages_blocks_moving_strip_block" ADD CONSTRAINT IF NOT EXISTS "moving_strip_parent_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages"("id") ON DELETE cascade;
+      ALTER TABLE "pages_blocks_moving_strip_block_items" ADD CONSTRAINT IF NOT EXISTS "moving_strip_items_parent_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_moving_strip_block"("id") ON DELETE cascade;
+
+      ALTER TABLE "pages_blocks_cms_feature_block" ADD CONSTRAINT IF NOT EXISTS "cms_feature_parent_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages"("id") ON DELETE cascade;
+      ALTER TABLE "pages_blocks_cms_feature_block_list_items" ADD CONSTRAINT IF NOT EXISTS "cms_feature_list_parent_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_cms_feature_block"("id") ON DELETE cascade;
+
+      ALTER TABLE "pages_blocks_clock_feature_block" ADD CONSTRAINT IF NOT EXISTS "clock_feature_parent_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages"("id") ON DELETE cascade;
+
+      ALTER TABLE "pages_blocks_cta_button_block" ADD CONSTRAINT IF NOT EXISTS "cta_button_parent_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages"("id") ON DELETE cascade;
     `);
 
     return NextResponse.json({ success: true });
   } catch (err: any) {
-    return NextResponse.json({ error: err.message, full: JSON.stringify(err) }, { status: 500 });
+    return NextResponse.json({ error: err.message }, { status: 500 });
   }
 }
