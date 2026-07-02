@@ -1,4 +1,5 @@
 import type { Block } from 'payload'
+import { techIconOptions } from './iconOptions'
 
 export const MovingStripBlock: Block = {
   slug: 'movingStripBlock',
@@ -10,7 +11,13 @@ export const MovingStripBlock: Block = {
       minRows: 1,
       fields: [
         { name: 'name', type: 'text', required: true },
-        { name: 'icon', type: 'text', required: true, admin: { description: 'react, ai, flutter, figma, cloud, shopify' } },
+        {
+          name: 'icon',
+          type: 'select',
+          required: true,
+          label: 'Icon',
+          options: techIconOptions,
+        },
       ],
     },
   ],

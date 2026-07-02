@@ -1,4 +1,5 @@
 import type { Block } from 'payload'
+import { techIconOptions } from './iconOptions'
 
 export const TechGridBlock: Block = {
   slug: 'techGridBlock',
@@ -10,15 +11,13 @@ export const TechGridBlock: Block = {
       label: 'Technologies',
       minRows: 1,
       fields: [
-        { name: 'name', type: 'text', required: true, label: 'Name' },
+        { name: 'name', type: 'text', required: true, label: 'Display Name' },
         {
           name: 'icon',
-          type: 'text',
+          type: 'select',
           required: true,
-          label: 'Icon Key',
-          admin: {
-            description: 'js, react, vue, nextjs, typescript, php, laravel, python, django, node, figma, sketch, wordpress, drupal, jira, tailwind, aws, flutter, docker, ai, shopify, youtube, cloud',
-          },
+          label: 'Icon',
+          options: techIconOptions,
         },
       ],
     },

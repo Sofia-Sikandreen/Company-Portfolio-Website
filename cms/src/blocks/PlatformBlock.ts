@@ -1,4 +1,5 @@
 import type { Block } from 'payload'
+import { techIconOptions } from './iconOptions'
 
 export const PlatformBlock: Block = {
   slug: 'platformBlock',
@@ -13,7 +14,13 @@ export const PlatformBlock: Block = {
       minRows: 1,
       fields: [
         { name: 'name', type: 'text', required: true },
-        { name: 'icon', type: 'text', required: true, admin: { description: 'aws, nextjs, react, flutter, docker, ai, wordpress, shopify, cloud' } },
+        {
+          name: 'icon',
+          type: 'select',
+          required: true,
+          label: 'Icon',
+          options: techIconOptions,
+        },
       ],
     },
   ],
