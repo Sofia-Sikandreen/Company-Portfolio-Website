@@ -14,6 +14,7 @@ import MovingStrip from '@/components/Services/MovingStrip'
 import CmsClockBlock from '@/components/Services/CmsClockBlock'
 import CTAButton from '@/components/Services/ServicesCTA'
 import ServicesHeader from '@/components/Services/ServicesHeaderBlock'
+import TeamBlock from '@/components/Team/TeamBlock'
 
 type PageBlock = { blockType: string; id?: string; [key: string]: any }
 
@@ -34,6 +35,7 @@ const blockRegistry: Record<string, React.ComponentType<{ data: any }>> = {
   ctaButtonBlock: CTAButton,
   servicesHeaderBlock: ServicesHeader,
   cmsClockBlock: CmsClockBlock,
+  teamBlock: TeamBlock,
 }
 
 export default function BlockRenderer({ blocks }: { blocks?: PageBlock[] }) {

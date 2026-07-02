@@ -16,6 +16,7 @@ import { MovingStripBlock } from '../blocks/MovingStripBlock'
 import { CTAButtonBlock } from '../blocks/CTAButtonBlock'
 import { ServicesHeaderBlock } from '../blocks/ServicesHeaderBlock'
 import { CmsClockBlock } from '../blocks/CmsClockBlock'
+import { TeamBlock } from '../blocks/TeamBlock'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -62,7 +63,8 @@ export const Pages: CollectionConfig = {
   MovingStripBlock,
   CTAButtonBlock,
   ServicesHeaderBlock,
-  CmsClockBlock
+  CmsClockBlock,
+   TeamBlock
 ],
     },
   ],
