@@ -27,6 +27,11 @@ export async function GET() {
     // ServicesHeaderBlock table
     `CREATE TABLE IF NOT EXISTS "pages_blocks_services_header_block" ("_order" integer NOT NULL,"_parent_id" integer NOT NULL,"_path" text NOT NULL,"id" varchar PRIMARY KEY NOT NULL,"heading" varchar,"highlighted_word" varchar,"description" varchar,"block_name" varchar)`,
     `ALTER TABLE "pages_blocks_services_header_block" ADD CONSTRAINT "services_header_parent_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages"("id") ON DELETE cascade`,
+
+    `CREATE TABLE IF NOT EXISTS "pages_blocks_cms_clock_block" ("_order" integer NOT NULL,"_parent_id" integer NOT NULL,"_path" text NOT NULL,"id" varchar PRIMARY KEY NOT NULL,"cms_heading" varchar,"cms_highlighted_word" varchar,"cms_heading_suffix" varchar,"cms_description" varchar,"clock_heading" varchar,"clock_highlighted_word" varchar,"clock_description" varchar,"clock_footer_text" varchar,"block_name" varchar)`,
+    `CREATE TABLE IF NOT EXISTS "pages_blocks_cms_clock_block_list_items" ("_order" integer NOT NULL,"_parent_id" varchar NOT NULL,"id" varchar PRIMARY KEY NOT NULL,"title" varchar NOT NULL,"date" varchar NOT NULL)`,
+    `ALTER TABLE "pages_blocks_cms_clock_block" ADD CONSTRAINT "cms_clock_parent_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages"("id") ON DELETE cascade`,
+    `ALTER TABLE "pages_blocks_cms_clock_block_list_items" ADD CONSTRAINT "cms_clock_list_parent_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_cms_clock_block"("id") ON DELETE cascade`,
   ];
 
   for (const sql of statements) {
