@@ -30,6 +30,8 @@ export async function GET() {
     `ALTER TABLE "pages_blocks_cms_feature_block_list_items" ADD CONSTRAINT "cms_feature_list_parent_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_cms_feature_block"("id") ON DELETE cascade`,
     `ALTER TABLE "pages_blocks_clock_feature_block" ADD CONSTRAINT "clock_feature_parent_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages"("id") ON DELETE cascade`,
     `ALTER TABLE "pages_blocks_cta_button_block" ADD CONSTRAINT "cta_button_parent_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages"("id") ON DELETE cascade`,
+    `ALTER TABLE "pages" ALTER COLUMN "slug" SET DATA TYPE varchar`,
+    `DROP TYPE IF EXISTS "public"."enum_pages_slug"`,
   ];
 
   for (const sql of statements) {
