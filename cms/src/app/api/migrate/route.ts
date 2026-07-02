@@ -32,6 +32,10 @@ export async function GET() {
     `ALTER TABLE "pages_blocks_cta_button_block" ADD CONSTRAINT "cta_button_parent_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages"("id") ON DELETE cascade`,
     `ALTER TABLE "pages" ALTER COLUMN "slug" SET DATA TYPE varchar`,
     `DROP TYPE IF EXISTS "public"."enum_pages_slug"`,
+    `CREATE TABLE IF NOT EXISTS "pages_blocks_services_header_block" ("_order" integer NOT NULL,"_parent_id" integer NOT NULL,"_path" text NOT NULL,"id" varchar PRIMARY KEY NOT NULL,"heading" varchar,"highlighted_word" varchar,"description" varchar,"block_name" varchar)`,
+    `ALTER TABLE "pages_blocks_services_header_block" ADD CONSTRAINT "services_header_parent_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages"("id") ON DELETE cascade`,
+    `ALTER TABLE "pages" ALTER COLUMN "slug" SET DATA TYPE varchar`,
+    `DROP TYPE IF EXISTS "public"."enum_pages_slug"`,
   ];
 
   for (const sql of statements) {
