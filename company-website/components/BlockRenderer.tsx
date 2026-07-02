@@ -11,8 +11,7 @@ import CTABanner from '@/components/About/CtaBanner'
 import TechGrid from '@/components/Services/TechGrid'
 import Platform from '@/components/Services/Platform'
 import MovingStrip from '@/components/Services/MovingStrip'
-import CmsFeature from '@/components/Services/CmsFeature'
-import ClockFeature from '@/components/Services/ClockFeature'
+import CmsClockBlock from '@/components/Services/CmsClockBlock'
 import CTAButton from '@/components/Services/ServicesCTA'
 import ServicesHeader from '@/components/Services/ServicesHeaderBlock'
 
@@ -32,10 +31,9 @@ const blockRegistry: Record<string, React.ComponentType<{ data: any }>> = {
   techGridBlock: TechGrid,
   platformBlock: Platform,
   movingStripBlock: MovingStrip,
-  cmsFeatureBlock: CmsFeature,
-  clockFeatureBlock: ClockFeature,
   ctaButtonBlock: CTAButton,
   servicesHeaderBlock: ServicesHeader,
+  cmsClockBlock: CmsClockBlock,
 }
 
 export default function BlockRenderer({ blocks }: { blocks?: PageBlock[] }) {

@@ -13,10 +13,9 @@ import { CTABannerBlock } from '../blocks/CTABannerBlock'
 import { TechGridBlock } from '../blocks/TechGridBlock'
 import { PlatformBlock } from '../blocks/PlatformBlock'
 import { MovingStripBlock } from '../blocks/MovingStripBlock'
-import { CmsFeatureBlock } from '../blocks/CmsFeatureBlock'
-import { ClockFeatureBlock } from '../blocks/ClockFeatureBlock'
 import { CTAButtonBlock } from '../blocks/CTAButtonBlock'
 import { ServicesHeaderBlock } from '../blocks/ServicesHeaderBlock'
+import { CmsClockBlock } from '../blocks/CmsClockBlock'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -61,10 +60,9 @@ export const Pages: CollectionConfig = {
   TechGridBlock,
   PlatformBlock,
   MovingStripBlock,
-  CmsFeatureBlock,
-  ClockFeatureBlock,
   CTAButtonBlock,
   ServicesHeaderBlock,
+  CmsClockBlock
 ],
     },
   ],
