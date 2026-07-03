@@ -95,29 +95,41 @@ export default function Hero({ data }: { data?: HeroData }) {
               fontWeight: 700, fontSize: 13, textDecoration: 'none', border: '1px solid var(--border-green)'
             }}>{btn2Text} →</Link>
           </div>
+
+          {/* trust row like reference "Trusted by 50+ sellers" */}
+          <div className="animate-on-scroll" style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 4 }}>
+            <div style={{ display: 'flex' }}>
+              {[0, 1, 2].map((i) => (
+                <div key={i} style={{
+                  width: 28, height: 28, borderRadius: '50%',
+                  background: 'linear-gradient(135deg, var(--green-bright), var(--green-lime))',
+                  border: '2px solid var(--bg-main)', marginLeft: i === 0 ? 0 : -10,
+                }} />
+              ))}
+            </div>
+            <span style={{ fontSize: 12, color: 'var(--text-secondary)' }}>Trusted by growing businesses</span>
+          </div>
         </div>
 
-        {/* RIGHT — VISUAL */}
+        {/* RIGHT — VISUAL (organic blob shape like reference) */}
         <div className="hero-visual animate-on-scroll">
           <div className="hero-visual-inner">
-            <div style={{
-              position: 'absolute', inset: 0,
-              background: 'linear-gradient(135deg, var(--green-bright), var(--green-lime), var(--green-dark))',
-              opacity: 0.15,
-            }} />
-            <div style={{
-              position: 'absolute', top: '10%', left: '10%', right: '10%', bottom: '10%',
-              borderRadius: 24, border: '1px solid var(--border-green)',
-              background: 'var(--card-bg)', backdropFilter: 'blur(10px)',
-              display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 14,
-            }}>
-              <div style={{
-                width: 64, height: 64, borderRadius: 18,
-                background: 'linear-gradient(135deg, var(--green-bright), var(--green-lime))',
-                display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 28,
-              }}>⚡</div>
-              <p style={{ color: 'var(--heading-color)', fontWeight: 700, fontSize: 15 }}>Trusted by growing businesses</p>
-              <p style={{ color: 'var(--text-secondary)', fontSize: 12, textAlign: 'center', maxWidth: 220 }}>Modern engineering, delivered end-to-end</p>
+            <img
+              src="/hero.jpg"
+              alt="Our Team"
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            />
+            <div className="blob-ring" />
+          </div>
+
+          {/* floating badge, like reference stats-over-image */}
+          <div className="floating-badge">
+            <div style={{ width: 34, height: 34, borderRadius: 10, background: 'var(--badge-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--green-bright)' }}>
+              <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+            </div>
+            <div>
+              <p style={{ margin: 0, fontSize: 15, fontWeight: 800, color: 'var(--heading-color)' }}>100+</p>
+              <p style={{ margin: 0, fontSize: 10, color: 'var(--text-secondary)' }}>Projects Delivered</p>
             </div>
           </div>
         </div>
@@ -132,13 +144,33 @@ export default function Hero({ data }: { data?: HeroData }) {
           display: flex; align-items: center; justify-content: space-between; gap: 60px;
           min-height: calc(100vh - 80px); padding: 0 20px;
         }
-        .hero-visual { flex: 1; display: flex; justify-content: center; }
-        .hero-visual-inner { position: relative; width: 100%; max-width: 420px; height: 440px; border-radius: 32px; overflow: hidden; }
+        .hero-visual { flex: 1; display: flex; justify-content: center; position: relative; }
+        .hero-visual-inner {
+          position: relative; width: 100%; max-width: 420px; height: 440px;
+          border-radius: 200px 20px 200px 20px;
+          overflow: hidden;
+          box-shadow: 0 30px 70px rgba(0,0,0,0.35);
+        }
+        .blob-ring {
+          position: absolute; inset: -14px; z-index: -1;
+          border-radius: 210px 30px 210px 30px;
+          background: linear-gradient(135deg, var(--green-bright), var(--green-lime));
+          opacity: 0.25;
+        }
+        .floating-badge {
+          position: absolute; bottom: 28px; left: -20px;
+          background: var(--card-bg); border: 1px solid var(--border-green);
+          border-radius: 16px; padding: 12px 16px;
+          display: flex; align-items: center; gap: 10px;
+          box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+          backdrop-filter: blur(10px);
+        }
         @media (max-width: 900px) {
           .container { flex-direction: column; text-align: center; padding-top: 20px; gap: 40px; }
           .container > div:first-child { align-items: center; text-align: center; }
           .container > div:first-child p, .container > div:first-child h1 { text-align: center; }
-          .hero-visual-inner { height: 320px; }
+          .hero-visual-inner { height: 320px; border-radius: 140px 20px 140px 20px; }
+          .floating-badge { left: 10px; bottom: -20px; }
         }
       `}</style>
     </section>

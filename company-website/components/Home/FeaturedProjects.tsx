@@ -29,7 +29,7 @@ export default function FeaturedProjects({ data }: { data?: ProjectsData }) {
   const imageUrl = project.image?.url || ''
 
   return (
-    <section id="works" style={{ background: 'var(--bg-main)', padding: '50px 0', userSelect: 'none', cursor: 'default' }}>
+    <section id="works" style={{ background: 'var(--bg-main)', padding: '70px 0', userSelect: 'none', cursor: 'default' }}>
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 24px' }}>
 
         <div style={{ textAlign: 'center', marginBottom: 50 }}>
@@ -41,14 +41,24 @@ export default function FeaturedProjects({ data }: { data?: ProjectsData }) {
           </h2>
         </div>
 
-        <div style={{ display: 'flex', gap: 50, alignItems: 'center', flexWrap: 'wrap' }}>
+        <div className="projects-layout">
 
-          {/* IMAGE */}
-          {imageUrl && (
-            <div style={{
-              flex: 1, minWidth: 320, height: 360, borderRadius: 16,
-              overflow: 'hidden', border: '1px solid var(--border-green)', position: 'relative',
-            }}>
+          {/* LEFT — clickable list */}
+          <div className="projects-list">
+            {projects.map((p, i) => (
+              <div key={i} onClick={() => setIndex(i)} className={`project-list-item ${i === index ? 'active' : ''}`}>
+                <div>
+                  <span className="project-tag-pill">{p.tag}</span>
+                  <p style={{ margin: '6px 0 0', fontSize: 14, fontWeight: 600, color: 'var(--heading-color)' }}>{p.title}</p>
+                </div>
+                <span style={{ color: 'var(--green-bright)', fontSize: 16 }}>→</span>
+              </div>
+            ))}
+          </div>
+
+          {/* RIGHT — big image with overlay detail card */}
+          <div className="project-detail">
+            {imageUrl && (
               <AnimatePresence mode="wait">
                 <motion.img
                   key={imageUrl} src={imageUrl}
@@ -56,36 +66,55 @@ export default function FeaturedProjects({ data }: { data?: ProjectsData }) {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.6 }}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', inset: 0 }}
                 />
               </AnimatePresence>
-              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, var(--image-overlay), transparent)' }} />
-            </div>
-          )}
+            )}
+            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.55), transparent 60%)' }} />
 
-          {/* CONTENT */}
-          <div style={{ flex: 1, minWidth: 320 }}>
-            <p style={{ color: 'var(--green-bright)', fontSize: 12, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: 10 }}>
-              {project.tag}
-            </p>
-            <h3 style={{ color: 'var(--heading-color)', fontSize: 28, fontWeight: 700, marginBottom: 15 }}>
-              {project.title}
-            </h3>
-            <p style={{ color: 'var(--text-secondary)', fontSize: 14, lineHeight: 1.7, maxWidth: 420 }}>
-              {project.description}
-            </p>
-            <div style={{ display: 'flex', gap: 8, marginTop: 25 }}>
-              {projects.map((_, i) => (
-                <div key={i} onClick={() => setIndex(i)} style={{
-                  width: i === index ? 18 : 6, height: 6, borderRadius: 999,
-                  background: i === index ? 'var(--green-bright)' : 'var(--border-green)',
-                  cursor: 'pointer',
-                }} />
-              ))}
+            <div className="project-info-card">
+              <p style={{ color: 'var(--green-bright)', fontSize: 11, letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 6 }}>
+                {project.tag}
+              </p>
+              <h3 style={{ color: 'var(--heading-color)', fontSize: 20, fontWeight: 700, marginBottom: 8 }}>
+                {project.title}
+              </h3>
+              <p style={{ color: 'var(--text-secondary)', fontSize: 13, lineHeight: 1.6, margin: 0 }}>
+                {project.description}
+              </p>
             </div>
           </div>
         </div>
       </div>
+
+      <style>{`
+        .projects-layout { display: grid; grid-template-columns: 300px 1fr; gap: 30px; align-items: stretch; }
+        .projects-list { display: flex; flex-direction: column; gap: 12px; }
+        .project-list-item {
+          display: flex; align-items: center; justify-content: space-between; gap: 10px;
+          padding: 16px; border-radius: 14px; border: 1px solid var(--border-green);
+          background: var(--card-bg); cursor: pointer; transition: all 0.2s ease;
+        }
+        .project-list-item.active { border-color: var(--green-bright); background: var(--tag-bg); }
+        .project-list-item:hover { border-color: var(--green-bright); }
+        .project-tag-pill {
+          font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em;
+          color: var(--green-mid); font-weight: 700;
+        }
+        .project-detail {
+          position: relative; border-radius: 20px; overflow: hidden;
+          min-height: 420px; border: 1px solid var(--border-green);
+        }
+        .project-info-card {
+          position: absolute; left: 20px; right: 20px; bottom: 20px;
+          background: var(--card-bg); backdrop-filter: blur(12px);
+          border: 1px solid var(--border-green); border-radius: 16px; padding: 20px;
+        }
+        @media (max-width: 900px) {
+          .projects-layout { grid-template-columns: 1fr; }
+          .project-detail { min-height: 340px; }
+        }
+      `}</style>
     </section>
   )
 }

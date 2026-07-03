@@ -194,6 +194,14 @@ body {
   background: var(--green-bright);
   animation: pulse 1s ease-in-out infinite;
 }
+.hero-visual-inner {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  height: 420px;
+  border-radius: 32px;
+  overflow: hidden;
+}
 
 @keyframes pulse {
   0%, 100% { opacity: 0.2; }
