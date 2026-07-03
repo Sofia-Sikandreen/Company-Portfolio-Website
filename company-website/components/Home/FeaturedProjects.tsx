@@ -26,9 +26,7 @@ export default function FeaturedProjects({ data }: { data?: ProjectsData }) {
   if (projects.length === 0) return null
 
   const project = projects[index]
-  const imageUrl = project.image?.url
-    ? `${process.env.NEXT_PUBLIC_CMS_URL}${project.image.url}`
-    : ''
+  const imageUrl = project.image?.url || ''
 
   return (
     <section id="works" style={{ background: 'var(--bg-main)', padding: '50px 0', userSelect: 'none', cursor: 'default' }}>

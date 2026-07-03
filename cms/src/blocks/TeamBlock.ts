@@ -15,7 +15,7 @@ export const TeamBlock: Block = {
     // CEO
     { name: 'ceoName', type: 'text', label: 'CEO Name' },
     { name: 'ceoRole', type: 'text', label: 'CEO Role' },
-    { name: 'ceoImage', type: 'text', label: 'CEO Image Path/URL', admin: { description: 'e.g. /team/image.png or a full URL' } },
+    { name: 'ceoImage', type: 'upload', relationTo: 'media', label: 'CEO Image' },
     { name: 'ceoGithub', type: 'text', label: 'CEO Github URL' },
     { name: 'ceoLinkedin', type: 'text', label: 'CEO LinkedIn URL' },
     { name: 'ceoBio', type: 'text', label: 'CEO Bio' },
@@ -28,7 +28,7 @@ export const TeamBlock: Block = {
       fields: [
         { name: 'name', type: 'text', required: true },
         { name: 'role', type: 'text', required: true },
-        { name: 'image', type: 'text', label: 'Image Path/URL' },
+       { name: 'image', type: 'upload', relationTo: 'media' },
         { name: 'github', type: 'text' },
         { name: 'linkedin', type: 'text' },
         { name: 'bio', type: 'text' },

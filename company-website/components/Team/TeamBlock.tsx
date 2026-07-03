@@ -3,7 +3,7 @@ import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 type Skill = { skill: string };
 type Member = {
-  name: string; role: string; image?: string;
+  name: string; role: string; image?: { url: string };
   github?: string; linkedin?: string; bio?: string; skills?: Skill[];
 };
 type TeamData = {
@@ -34,7 +34,7 @@ export default function TeamBlock({ data }: { data: TeamData }) {
       {ceoName && (
         <div className="ceo-card" style={{ marginBottom: 80 }}>
           <div style={{ width: 160, height: 160, borderRadius: 20, overflow: "hidden", flexShrink: 0, border: "1px solid var(--border-green)" }}>
-            {ceoImage && <img src={ceoImage} alt={ceoName} width={160} height={160} style={{ objectFit: "cover" }} />}
+           {ceoImage?.url && <img src={ceoImage.url} alt={ceoName} width={160} height={160} style={{ objectFit: "cover" }} />}
           </div>
           <div>
             <h2 style={{ fontSize: 26, fontWeight: 700 }}>{ceoName}</h2>
@@ -72,7 +72,7 @@ export default function TeamBlock({ data }: { data: TeamData }) {
               width: 110, height: 110, borderRadius: "50%", overflow: "hidden",
               border: "4px solid var(--border-green)",
             }}>
-              {member.image && <img src={member.image} alt={member.name} width={110} height={110} />}
+              {member.image?.url && <img src={member.image.url} alt={member.name} width={110} height={110} />}
             </div>
 
             <h3 style={{ fontSize: 17, fontWeight: 700 }}>{member.name}</h3>

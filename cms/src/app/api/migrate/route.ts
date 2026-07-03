@@ -34,11 +34,18 @@ export async function GET() {
     `ALTER TABLE "pages_blocks_cms_clock_block_list_items" ADD CONSTRAINT "cms_clock_list_parent_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_cms_clock_block"("id") ON DELETE cascade`,
 
     `CREATE TABLE IF NOT EXISTS "pages_blocks_team_block" ("_order" integer NOT NULL,"_parent_id" integer NOT NULL,"_path" text NOT NULL,"id" varchar PRIMARY KEY NOT NULL,"heading" varchar,"highlighted_word" varchar,"description" varchar,"ceo_name" varchar,"ceo_role" varchar,"ceo_image" varchar,"ceo_github" varchar,"ceo_linkedin" varchar,"ceo_bio" varchar,"ceo_quote" varchar,"block_name" varchar)`,
-`CREATE TABLE IF NOT EXISTS "pages_blocks_team_block_members" ("_order" integer NOT NULL,"_parent_id" varchar NOT NULL,"id" varchar PRIMARY KEY NOT NULL,"name" varchar NOT NULL,"role" varchar NOT NULL,"image" varchar,"github" varchar,"linkedin" varchar,"bio" varchar)`,
-`CREATE TABLE IF NOT EXISTS "pages_blocks_team_block_members_skills" ("_order" integer NOT NULL,"_parent_id" varchar NOT NULL,"id" varchar PRIMARY KEY NOT NULL,"skill" varchar NOT NULL)`,
-`DO $$ BEGIN ALTER TABLE "pages_blocks_team_block" ADD CONSTRAINT "team_block_parent_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages"("id") ON DELETE cascade; EXCEPTION WHEN duplicate_object THEN NULL; END $$`,
-`DO $$ BEGIN ALTER TABLE "pages_blocks_team_block_members" ADD CONSTRAINT "team_block_members_parent_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_team_block"("id") ON DELETE cascade; EXCEPTION WHEN duplicate_object THEN NULL; END $$`,
-`DO $$ BEGIN ALTER TABLE "pages_blocks_team_block_members_skills" ADD CONSTRAINT "team_block_members_skills_parent_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_team_block_members"("id") ON DELETE cascade; EXCEPTION WHEN duplicate_object THEN NULL; END $$`,
+    `CREATE TABLE IF NOT EXISTS "pages_blocks_team_block_members" ("_order" integer NOT NULL,"_parent_id" varchar NOT NULL,"id" varchar PRIMARY KEY NOT NULL,"name" varchar NOT NULL,"role" varchar NOT NULL,"image" varchar,"github" varchar,"linkedin" varchar,"bio" varchar)`,
+    `CREATE TABLE IF NOT EXISTS "pages_blocks_team_block_members_skills" ("_order" integer NOT NULL,"_parent_id" varchar NOT NULL,"id" varchar PRIMARY KEY NOT NULL,"skill" varchar NOT NULL)`,
+    `DO $$ BEGIN ALTER TABLE "pages_blocks_team_block" ADD CONSTRAINT "team_block_parent_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages"("id") ON DELETE cascade; EXCEPTION WHEN duplicate_object THEN NULL; END $$`,
+    `DO $$ BEGIN ALTER TABLE "pages_blocks_team_block_members" ADD CONSTRAINT "team_block_members_parent_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_team_block"("id") ON DELETE cascade; EXCEPTION WHEN duplicate_object THEN NULL; END $$`,
+    `DO $$ BEGIN ALTER TABLE "pages_blocks_team_block_members_skills" ADD CONSTRAINT "team_block_members_skills_parent_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_team_block_members"("id") ON DELETE cascade; EXCEPTION WHEN duplicate_object THEN NULL; END $$`,
+
+    `ALTER TABLE "pages_blocks_team_block" DROP COLUMN IF EXISTS "ceo_image"`,
+    `ALTER TABLE "pages_blocks_team_block" ADD COLUMN IF NOT EXISTS "ceo_image_id" integer`,
+    `DO $$ BEGIN ALTER TABLE "pages_blocks_team_block" ADD CONSTRAINT "team_block_ceo_image_id_media_id_fk" FOREIGN KEY ("ceo_image_id") REFERENCES "public"."media"("id") ON DELETE SET NULL; EXCEPTION WHEN duplicate_object THEN NULL; END $$`,
+    `ALTER TABLE "pages_blocks_team_block_members" DROP COLUMN IF EXISTS "image"`,
+    `ALTER TABLE "pages_blocks_team_block_members" ADD COLUMN IF NOT EXISTS "image_id" integer`,
+    `DO $$ BEGIN ALTER TABLE "pages_blocks_team_block_members" ADD CONSTRAINT "team_block_members_image_id_media_id_fk" FOREIGN KEY ("image_id") REFERENCES "public"."media"("id") ON DELETE SET NULL; EXCEPTION WHEN duplicate_object THEN NULL; END $$`,
   ];
 
   for (const sql of statements) {
