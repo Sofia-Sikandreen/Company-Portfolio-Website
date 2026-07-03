@@ -6,9 +6,10 @@ type Member = {
   name: string; role: string; image?: { url: string };
   github?: string; linkedin?: string; bio?: string; skills?: Skill[];
 };
+
 type TeamData = {
   heading?: string; highlightedWord?: string; description?: string;
-  ceoName?: string; ceoRole?: string; ceoImage?: string;
+  ceoName?: string; ceoRole?: string; ceoImage?: { url: string };
   ceoGithub?: string; ceoLinkedin?: string; ceoBio?: string; ceoQuote?: string;
   members?: Member[];
 };
