@@ -46,6 +46,8 @@ export async function GET() {
     `ALTER TABLE "pages_blocks_team_block_members" DROP COLUMN IF EXISTS "image"`,
     `ALTER TABLE "pages_blocks_team_block_members" ADD COLUMN IF NOT EXISTS "image_id" integer`,
     `DO $$ BEGIN ALTER TABLE "pages_blocks_team_block_members" ADD CONSTRAINT "team_block_members_image_id_media_id_fk" FOREIGN KEY ("image_id") REFERENCES "public"."media"("id") ON DELETE SET NULL; EXCEPTION WHEN duplicate_object THEN NULL; END $$`,
+
+    `ALTER TABLE "media" ADD COLUMN IF NOT EXISTS "alt" varchar`,
   ];
 
   for (const sql of statements) {
