@@ -53,6 +53,7 @@ export default function Hero({ data }: { data?: HeroData }) {
       <div className="bg-glow" />
       <div className="bg-glow bg-glow-secondary" />
       <div className="bg-grid" aria-hidden="true" />
+      <div className="bg-noise-dots" aria-hidden="true" />
 
       {/* concentric spiral rings with glow, centered behind the heading */}
       <div className="rings-wrap" aria-hidden="true">
@@ -76,8 +77,33 @@ export default function Hero({ data }: { data?: HeroData }) {
           <path d="M12 7v5l3.5 2" />
         </svg>
       </div>
+      <div className="float-badge badge-top" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 3l2.4 5.2 5.6.6-4.2 3.8 1.2 5.6L12 15.8 6.9 18.2l1.2-5.6L4 8.8l5.6-.6z" />
+        </svg>
+      </div>
+      <div className="float-badge badge-bottom" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="3" y="11" width="4" height="8" rx="1" />
+          <rect x="10" y="7" width="4" height="12" rx="1" />
+          <rect x="17" y="3" width="4" height="16" rx="1" />
+        </svg>
+      </div>
       <span className="float-dot dot-1" />
       <span className="float-dot dot-2" />
+      <span className="float-dot dot-3" />
+
+      {/* side accents — thin glowing rails for a premium, framed feel */}
+      <div className="side-accent side-accent-left" aria-hidden="true">
+        <span className="side-line" />
+        <span className="side-node" />
+        <span className="side-line side-line-short" />
+      </div>
+      <div className="side-accent side-accent-right" aria-hidden="true">
+        <span className="side-line side-line-short" />
+        <span className="side-node" />
+        <span className="side-line" />
+      </div>
 
       <div className="hero-container">
         <div className="hero-content">
@@ -91,7 +117,7 @@ export default function Hero({ data }: { data?: HeroData }) {
           {/* HEADING — the dominant element on the page */}
           <motion.h1 variants={sentence} initial="hidden" animate="visible" className="hero-heading">
             {line1.map((w, i) => (
-              <motion.span key={i} variants={word} style={{ marginRight: 12, display: 'inline-block', color: 'var(--heading-color)' }}>{w}</motion.span>
+              <motion.span key={i} variants={word} className="hero-heading-word" style={{ marginRight: 12, display: 'inline-block', color: 'var(--heading-color)' }}>{w}</motion.span>
             ))}
             <br />
             {line2.map((w, i) => (
@@ -99,7 +125,7 @@ export default function Hero({ data }: { data?: HeroData }) {
             ))}
             <br />
             {line3.map((w, i) => (
-              <motion.span key={i} variants={word} style={{ marginRight: 12, display: 'inline-block', color: 'var(--heading-color)' }}>{w}</motion.span>
+              <motion.span key={i} variants={word} className="hero-heading-word" style={{ marginRight: 12, display: 'inline-block', color: 'var(--heading-color)' }}>{w}</motion.span>
             ))}
           </motion.h1>
 
@@ -132,16 +158,17 @@ export default function Hero({ data }: { data?: HeroData }) {
         </div>
       </div>
 
-      {/* bottom wave — soft transition into the next section */}
+      {/* bottom wave — soft, layered transition into the next section */}
       <div className="hero-wave" aria-hidden="true">
-        <svg viewBox="0 0 1440 140" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-          <path className="wave-back" d="M0,80 C 240,140 480,20 720,60 C 960,100 1200,20 1440,70 L1440,140 L0,140 Z" />
-          <path className="wave-front" d="M0,100 C 220,50 460,120 720,90 C 980,60 1220,120 1440,90 L1440,140 L0,140 Z" />
+        <svg viewBox="0 0 1440 150" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path className="wave-far" d="M0,110 C 260,150 500,70 760,100 C 1020,130 1240,70 1440,100 L1440,150 L0,150 Z" />
+          <path className="wave-back" d="M0,90 C 240,150 480,30 720,70 C 960,110 1200,30 1440,80 L1440,150 L0,150 Z" />
+          <path className="wave-front" d="M0,110 C 220,60 460,130 720,100 C 980,70 1220,130 1440,100 L1440,150 L0,150 Z" />
         </svg>
       </div>
 
       <style jsx>{`
-        .hero { min-height: 100vh; padding-top: 80px; position: relative; overflow-x: hidden; background: var(--bg-main); }
+        .hero { min-height: 100vh; padding-top: 128px; padding-bottom: 8px; position: relative; overflow-x: hidden; background: var(--bg-main); }
 
         .bg-glow { position: absolute; inset: 0; background: radial-gradient(circle at 50% 30%, var(--glow-color), transparent 55%); pointer-events: none; z-index: 0; }
         .bg-glow-secondary { background: radial-gradient(circle at 82% 78%, var(--glow-color), transparent 42%); opacity: 0.55; }
@@ -155,10 +182,18 @@ export default function Hero({ data }: { data?: HeroData }) {
           mask-image: radial-gradient(circle at 50% 35%, black 0%, transparent 68%);
           -webkit-mask-image: radial-gradient(circle at 50% 35%, black 0%, transparent 68%);
         }
+        .bg-noise-dots {
+          position: absolute; inset: 0; pointer-events: none; z-index: 0;
+          background-image: radial-gradient(var(--border-green) 1.2px, transparent 1.2px);
+          background-size: 26px 26px;
+          opacity: 0.06;
+          mask-image: radial-gradient(ellipse at 50% 20%, black 0%, transparent 60%);
+          -webkit-mask-image: radial-gradient(ellipse at 50% 20%, black 0%, transparent 60%);
+        }
 
         /* concentric spiral rings, slow rotating for a subtle premium ambience */
         .rings-wrap {
-          position: absolute; top: 42%; left: 50%;
+          position: absolute; top: 44%; left: 50%;
           width: 780px; height: 780px;
           transform: translate(-50%, -50%);
           pointer-events: none;
@@ -192,19 +227,35 @@ export default function Hero({ data }: { data?: HeroData }) {
           animation: float-badge 6s ease-in-out infinite;
           z-index: 2;
         }
-        .badge-left { top: 50%; left: 9%; animation-delay: 0.2s; }
-        .badge-right { top: 22%; right: 11%; animation-delay: 1.4s; }
+        .badge-left { top: 52%; left: 9%; animation-delay: 0.2s; }
+        .badge-right { top: 24%; right: 11%; animation-delay: 1.4s; }
+        .badge-top { width: 38px; height: 38px; border-radius: 11px; top: 15%; left: 27%; animation-delay: 0.8s; }
+        .badge-bottom { width: 38px; height: 38px; border-radius: 11px; bottom: 16%; right: 26%; animation-delay: 2s; }
         @keyframes float-badge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
 
         .float-dot { position: absolute; width: 6px; height: 6px; border-radius: 50%; background: var(--green-bright); pointer-events: none; z-index: 1; }
-        .dot-1 { top: 16%; left: 22%; animation: pulse-dot 3s ease-in-out infinite; }
-        .dot-2 { bottom: 22%; right: 20%; animation: pulse-dot 3s ease-in-out infinite 1.5s; }
+        .dot-1 { top: 18%; left: 22%; animation: pulse-dot 3s ease-in-out infinite; }
+        .dot-2 { bottom: 24%; right: 20%; animation: pulse-dot 3s ease-in-out infinite 1.5s; }
+        .dot-3 { top: 32%; right: 30%; animation: pulse-dot 3.4s ease-in-out infinite 0.8s; }
         @keyframes pulse-dot { 0%, 100% { opacity: 0.25; transform: scale(1); } 50% { opacity: 1; transform: scale(1.4); } }
+
+        /* side accents — thin vertical rails that frame the hero for a premium SaaS feel */
+        .side-accent {
+          position: absolute; top: 50%; transform: translateY(-50%);
+          display: flex; flex-direction: column; align-items: center; gap: 16px;
+          z-index: 1; pointer-events: none;
+        }
+        .side-accent-left { left: 4.5%; }
+        .side-accent-right { right: 4.5%; }
+        .side-line { width: 1px; height: 120px; background: linear-gradient(180deg, transparent, var(--border-green-hover), transparent); opacity: 0.7; }
+        .side-line-short { height: 60px; }
+        .side-node { width: 7px; height: 7px; border-radius: 50%; background: var(--green-bright); box-shadow: 0 0 14px var(--green-bright); animation: pulse-dot 3s ease-in-out infinite; }
+        @media (max-width: 1150px) { .side-accent { display: none; } }
 
         .hero-container {
           max-width: 1200px; margin: 0 auto; position: relative; z-index: 1;
           display: flex; justify-content: center; align-items: center;
-          min-height: calc(100vh - 80px); padding: 0 20px 60px;
+          min-height: calc(100vh - 128px); padding: 44px 20px 88px;
         }
 
         .hero-content {
@@ -216,14 +267,14 @@ export default function Hero({ data }: { data?: HeroData }) {
         .hero-badge {
           display: inline-flex; align-items: center; gap: 9px;
           background: var(--tag-bg); border: 1px solid var(--border-green);
-          border-radius: 999px; padding: 7px 16px 7px 14px;
+          border-radius: 999px; padding: 6px 15px 6px 13px;
           box-shadow: 0 4px 18px rgba(0,0,0,0.12);
           position: relative; z-index: 2;
           margin-bottom: 4px;
         }
         .hero-badge-text {
-          font-size: 11px; color: var(--green-mid); font-weight: 700;
-          letter-spacing: 0.12em; text-transform: uppercase;
+          font-size: 10px; color: var(--green-mid); font-weight: 700;
+          letter-spacing: 0.13em; text-transform: uppercase;
         }
         .hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green-bright); box-shadow: 0 0 10px var(--green-bright); position: relative; flex-shrink: 0; }
         .hero-badge-dot::after {
@@ -232,24 +283,29 @@ export default function Hero({ data }: { data?: HeroData }) {
         }
         @keyframes pulse-ring { 0% { transform: scale(0.6); opacity: 1; } 100% { transform: scale(2); opacity: 0; } }
 
-        /* HEADING — dominant, largest element on the page */
+        /* HEADING — dominant, largest element on the page, tuned for a stylish premium feel */
         .hero-heading {
           font-size: clamp(38px, 5.2vw, 72px);
           font-weight: 800;
           line-height: 1.14;
           margin: 0;
-          letter-spacing: -0.03em;
+          letter-spacing: -0.035em;
           position: relative;
           z-index: 2;
         }
-        .hero-gradient-glow { filter: drop-shadow(0 0 24px var(--border-green-hover)); }
+        .hero-heading-word { text-shadow: 0 2px 26px rgba(0,0,0,0.14); }
+        .hero-gradient-glow { filter: drop-shadow(0 0 22px var(--border-green-hover)); animation: glow-pulse 3.2s ease-in-out infinite; }
+        @keyframes glow-pulse {
+          0%, 100% { filter: drop-shadow(0 0 16px var(--border-green-hover)); }
+          50% { filter: drop-shadow(0 0 32px var(--border-green-hover)); }
+        }
 
         /* DESCRIPTION — deliberately restrained, purely supporting */
         .hero-description {
-          font-size: 15px;
+          font-size: 13.5px;
           color: var(--text-secondary);
-          line-height: 1.75;
-          max-width: 440px;
+          line-height: 1.7;
+          max-width: 420px;
           margin: 4px 0 0;
           position: relative;
           z-index: 2;
@@ -337,19 +393,21 @@ export default function Hero({ data }: { data?: HeroData }) {
         .scroll-cue-dot { width: 4px; height: 8px; border-radius: 3px; background: var(--green-bright); animation: scroll-cue-move 1.8s ease-in-out infinite; }
         @keyframes scroll-cue-move { 0% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; transform: translateY(10px); } }
 
-        /* bottom wave */
+        /* bottom wave — layered for extra depth */
         .hero-wave {
-          position: absolute; left: 0; right: 0; bottom: -1px; height: 120px;
+          position: absolute; left: 0; right: 0; bottom: -1px; height: 130px;
           z-index: 1; pointer-events: none; line-height: 0;
         }
         .hero-wave svg { width: 100%; height: 100%; display: block; }
+        .wave-far { fill: var(--glow-color); opacity: 0.35; animation: wave-drift-slow 18s ease-in-out infinite; }
         .wave-back { fill: var(--tag-bg); opacity: 0.6; animation: wave-drift-slow 14s ease-in-out infinite; }
         .wave-front { fill: var(--card-bg); animation: wave-drift 9s ease-in-out infinite; }
         @keyframes wave-drift { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(-2.5%); } }
         @keyframes wave-drift-slow { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(2.5%); } }
 
         @media (max-width: 900px) {
-          .hero-container { text-align: center; padding-bottom: 90px; }
+          .hero { padding-top: 104px; }
+          .hero-container { text-align: center; padding: 24px 20px 90px; min-height: calc(100vh - 104px); }
           .float-badge, .rings-wrap .hero-ring-1, .rings-wrap .hero-ring-2 { display: none; }
           .float-dot { display: none; }
           .bg-grid { opacity: 0.035; }
