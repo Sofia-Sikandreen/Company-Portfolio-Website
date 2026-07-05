@@ -52,7 +52,7 @@ export default function Hero({ data }: { data?: HeroData }) {
       {/* decorative background layers — pure CSS, no assets */}
       <div className="bg-glow" />
 
-      {/* concentric target rings behind the heading, reference-style */}
+      {/* concentric spiral rings with glow, centered behind the heading */}
       <div className="rings-wrap" aria-hidden="true">
         <span className="hero-ring hero-ring-1" />
         <span className="hero-ring hero-ring-2" />
@@ -61,7 +61,7 @@ export default function Hero({ data }: { data?: HeroData }) {
         <span className="hero-ring hero-ring-core" />
       </div>
 
-      {/* floating icon badges sitting on the outer ring, reference-style */}
+      {/* floating icon badges */}
       <div className="float-badge badge-left" aria-hidden="true">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5l8-3z" />
@@ -80,45 +80,45 @@ export default function Hero({ data }: { data?: HeroData }) {
       <div className="hero-container">
         <div className="hero-content">
 
-          {/* TAG */}
+          {/* TAG — kept small and quiet so it never competes with the heading */}
           <div className="animate-on-scroll hero-badge">
             <span className="hero-badge-dot" />
-            <span style={{ fontSize: 10.5, color: 'var(--green-mid)', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase' }}>
-              {tagText}
-            </span>
+            <span className="hero-badge-text">{tagText}</span>
           </div>
 
-          {/* HEADING */}
+          {/* HEADING — the dominant element on the page */}
           <motion.h1 variants={sentence} initial="hidden" animate="visible" className="hero-heading">
             {line1.map((w, i) => (
-              <motion.span key={i} variants={word} style={{ marginRight: 11, display: 'inline-block', color: 'var(--heading-color)' }}>{w}</motion.span>
+              <motion.span key={i} variants={word} style={{ marginRight: 12, display: 'inline-block', color: 'var(--heading-color)' }}>{w}</motion.span>
             ))}
             <br />
             {line2.map((w, i) => (
-              <motion.span key={i} variants={word} className="gradient-text hero-gradient-glow" style={{ marginRight: 11, display: 'inline-block' }}>{w}</motion.span>
+              <motion.span key={i} variants={word} className="gradient-text hero-gradient-glow" style={{ marginRight: 12, display: 'inline-block' }}>{w}</motion.span>
             ))}
             <br />
             {line3.map((w, i) => (
-              <motion.span key={i} variants={word} style={{ marginRight: 11, display: 'inline-block', color: 'var(--heading-color)' }}>{w}</motion.span>
+              <motion.span key={i} variants={word} style={{ marginRight: 12, display: 'inline-block', color: 'var(--heading-color)' }}>{w}</motion.span>
             ))}
           </motion.h1>
 
-          {/* DESCRIPTION */}
+          {/* DESCRIPTION — kept narrow and modest, supporting text only */}
           <p className="animate-on-scroll hero-description">
             {description}
           </p>
 
-          {/* BUTTONS */}
+          {/* BUTTONS — premium sizing */}
           <div className="animate-on-scroll cta-row">
             <Link href={btn1Link} className="hero-cta">
               <span className="hero-cta-pill">{btn1Text}</span>
               <span className="hero-cta-circle">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7M17 7H8M17 7v9" /></svg>
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7M17 7H8M17 7v9" /></svg>
               </span>
             </Link>
             <Link href={btn2Link} className="hero-link-secondary">
-              {btn2Text}
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
+              <span className="hero-link-secondary-inner">
+                {btn2Text}
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
+              </span>
             </Link>
           </div>
 
@@ -134,10 +134,10 @@ export default function Hero({ data }: { data?: HeroData }) {
 
         .bg-glow { position: absolute; inset: 0; background: radial-gradient(circle at 50% 34%, var(--glow-color), transparent 58%); pointer-events: none; z-index: 0; }
 
-        /* concentric target rings, centered on the heading/description block */
+        /* concentric spiral rings, slow rotating for a subtle premium ambience */
         .rings-wrap {
-          position: absolute; top: 46%; left: 50%;
-          width: 780px; height: 780px;
+          position: absolute; top: 45%; left: 50%;
+          width: 820px; height: 820px;
           transform: translate(-50%, -50%);
           pointer-events: none;
           z-index: 0;
@@ -146,20 +146,21 @@ export default function Hero({ data }: { data?: HeroData }) {
           position: absolute; top: 50%; left: 50%; border-radius: 50%;
           transform: translate(-50%, -50%);
         }
-        .hero-ring-1 { width: 780px; height: 780px; border: 1px solid var(--border-green); opacity: 0.22; }
-        .hero-ring-2 { width: 610px; height: 610px; border: 1px solid var(--border-green); opacity: 0.32; }
-        .hero-ring-3 { width: 450px; height: 450px; border: 1px solid var(--border-green); opacity: 0.45; }
+        .hero-ring-1 { width: 820px; height: 820px; border: 1px solid var(--border-green); opacity: 0.2; animation: spin-slow 60s linear infinite; }
+        .hero-ring-2 { width: 640px; height: 640px; border: 1px solid var(--border-green); opacity: 0.3; animation: spin-slow 46s linear infinite reverse; }
+        .hero-ring-3 { width: 470px; height: 470px; border: 1px solid var(--border-green); opacity: 0.45; animation: spin-slow 34s linear infinite; }
         .hero-ring-4 {
-          width: 320px; height: 320px;
+          width: 330px; height: 330px;
           background: radial-gradient(circle, var(--glow-color) 0%, transparent 72%);
           opacity: 0.9;
         }
         .hero-ring-core {
-          width: 170px; height: 170px;
+          width: 175px; height: 175px;
           background: radial-gradient(circle, var(--green-bright) 0%, transparent 68%);
-          filter: blur(10px);
-          opacity: 0.65;
+          filter: blur(12px);
+          opacity: 0.7;
         }
+        @keyframes spin-slow { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
 
         .float-badge {
           position: absolute; width: 46px; height: 46px; border-radius: 13px;
@@ -186,52 +187,59 @@ export default function Hero({ data }: { data?: HeroData }) {
 
         .hero-content {
           display: flex; flex-direction: column; align-items: center; text-align: center;
-          gap: 26px; max-width: 720px; position: relative; z-index: 2;
+          gap: 24px; max-width: 650px; position: relative; z-index: 2;
         }
 
-        .hero-heading {
-          font-size: clamp(38px, 4.4vw, 62px);
-          font-weight: 800;
-          line-height: 1.22;
-          margin: 0;
-          letter-spacing: -0.02em;
-          position: relative;
-          z-index: 2;
-        }
-
-        .hero-description {
-          font-size: 15.5px;
-          color: var(--text-secondary);
-          line-height: 1.8;
-          max-width: 500px;
-          margin: 0;
-          position: relative;
-          z-index: 2;
-        }
-
+        /* TAG — small, quiet, secondary */
         .hero-badge {
-          display: inline-flex; align-items: center; gap: 9px;
+          display: inline-flex; align-items: center; gap: 8px;
           background: var(--tag-bg); border: 1px solid var(--border-green);
-          border-radius: 999px; padding: 8px 18px;
+          border-radius: 999px; padding: 6px 14px;
           box-shadow: 0 4px 18px rgba(0,0,0,0.12);
           position: relative; z-index: 2;
         }
-        .hero-badge-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green-bright); box-shadow: 0 0 10px var(--green-bright); position: relative; }
+        .hero-badge-text {
+          font-size: 10px; color: var(--green-mid); font-weight: 700;
+          letter-spacing: 0.13em; text-transform: uppercase;
+        }
+        .hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green-bright); box-shadow: 0 0 10px var(--green-bright); position: relative; }
         .hero-badge-dot::after {
           content: ''; position: absolute; inset: -4px; border-radius: 50%;
           border: 1px solid var(--green-bright); animation: pulse-ring 2s ease-out infinite;
         }
         @keyframes pulse-ring { 0% { transform: scale(0.6); opacity: 1; } 100% { transform: scale(2); opacity: 0; } }
 
-        .hero-gradient-glow { filter: drop-shadow(0 0 20px var(--border-green-hover)); }
+        /* HEADING — dominant, largest element on the page */
+        .hero-heading {
+          font-size: clamp(44px, 5.4vw, 76px);
+          font-weight: 800;
+          line-height: 1.16;
+          margin: 0;
+          letter-spacing: -0.03em;
+          position: relative;
+          z-index: 2;
+        }
+        .hero-gradient-glow { filter: drop-shadow(0 0 22px var(--border-green-hover)); }
 
-        .cta-row {
-          display: flex; align-items: center; gap: 32px;
-          flex-wrap: wrap; justify-content: center;
-          position: relative; z-index: 2;
+        /* DESCRIPTION — deliberately small and narrow, purely supporting */
+        .hero-description {
+          font-size: 14px;
+          color: var(--text-secondary);
+          line-height: 1.75;
+          max-width: 400px;
+          margin: 0;
+          position: relative;
+          z-index: 2;
         }
 
-        /* unified pill + circle CTA — circle is absolutely placed on the pill's own box, it can never wrap onto a new line */
+        .cta-row {
+          display: flex; align-items: center; gap: 34px;
+          flex-wrap: wrap; justify-content: center;
+          position: relative; z-index: 2;
+          margin-top: 6px;
+        }
+
+        /* primary CTA — premium sized pill + attached circle, structurally safe against wrapping */
         .hero-cta {
           position: relative;
           display: inline-flex;
@@ -241,14 +249,14 @@ export default function Hero({ data }: { data?: HeroData }) {
         .hero-cta-pill {
           display: block;
           background: linear-gradient(135deg, var(--green-bright), var(--green-lime));
-          color: #fff; font-weight: 700; font-size: 14px; line-height: 1; white-space: nowrap;
-          padding: 17px 34px; border-radius: 999px;
-          box-shadow: 0 10px 30px var(--border-green-hover);
+          color: #fff; font-weight: 700; font-size: 15px; line-height: 1; white-space: nowrap;
+          padding: 19px 38px; border-radius: 999px;
+          box-shadow: 0 12px 32px var(--border-green-hover);
         }
         .hero-cta-circle {
-          position: absolute; right: -10px; bottom: -10px;
+          position: absolute; right: -11px; bottom: -11px;
           display: flex; align-items: center; justify-content: center;
-          width: 42px; height: 42px; border-radius: 50%;
+          width: 46px; height: 46px; border-radius: 50%;
           background: var(--bg-main); border: 1.5px solid var(--green-bright);
           color: var(--green-bright);
           box-shadow: 0 6px 18px rgba(0,0,0,0.25);
@@ -256,17 +264,27 @@ export default function Hero({ data }: { data?: HeroData }) {
         }
         .hero-cta:hover .hero-cta-circle { background: var(--green-bright); color: #fff; transform: rotate(45deg); }
 
+        /* secondary link — flex lives on an inner span, never directly on the <a>,
+           so it can't be knocked out of row-direction by any global anchor styles */
         .hero-link-secondary {
-          display: inline-flex; align-items: center; gap: 7px;
-          color: var(--heading-color); font-weight: 700; font-size: 14px;
-          text-decoration: none; padding-bottom: 2px; white-space: nowrap;
+          display: inline-block;
+          text-decoration: none;
+          color: var(--heading-color);
+        }
+        .hero-link-secondary-inner {
+          display: inline-flex;
+          flex-direction: row;
+          align-items: center;
+          gap: 7px;
+          font-weight: 700; font-size: 14px; white-space: nowrap;
+          padding-bottom: 3px;
           border-bottom: 1.5px solid var(--border-green);
           transition: border-color 0.25s ease, color 0.25s ease, gap 0.25s ease;
         }
-        .hero-link-secondary:hover { border-color: var(--green-bright); color: var(--green-bright); gap: 10px; }
+        .hero-link-secondary:hover .hero-link-secondary-inner { border-color: var(--green-bright); color: var(--green-bright); gap: 10px; }
 
         .scroll-cue {
-          margin-top: 12px; width: 24px; height: 38px; border-radius: 14px;
+          margin-top: 10px; width: 24px; height: 38px; border-radius: 14px;
           border: 1.5px solid var(--border-green);
           display: flex; justify-content: center; padding-top: 7px;
           position: relative; z-index: 2;
