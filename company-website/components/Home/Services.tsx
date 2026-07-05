@@ -1,57 +1,67 @@
 'use client'
 
 import Link from 'next/link'
-import { motion } from 'framer-motion'
 
-
-const defaultServices = [
-  { title: 'Web Development', icon: '💻', link: '/ser' },
-  { title: 'Laravel Dev', icon: '⚙️', link: '/ser' },
-  { title: 'WordPress', icon: '🌐', link: '/ser' },
-  { title: 'Shopify', icon: '🛒', link: '/ser' },
-  { title: 'YouTube Automation', icon: '▶️', link: '/ser' },
-  { title: 'Next.js Apps', icon: '⚡', link: '/ser' },
-]
-
-type ServiceItem = { title: string; icon?: string; link?: string }
+type ServiceItem = { title: string; icon?: string; description?: string; link?: string }
 
 export default function Services({ data }: { data?: { services?: ServiceItem[] } }) {
   const services = data?.services || []
-if (services.length === 0) return null
+  if (services.length === 0) return null
+
   return (
-    <section id="services" style={{ background: "linear-gradient(135deg,var(--green-bright),var(--green-lime),var(--green-dark))", overflow: 'hidden', userSelect: "none", cursor: "default" }} className="services-section">
-      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 24px' }}>
-        <div style={{ textAlign: 'center', marginBottom: 8 }}>
-          <h2 style={{ color: '#fff', fontSize: 18, fontWeight: 700, margin: 0 }}>Services</h2>
-        </div>
-        <div style={{ overflow: 'hidden' }}>
-          <motion.div
-            style={{ display: 'flex', gap: 12, width: 'max-content', alignItems: 'center' }}
-            animate={{ x: ['0%', '-50%'] }}
-            transition={{ repeat: Infinity, duration: 18, ease: 'linear' }}
-          >
-            {[...services, ...services].map((s, i) => (
+    <section id="services" style={{ background: 'var(--bg-main)', padding: '90px 0', userSelect: "none", cursor: "default" }}>
+      <div style={{ maxWidth: 1240, margin: '0 auto', padding: '0 24px' }}>
+
+        {/* dark green panel — exactly like image1's "Our Services" block */}
+        <div className="services-panel">
+          <h2 style={{ color: '#fff', fontSize: 'clamp(26px, 3vw, 34px)', fontWeight: 800, margin: 0, textAlign: 'center' }}>
+            Our Services
+          </h2>
+          <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: 14, marginTop: 10, textAlign: 'center', maxWidth: 480, marginLeft: 'auto', marginRight: 'auto' }}>
+            Everything you need to scale your business, handled by experts.
+          </p>
+
+          <div className="services-grid">
+            {services.map((s, i) => (
               <Link key={i} href={s.link || '/ser'} style={{ textDecoration: 'none' }}>
-                <div className="service-card" style={{
-                  background: 'var(--card-bg)', border: '1px solid var(--border-green)', borderRadius: 10,
-                  display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-                  textAlign: 'center', gap: 6, cursor: 'pointer', transition: 'all 0.3s ease',
-                }}
-                  onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.borderColor = 'var(--green-bright)' }}
-                  onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = 'var(--border-green)' }}
-                >
-                  <div style={{ fontSize: 16 }}>{s.icon}</div>
-                  <p style={{ color: 'var(--text-primary)', fontSize: 11, fontWeight: 600, margin: 0 }}>{s.title}</p>
+                <div className="service-card">
+                  <div className="service-icon">{s.icon}</div>
+                  <h3 style={{ color: '#fff', fontSize: 15, fontWeight: 700, margin: 0 }}>{s.title}</h3>
+                  {s.description && (
+                    <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 12.5, lineHeight: 1.6, margin: 0 }}>{s.description}</p>
+                  )}
+                  <span className="learn-more">Learn More →</span>
                 </div>
               </Link>
             ))}
-          </motion.div>
+          </div>
         </div>
       </div>
+
       <style>{`
-        .services-section { padding: 18px 0 22px; }
-        .service-card { width: 150px; height: 80px; }
-        @media (max-width: 768px) { .services-section { padding: 32px 0 28px; margin-top: 16px; } .service-card { width: 110px; height: 65px; } }
+        .services-panel {
+          background: var(--green-dark);
+          border-radius: 28px;
+          padding: 44px 36px;
+        }
+        .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 36px; }
+        .service-card {
+          border-radius: 16px; padding: 24px 20px;
+          background: rgba(255,255,255,0.04);
+          border: 1px solid rgba(255,255,255,0.08);
+          display: flex; flex-direction: column; gap: 12px;
+          transition: all 0.25s ease;
+        }
+        .service-card:hover { border-color: var(--green-bright); transform: translateY(-5px); }
+        .service-icon {
+          width: 40px; height: 40px; border-radius: 50%;
+          background: var(--green-bright);
+          display: flex; align-items: center; justify-content: center; font-size: 18px;
+          color: #fff;
+        }
+        .learn-more { font-size: 12px; font-weight: 700; color: var(--green-lime); margin-top: auto; }
+        @media (max-width: 900px) { .services-grid { grid-template-columns: repeat(2, 1fr); } .services-panel { padding: 28px 20px; } }
+        @media (max-width: 500px) { .services-grid { grid-template-columns: 1fr; } }
       `}</style>
     </section>
   )
