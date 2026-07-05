@@ -3,10 +3,16 @@
 import { useState } from 'react';
 
 type FormState = { name: string; email: string; message: string; };
-type CTAData = { heading?: string; email?: string; responseTime?: string; supportText?: string }
+
+type CTAData = {
+  heading?: string
+  email?: string
+  responseTime?: string
+  supportText?: string
+}
 
 const inputStyle = {
-  padding: '11px 14px', borderRadius: 10,
+  padding: '10px 12px', borderRadius: 10,
   background: 'var(--bg-main)', border: '1px solid var(--border-green)',
   color: 'var(--heading-color)', fontSize: 13, outline: 'none',
 }
@@ -30,20 +36,28 @@ export default function Contact({ data }: { data?: CTAData }) {
     setLoading(true);
     try {
       await fetch(`${process.env.NEXT_PUBLIC_CMS_URL}/api/contact`, {
-        method: "POST", headers: { "Content-Type": "application/json" },
-        credentials: "include", body: JSON.stringify(form),
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify(form),
       });
       setSuccess(true);
       setForm({ name: "", email: "", message: "" });
-    } finally { setLoading(false); }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <section id="contact" style={{ padding: '90px 0', background: 'var(--bg-main)', userSelect: "none", cursor: "default" }}>
-      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 24px' }}>
-        <div style={{ textAlign: 'center', marginBottom: 44 }}>
-          <p style={{ color: 'var(--green-bright)', fontSize: 11, letterSpacing: '0.3em', textTransform: 'uppercase', marginBottom: 6 }}>Contact Us</p>
-          <h2 style={{ color: 'var(--heading-color)', fontSize: 28, fontWeight: 700, margin: 0 }}>{heading}</h2>
+    <section id="contact" style={{ padding: '50px 0', background: 'var(--bg-main)', userSelect: "none", cursor: "default" }}>
+      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 20px' }}>
+        <div style={{ textAlign: 'center', marginBottom: 40 }}>
+          <p style={{ color: 'var(--green-bright)', fontSize: 11, letterSpacing: '0.3em', textTransform: 'uppercase', marginBottom: 6 }}>
+            Contact Us
+          </p>
+          <h2 style={{ color: 'var(--heading-color)', fontSize: 28, fontWeight: 700, margin: 0 }}>
+            {heading}
+          </h2>
         </div>
 
         <div className="contact-grid">
@@ -53,24 +67,28 @@ export default function Contact({ data }: { data?: CTAData }) {
               Have a project idea or need a digital solution? We help businesses grow with web apps, automation and modern tech systems.
             </p>
             <div style={{ fontSize: 13, lineHeight: 2 }}>
-              <p><span style={{ color: 'var(--green-mid)' }}>Email:</span> {email}</p>
-              <p><span style={{ color: 'var(--green-mid)' }}>Response:</span> {responseTime}</p>
-              <p><span style={{ color: 'var(--green-mid)' }}>Support:</span> {supportText}</p>
+              <p><span style={{ color: 'var(--green-lime)' }}>Email:</span> {email}</p>
+              <p><span style={{ color: 'var(--green-lime)' }}>Response:</span> {responseTime}</p>
+              <p><span style={{ color: 'var(--green-lime)' }}>Support:</span> {supportText}</p>
             </div>
           </div>
 
-         <form onSubmit={handleSubmit} style={{
-  display: 'flex', flexDirection: 'column', gap: 14,
-  background: 'var(--card-bg)', padding: 22, borderRadius: 16,
-  border: '1px solid var(--border-green)',
-}}>
-            <input name="name" placeholder="Your Name" value={form.name} onChange={handleChange} style={inputStyle} />
-            <input name="email" placeholder="Your Email" value={form.email} onChange={handleChange} style={inputStyle} />
-            <textarea name="message" placeholder="Your Message" rows={4} value={form.message} onChange={handleChange} style={{ ...inputStyle, resize: 'none' }} />
-            <button type="submit" className="btn-primary" style={{ padding: '12px 16px', borderRadius: 10, border: 'none', fontWeight: 700, cursor: 'pointer' }}>
+          <form onSubmit={handleSubmit} style={{
+            display: 'flex', flexDirection: 'column', gap: 14,
+            background: 'var(--card-bg)', padding: 20, borderRadius: 14,
+            border: '1px solid var(--border-green)',
+          }}>
+            <input name="name" placeholder="Your Name" onChange={handleChange} style={inputStyle} />
+            <input name="email" placeholder="Your Email" onChange={handleChange} style={inputStyle} />
+            <textarea name="message" placeholder="Your Message" rows={4} onChange={handleChange} style={{ ...inputStyle, resize: 'none' }} />
+            <button type="submit" style={{
+              background: 'linear-gradient(135deg, var(--green-bright), var(--green-lime), var(--green-dark))',
+              padding: '10px 14px', borderRadius: 10, border: 'none',
+              color: '#ffff', fontWeight: 600, cursor: 'pointer',
+            }}>
               {loading ? "Sending..." : "Send Message"}
             </button>
-            {success && <p style={{ color: "var(--green-bright)", textAlign: "center", margin: 0 }}>Message sent successfully!</p>}
+            {success && <p style={{ color: "var(--green-bright)", marginTop: 12, textAlign: "center" }}>Message sent successfully!</p>}
           </form>
         </div>
       </div>

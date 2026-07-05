@@ -46,6 +46,21 @@
 
   --section-pad: 96px;
   --container-max: 1240px;
+
+    --landing-primary:#2FB34A;
+  --landing-primary-dark:#1E7A35;
+  --landing-primary-light:#8DD94A;
+
+  --landing-bg:#F7FBF7;
+  --landing-card:#FFFFFF;
+
+  --landing-text:#1E293B;
+  --landing-muted:#64748B;
+
+  --landing-border:#DDEEDD;
+
+  --landing-gradient:
+      linear-gradient(135deg,#8DD94A 0%,#2FB34A 100%);
 }
 .light {
   --bg-main: #f9fdf8;
