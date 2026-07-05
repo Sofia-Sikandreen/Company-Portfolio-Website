@@ -52,15 +52,16 @@ export default function Hero({ data }: { data?: HeroData }) {
       {/* decorative background layers — pure CSS, no assets */}
       <div className="bg-glow" />
 
-      {/* concentric target rings behind the heading */}
+      {/* concentric target rings behind the heading, reference-style */}
       <div className="rings-wrap" aria-hidden="true">
-        <span className="ring ring-1" />
-        <span className="ring ring-2" />
-        <span className="ring ring-3" />
-        <span className="ring ring-4" />
+        <span className="hero-ring hero-ring-1" />
+        <span className="hero-ring hero-ring-2" />
+        <span className="hero-ring hero-ring-3" />
+        <span className="hero-ring hero-ring-4" />
+        <span className="hero-ring hero-ring-core" />
       </div>
 
-      {/* floating icon badges, reference-style */}
+      {/* floating icon badges sitting on the outer ring, reference-style */}
       <div className="float-badge badge-left" aria-hidden="true">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5l8-3z" />
@@ -76,8 +77,8 @@ export default function Hero({ data }: { data?: HeroData }) {
       <span className="float-dot dot-1" />
       <span className="float-dot dot-2" />
 
-      <div className="container">
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: 22, maxWidth: 680, position: 'relative', zIndex: 2 }}>
+      <div className="hero-container">
+        <div className="hero-content">
 
           {/* TAG */}
           <div className="animate-on-scroll hero-badge">
@@ -90,29 +91,29 @@ export default function Hero({ data }: { data?: HeroData }) {
           {/* HEADING */}
           <motion.h1 variants={sentence} initial="hidden" animate="visible" className="hero-heading">
             {line1.map((w, i) => (
-              <motion.span key={i} variants={word} style={{ marginRight: 9, display: 'inline-block', color: 'var(--heading-color)' }}>{w}</motion.span>
+              <motion.span key={i} variants={word} style={{ marginRight: 11, display: 'inline-block', color: 'var(--heading-color)' }}>{w}</motion.span>
             ))}
             <br />
             {line2.map((w, i) => (
-              <motion.span key={i} variants={word} className="gradient-text hero-gradient-glow" style={{ marginRight: 9, display: 'inline-block' }}>{w}</motion.span>
+              <motion.span key={i} variants={word} className="gradient-text hero-gradient-glow" style={{ marginRight: 11, display: 'inline-block' }}>{w}</motion.span>
             ))}
             <br />
             {line3.map((w, i) => (
-              <motion.span key={i} variants={word} style={{ marginRight: 9, display: 'inline-block', color: 'var(--heading-color)' }}>{w}</motion.span>
+              <motion.span key={i} variants={word} style={{ marginRight: 11, display: 'inline-block', color: 'var(--heading-color)' }}>{w}</motion.span>
             ))}
           </motion.h1>
 
           {/* DESCRIPTION */}
-          <p className="animate-on-scroll" style={{ fontSize: 15, color: 'var(--text-secondary)', lineHeight: 1.75, maxWidth: 480, margin: 0 }}>
+          <p className="animate-on-scroll hero-description">
             {description}
           </p>
 
           {/* BUTTONS */}
-          <div className="animate-on-scroll" style={{ display: 'flex', alignItems: 'center', gap: 20, flexWrap: 'wrap', justifyContent: 'center', marginTop: 8 }}>
+          <div className="animate-on-scroll cta-row">
             <Link href={btn1Link} className="hero-cta">
               <span className="hero-cta-pill">{btn1Text}</span>
               <span className="hero-cta-circle">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7M17 7H8M17 7v9" /></svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7M17 7H8M17 7v9" /></svg>
               </span>
             </Link>
             <Link href={btn2Link} className="hero-link-secondary">
@@ -129,51 +130,81 @@ export default function Hero({ data }: { data?: HeroData }) {
       </div>
 
       <style jsx>{`
-        .hero { min-height: 100vh; padding-top: 80px; position: relative; overflow: hidden; background: var(--bg-main); }
+        .hero { min-height: 100vh; padding-top: 80px; position: relative; overflow-x: hidden; background: var(--bg-main); }
 
-        .bg-glow { position: absolute; inset: 0; background: radial-gradient(circle at 50% 28%, var(--glow-color), transparent 62%); }
+        .bg-glow { position: absolute; inset: 0; background: radial-gradient(circle at 50% 34%, var(--glow-color), transparent 58%); pointer-events: none; z-index: 0; }
 
-        /* concentric target rings */
+        /* concentric target rings, centered on the heading/description block */
         .rings-wrap {
-          position: absolute; top: 4%; left: 50%; transform: translateX(-50%);
-          width: 640px; height: 640px; pointer-events: none;
+          position: absolute; top: 46%; left: 50%;
+          width: 780px; height: 780px;
+          transform: translate(-50%, -50%);
+          pointer-events: none;
+          z-index: 0;
         }
-        .ring {
+        .hero-ring {
           position: absolute; top: 50%; left: 50%; border-radius: 50%;
           transform: translate(-50%, -50%);
-          border: 1px solid var(--border-green);
         }
-        .ring-1 { width: 640px; height: 640px; opacity: 0.35; animation: breathe 9s ease-in-out infinite; }
-        .ring-2 { width: 480px; height: 480px; opacity: 0.45; animation: breathe 9s ease-in-out infinite 0.6s; }
-        .ring-3 { width: 330px; height: 330px; opacity: 0.6; background: radial-gradient(circle, var(--glow-color), transparent 70%); animation: breathe 9s ease-in-out infinite 1.2s; }
-        .ring-4 { width: 190px; height: 190px; opacity: 0.8; background: radial-gradient(circle, var(--green-bright) 0%, transparent 72%); filter: blur(2px); animation: breathe 9s ease-in-out infinite 1.8s; }
-        @keyframes breathe { 0%, 100% { opacity: var(--o, 0.4); } 50% { opacity: calc(var(--o, 0.4) * 0.55); } }
+        .hero-ring-1 { width: 780px; height: 780px; border: 1px solid var(--border-green); opacity: 0.22; }
+        .hero-ring-2 { width: 610px; height: 610px; border: 1px solid var(--border-green); opacity: 0.32; }
+        .hero-ring-3 { width: 450px; height: 450px; border: 1px solid var(--border-green); opacity: 0.45; }
+        .hero-ring-4 {
+          width: 320px; height: 320px;
+          background: radial-gradient(circle, var(--glow-color) 0%, transparent 72%);
+          opacity: 0.9;
+        }
+        .hero-ring-core {
+          width: 170px; height: 170px;
+          background: radial-gradient(circle, var(--green-bright) 0%, transparent 68%);
+          filter: blur(10px);
+          opacity: 0.65;
+        }
 
         .float-badge {
-          position: absolute; width: 46px; height: 46px; border-radius: 14px;
+          position: absolute; width: 46px; height: 46px; border-radius: 13px;
           display: flex; align-items: center; justify-content: center;
           background: var(--card-bg); border: 1px solid var(--border-green);
-          color: var(--green-bright); box-shadow: 0 12px 30px rgba(0,0,0,0.16);
+          color: var(--green-bright); box-shadow: 0 12px 30px rgba(0,0,0,0.2), 0 0 0 1px var(--border-green);
           animation: float-badge 6s ease-in-out infinite;
           z-index: 2;
         }
-        .badge-left { top: 44%; left: 9%; animation-delay: 0.2s; }
-        .badge-right { top: 24%; right: 11%; animation-delay: 1.4s; }
+        .badge-left { top: 52%; left: 8%; animation-delay: 0.2s; }
+        .badge-right { top: 24%; right: 10%; animation-delay: 1.4s; }
         @keyframes float-badge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
 
-        .float-dot { position: absolute; width: 6px; height: 6px; border-radius: 50%; background: var(--green-bright); pointer-events: none; }
-        .dot-1 { top: 20%; left: 22%; animation: pulse-dot 3s ease-in-out infinite; }
-        .dot-2 { bottom: 22%; right: 20%; animation: pulse-dot 3s ease-in-out infinite 1.5s; }
+        .float-dot { position: absolute; width: 6px; height: 6px; border-radius: 50%; background: var(--green-bright); pointer-events: none; z-index: 1; }
+        .dot-1 { top: 16%; left: 22%; animation: pulse-dot 3s ease-in-out infinite; }
+        .dot-2 { bottom: 18%; right: 20%; animation: pulse-dot 3s ease-in-out infinite 1.5s; }
         @keyframes pulse-dot { 0%, 100% { opacity: 0.25; transform: scale(1); } 50% { opacity: 1; transform: scale(1.4); } }
 
-        .container { max-width: 1200px; margin: auto; position: relative; z-index: 1; display: flex; justify-content: center; align-items: center; min-height: calc(100vh - 80px); padding: 0 20px; }
+        .hero-container {
+          max-width: 1200px; margin: 0 auto; position: relative; z-index: 1;
+          display: flex; justify-content: center; align-items: center;
+          min-height: calc(100vh - 80px); padding: 0 20px;
+        }
+
+        .hero-content {
+          display: flex; flex-direction: column; align-items: center; text-align: center;
+          gap: 26px; max-width: 720px; position: relative; z-index: 2;
+        }
 
         .hero-heading {
-          font-size: clamp(30px, 3.2vw, 46px);
+          font-size: clamp(38px, 4.4vw, 62px);
           font-weight: 800;
-          line-height: 1.18;
+          line-height: 1.22;
           margin: 0;
           letter-spacing: -0.02em;
+          position: relative;
+          z-index: 2;
+        }
+
+        .hero-description {
+          font-size: 15.5px;
+          color: var(--text-secondary);
+          line-height: 1.8;
+          max-width: 500px;
+          margin: 0;
           position: relative;
           z-index: 2;
         }
@@ -192,41 +223,50 @@ export default function Hero({ data }: { data?: HeroData }) {
         }
         @keyframes pulse-ring { 0% { transform: scale(0.6); opacity: 1; } 100% { transform: scale(2); opacity: 0; } }
 
-        .hero-gradient-glow { filter: drop-shadow(0 0 18px var(--border-green-hover)); }
+        .hero-gradient-glow { filter: drop-shadow(0 0 20px var(--border-green-hover)); }
 
-        /* unified pill + circle CTA */
+        .cta-row {
+          display: flex; align-items: center; gap: 32px;
+          flex-wrap: wrap; justify-content: center;
+          position: relative; z-index: 2;
+        }
+
+        /* unified pill + circle CTA — circle is absolutely placed on the pill's own box, it can never wrap onto a new line */
         .hero-cta {
-          display: inline-flex; align-items: center; gap: 0;
+          position: relative;
+          display: inline-flex;
           text-decoration: none;
+          flex-shrink: 0;
         }
         .hero-cta-pill {
+          display: block;
           background: linear-gradient(135deg, var(--green-bright), var(--green-lime));
-          color: #fff; font-weight: 700; font-size: 14px;
-          padding: 14px 26px; border-radius: 999px 0 0 999px;
-          box-shadow: 0 10px 28px var(--border-green-hover);
-          transition: padding 0.25s ease;
+          color: #fff; font-weight: 700; font-size: 14px; line-height: 1; white-space: nowrap;
+          padding: 17px 34px; border-radius: 999px;
+          box-shadow: 0 10px 30px var(--border-green-hover);
         }
         .hero-cta-circle {
+          position: absolute; right: -10px; bottom: -10px;
           display: flex; align-items: center; justify-content: center;
-          width: 46px; height: 46px; border-radius: 50%;
-          background: var(--card-bg); border: 1.5px solid var(--green-bright);
-          color: var(--green-bright); margin-left: -2px;
+          width: 42px; height: 42px; border-radius: 50%;
+          background: var(--bg-main); border: 1.5px solid var(--green-bright);
+          color: var(--green-bright);
+          box-shadow: 0 6px 18px rgba(0,0,0,0.25);
           transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
         }
         .hero-cta:hover .hero-cta-circle { background: var(--green-bright); color: #fff; transform: rotate(45deg); }
-        .hero-cta:hover .hero-cta-pill { padding-right: 32px; }
 
         .hero-link-secondary {
           display: inline-flex; align-items: center; gap: 7px;
           color: var(--heading-color); font-weight: 700; font-size: 14px;
-          text-decoration: none; padding-bottom: 2px;
+          text-decoration: none; padding-bottom: 2px; white-space: nowrap;
           border-bottom: 1.5px solid var(--border-green);
           transition: border-color 0.25s ease, color 0.25s ease, gap 0.25s ease;
         }
         .hero-link-secondary:hover { border-color: var(--green-bright); color: var(--green-bright); gap: 10px; }
 
         .scroll-cue {
-          margin-top: 22px; width: 24px; height: 38px; border-radius: 14px;
+          margin-top: 12px; width: 24px; height: 38px; border-radius: 14px;
           border: 1.5px solid var(--border-green);
           display: flex; justify-content: center; padding-top: 7px;
           position: relative; z-index: 2;
@@ -235,9 +275,12 @@ export default function Hero({ data }: { data?: HeroData }) {
         @keyframes scroll-cue-move { 0% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; transform: translateY(10px); } }
 
         @media (max-width: 900px) {
-          .container { text-align: center; }
-          .float-badge, .rings-wrap .ring-1, .rings-wrap .ring-2 { display: none; }
+          .hero-container { text-align: center; }
+          .float-badge, .rings-wrap .hero-ring-1, .rings-wrap .hero-ring-2 { display: none; }
           .float-dot { display: none; }
+          .rings-wrap { width: 460px; height: 460px; }
+          .hero-ring-3 { width: 320px; height: 320px; }
+          .hero-ring-4 { width: 230px; height: 230px; }
         }
       `}</style>
     </section>
