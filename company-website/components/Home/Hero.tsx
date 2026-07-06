@@ -236,7 +236,7 @@ export default function Hero({ data }: { data?: HeroData }) {
         .btn-primary {
           background: linear-gradient(135deg, var(--green-bright), var(--green-lime));
           padding: 13px 28px;
-          border-radius: 150px;
+          border-radius: 999px;
           color: #fff;
           font-weight: 700;
           font-size: 14px;
