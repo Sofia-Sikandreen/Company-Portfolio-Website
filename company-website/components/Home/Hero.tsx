@@ -65,6 +65,12 @@ export default function Hero({ data }: { data?: HeroData }) {
 
       {/* BACKGROUND GLOW */}
       <div className="bg-glow" />
+      {/* FLOATING ICONS */}
+<div className="icon icon1">⚙️</div>
+<div className="icon icon2">💻</div>
+<div className="icon icon3">🚀</div>
+<div className="icon icon4">📊</div>
+<div className="icon icon5">⚡</div>
 
       {/* STATIC WAVES (NO ANIMATION) */}
       <div className="hero-wave" aria-hidden="true">
@@ -192,11 +198,13 @@ export default function Hero({ data }: { data?: HeroData }) {
         }
 
         /* HEADING */
-        .heading {
-          font-size: clamp(40px, 4.5vw, 64px);
-          font-weight: 800;
-          line-height: 1.15;
-        }
+       .heading {
+  font-size: clamp(48px, 5.5vw, 76px);
+  font-weight: 900;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+  margin: 0;
+}
 
         .word {
           display: inline-block;
@@ -219,43 +227,58 @@ export default function Hero({ data }: { data?: HeroData }) {
         }
 
         /* BUTTONS */
-        .btn-row {
-          display: flex;
-          justify-content: center;
-          gap: 14px;
-          margin-top: 22px;
-          flex-wrap: wrap;
-        }
+       .btn-row {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 26px;
+  flex-wrap: wrap;
+}
 
-        .btn-primary {
-          padding: 14px 28px;
-          border-radius: 10px;
-          font-weight: 700;
-          font-size: 13px;
-          color: white;
-          text-decoration: none;
-          background: linear-gradient(135deg, var(--green-bright), var(--green-lime));
-        }
+/* PRIMARY CTA */
+.btn-primary {
+  padding: 16px 34px;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 14px;
+  color: white;
+  text-decoration: none;
+  background: linear-gradient(135deg, var(--green-bright), var(--green-lime));
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+  transition: 0.3s ease;
+}
 
-        .btn-outline {
-          padding: 14px 28px;
-          border-radius: 10px;
-          font-weight: 700;
-          font-size: 13px;
-          color: var(--green-bright);
-          text-decoration: none;
-          border: 1px solid var(--border-green);
-        }
+.btn-primary:hover {
+  transform: translateY(-3px);
+}
+
+/* OUTLINE CTA */
+.btn-outline {
+  padding: 16px 34px;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 14px;
+  color: var(--green-bright);
+  text-decoration: none;
+  border: 1.5px solid var(--border-green);
+  transition: 0.3s ease;
+}
+
+.btn-outline:hover {
+  background: rgba(255,255,255,0.05);
+  transform: translateY(-3px);
+}
 
         /* BADGES (simple decorative) */
-        .badge {
-          position: absolute;
-          width: 46px;
-          height: 46px;
-          border-radius: 12px;
-          border: 1px solid var(--border-green);
-          background: var(--card-bg);
-        }
+       .badge {
+  position: absolute;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  border: 1px solid var(--border-green);
+  background: var(--card-bg);
+  opacity: 0.9;
+}
 
         .badge-left { left: 8%; top: 45%; }
         .badge-right { right: 10%; top: 25%; }
@@ -285,6 +308,24 @@ export default function Hero({ data }: { data?: HeroData }) {
           .badge { display: none; }
           .dot { display: none; }
         }
+
+        .icon {
+  position: absolute;
+  font-size: 20px;
+  opacity: 0.85;
+  animation: float 6s ease-in-out infinite;
+}
+
+.icon1 { top: 20%; left: 10%; }
+.icon2 { top: 35%; right: 8%; }
+.icon3 { bottom: 30%; left: 12%; }
+.icon4 { bottom: 20%; right: 15%; }
+.icon5 { top: 50%; left: 5%; }
+
+@keyframes float {
+  0%,100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
       `}</style>
     </section>
   )
