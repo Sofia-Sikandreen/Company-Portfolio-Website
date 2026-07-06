@@ -243,7 +243,9 @@ export default function Hero({ data }: { data?: HeroData }) {
           text-decoration: none;
           box-shadow: 0 8px 24px rgba(107,179,63,0.35);
           transition: transform 0.2s, box-shadow 0.2s;
-          display: inline-block;
+          display: inline-flex;
+          align-items: center; gap: 8px;
+          text-decoration: none; white-space: nowrap;
         }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(107,179,63,0.45); }
         .btn-secondary {
