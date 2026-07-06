@@ -94,23 +94,6 @@ export default function Hero({ data }: { data?: HeroData }) {
             {description}
           </motion.p>
 
-          {/* Buttons */}
-          <motion.div custom={1.1} variants={fadeUp} initial="hidden" animate="visible"
-            style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginTop: 32 }}>
-            <Link href={btn1Link} className="btn-primary">{btn1Text}</Link>
-            <Link href={btn2Link} className="btn-secondary">{btn2Text}</Link>
-          </motion.div>
-
-          {/* Trust strip */}
-          <motion.div custom={1.3} variants={fadeUp} initial="hidden" animate="visible"
-            style={{ display: 'flex', gap: 24, marginTop: 30, flexWrap: 'wrap' }}>
-            {[['50+', 'Happy Clients'], ['100+', 'Projects'], ['5+', 'Years']].map(([num, label]) => (
-              <div key={label} style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                <span style={{ fontSize: 20, fontWeight: 800, color: 'var(--green-lime)' }}>{num}</span>
-                <span style={{ fontSize: 11, color: 'var(--text-secondary)', letterSpacing: '0.05em' }}>{label}</span>
-              </div>
-            ))}
-          </motion.div>
         </div>
 
         {/* RIGHT — code window */}
