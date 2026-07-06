@@ -48,6 +48,8 @@ export async function GET() {
     `DO $$ BEGIN ALTER TABLE "pages_blocks_team_block_members" ADD CONSTRAINT "team_block_members_image_id_media_id_fk" FOREIGN KEY ("image_id") REFERENCES "public"."media"("id") ON DELETE SET NULL; EXCEPTION WHEN duplicate_object THEN NULL; END $$`,
 
     `ALTER TABLE "media" ADD COLUMN IF NOT EXISTS "alt" varchar`,
+
+    `ALTER TABLE "pages_blocks_services_strip_block_items" ALTER COLUMN "icon" TYPE "public"."enum_pages_blocks_services_strip_block_items_icon" USING "icon"::"public"."enum_pages_blocks_services_strip_block_items_icon"`,
   ];
 
   for (const sql of statements) {

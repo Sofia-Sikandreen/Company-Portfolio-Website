@@ -103,7 +103,7 @@ export default function Hero({ data }: { data?: HeroData }) {
 
           {/* Trust strip */}
           <motion.div custom={1.3} variants={fadeUp} initial="hidden" animate="visible"
-            style={{ display: 'flex', gap: 24, marginTop: 40, flexWrap: 'wrap' }}>
+            style={{ display: 'flex', gap: 24, marginTop: 30, flexWrap: 'wrap' }}>
             {[['50+', 'Happy Clients'], ['100+', 'Projects'], ['5+', 'Years']].map(([num, label]) => (
               <div key={label} style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                 <span style={{ fontSize: 20, fontWeight: 800, color: 'var(--green-lime)' }}>{num}</span>
@@ -154,20 +154,6 @@ export default function Hero({ data }: { data?: HeroData }) {
               ))}
             </div>
           </div>
-
-          {/* Floating badges */}
-          <motion.div className="badge badge-react"
-            animate={{ y: [0, -8, 0] }} transition={{ repeat: Infinity, duration: 3, ease: 'easeInOut' }}>
-            ⚛ React
-          </motion.div>
-          <motion.div className="badge badge-next"
-            animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 3.5, ease: 'easeInOut', delay: 0.5 }}>
-            ▲ Next.js
-          </motion.div>
-          <motion.div className="badge badge-node"
-            animate={{ y: [0, -6, 0] }} transition={{ repeat: Infinity, duration: 2.8, ease: 'easeInOut', delay: 1 }}>
-            🟢 Node.js
-          </motion.div>
         </motion.div>
       </div>
 
@@ -247,13 +233,10 @@ export default function Hero({ data }: { data?: HeroData }) {
           box-shadow: 0 8px 24px rgba(0,0,0,0.3);
           white-space: nowrap;
         }
-        .badge-react { top: -16px; right: 20px; border-color: rgba(97,218,251,0.3); }
-        .badge-next { bottom: 20px; right: -16px; border-color: rgba(255,255,255,0.15); }
-        .badge-node { bottom: -16px; left: 20px; border-color: rgba(107,179,63,0.4); }
         .btn-primary {
           background: linear-gradient(135deg, var(--green-bright), var(--green-lime));
           padding: 13px 28px;
-          border-radius: 12px;
+          border-radius: 18px;
           color: #fff;
           font-weight: 700;
           font-size: 14px;
