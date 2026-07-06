@@ -1,5 +1,4 @@
 import type { Block } from 'payload'
-import { techIconOptions } from './iconOptions'
 
 export const ServicesStripBlock: Block = {
   slug: 'servicesStripBlock',
@@ -10,7 +9,6 @@ export const ServicesStripBlock: Block = {
       type: 'array',
       label: 'Services',
       fields: [
-        { name: 'name', type: 'text', required: true },
         {
           name: 'title',
           type: 'text',
@@ -19,9 +17,8 @@ export const ServicesStripBlock: Block = {
         },
         {
           name: 'icon',
-          type: 'select',
-          label: 'Icon ',
-          options: techIconOptions,
+          type: 'text',
+          label: 'Icon (emoji)',
         },
         {
           name: 'link',
