@@ -10,6 +10,7 @@ export const ServicesStripBlock: Block = {
       type: 'array',
       label: 'Services',
       fields: [
+        { name: 'name', type: 'text', required: true },
         {
           name: 'title',
           type: 'text',
